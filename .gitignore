@@ -1,0 +1,13 @@
+#files to ignoring
+*.pyc
+*.pyo
+*.hg*
+*.kpf
+*.sock
+*.conf
+*.config
+venv
+local_settings.py
+local_settings.pyc
+debug.log
+pip-log.txt
