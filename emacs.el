@@ -1,4 +1,6 @@
 (add-to-list 'load-path "~/.emacs.d/") 
+(load-file "/usr/share/emacs23/site-lisp/cedet-common/cedet.el")
+(add-to-list 'load-path "/usr/share/emacs23/site-lisp/ecb")
 
 (require 'font-lock) (if (fboundp 'global-font-lock-mode) (global-font-lock-mode 1)) 
 (require 'auto-complete)
@@ -9,12 +11,16 @@
 (require 'ipython)
 (require 'espresso)
 (require 'django-html-mode)
+(require 'ecb)
 
-
-(menu-bar-mode -1)        ;; this too
+(scroll-bar-mode nil)
+(menu-bar-mode nil)        ;; this too
 (column-number-mode t)    ;; but this one is good
 ;;(ido-mode t)
 
+;; Turn on column number mode
+(setq column-number-mode t) ;;turn on column number mode
+(setq show-paren-mode t) ;;hightlight brackets
 (fset 'yes-or-no-p 'y-or-n-p) 
 
 (setq default-tab-width 4) 
@@ -63,8 +69,11 @@
 (add-to-list 'auto-mode-alist '("\\.html$" . django-html-mode))
 
 (setq auto-mode-alist (cons '("\\.py$" . python-mode) auto-mode-alist))
+
 (setq interpreter-mode-alist (cons '("python" . python-mode) interpreter-mode-alist))
 (autoload 'python-mode "python-mode" "Python editing mode." t)
+
+(setq semantic-load-turn-useful-things-on t)
 
 
 (provide 'emacs)

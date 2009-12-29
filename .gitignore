@@ -11,3 +11,7 @@ local_settings.py
 local_settings.pyc
 debug.log
 pip-log.txt
+auto-save-list/*
+.saves*
+#*#
+*#*#
