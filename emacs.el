@@ -68,18 +68,20 @@
 
 (set-default-font "Monospace-9") ;;default font
 
-(when (require 'auto-complete nil t)
-  (require 'auto-complete-yasnippet)
-  (require 'auto-complete-python)
-  (require 'auto-complete-css) 
-  (require 'auto-complete-emacs-lisp)  
-  (require 'auto-complete-semantic)  
-  (require 'auto-complete-gtags)
+;;(when (require 'auto-complete nil t)
+;;  (require 'auto-complete-yasnippet)
+;;  (require 'auto-complete-python)
+;;  (require 'auto-complete-css) 
+;;  (require 'auto-complete-emacs-lisp)  
+;;  (require 'auto-complete-semantic)  
+;;  (require 'auto-complete-gtags)
 
-  (global-auto-complete-mode t)
-  (setq ac-auto-start 3)
-  (setq ac-dwim t)
-  (set-default 'ac-sources '(ac-source-yasnippet ac-source-abbrev ac-source-words-in-buffer ac-source-files-in-current-dir ac-source-symbols)))
+;;  (global-auto-complete-mode t)
+;;  (setq ac-auto-start 3)
+;;  (setq ac-dwim t)
+;;  (set-default 'ac-sources '(ac-source-yasnippet ac-source-abbrev ac-source-words-in-buffer ac-source-files-in-current-dir ac-source-symbols)))
 
 ;;;(load-library "init_python")
+
+(load-library "init_python")
 (provide 'emacs)
