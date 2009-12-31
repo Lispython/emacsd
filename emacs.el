@@ -7,6 +7,8 @@
 (require 'auto-complete)
 (require 'auto-complete-config)
 (require 'yasnippet)
+(require 'python-mode)
+(require 'js2-mode)
 (require 'ipython)
 (require 'espresso)
 (require 'django-html-mode)
@@ -30,6 +32,7 @@
 (color-theme-tty-dark)
 
 (modify-coding-system-alist 'file ".*" 'utf-8) ;; fuck cp1251 and koi-8
+(set-default-font "Monospace-9") ;;default font
 
 ;;initialize yasnippet
 (yas/initialize)
@@ -62,26 +65,33 @@
        (common-lisp-hyperspec symbol-name)
      (call-interactively 'common-lisp-hyperspec))))
 
-(add-to-list 'auto-mode-alist '("\\.js$" . espresso-mode))
-(add-to-list 'auto-mode-alist '("\\.json$" . espresso-mode))
+(add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
+(add-to-list 'auto-mode-alist '("\\.json$" . js2-mode))
 (add-to-list 'auto-mode-alist '("\\.html$" . django-html-mode))
 
-(set-default-font "Monospace-9") ;;default font
+(autoload 'python-mode "python-mode" "Python Mode." t)
+(add-to-list 'auto-mode-alist '("\\.py\\'" . python-mode))
+(add-to-list 'interpreter-mode-alist '("python" . python-mode))
 
-;;(when (require 'auto-complete nil t)
-;;  (require 'auto-complete-yasnippet)
-;;  (require 'auto-complete-python)
-;;  (require 'auto-complete-css) 
-;;  (require 'auto-complete-emacs-lisp)  
-;;  (require 'auto-complete-semantic)  
-;;  (require 'auto-complete-gtags)
+(add-hook 'python-mode-hook
+		  (lambda ()
+			(set-variable 'py-indent-offset 4)
 
-;;  (global-auto-complete-mode t)
-;;  (setq ac-auto-start 3)
-;;  (setq ac-dwim t)
-;;  (set-default 'ac-sources '(ac-source-yasnippet ac-source-abbrev ac-source-words-in-buffer ac-source-files-in-current-dir ac-source-symbols)))
+			(set-variable 'indent-tabs-mode nil)
+			(define-key py-mode-map (kbd "RET") 'newline-and-indent)
+			(smart-operator-mode-on)))
 
-;;;(load-library "init_python")
 
-(load-library "init_python")
+(when (require 'auto-complete nil t)
+  (require 'auto-complete-yasnippet)
+  (require 'auto-complete-python)
+  (require 'auto-complete-css) 
+  (require 'auto-complete-emacs-lisp)  
+  (require 'auto-complete-semantic)  
+  (require 'auto-complete-gtags)
+
+  (setq ac-auto-start 3)
+  (setq ac-dwim t)
+  (set-default 'ac-sources '( ac-source-ropemacs  ac-source-css-keywords ac-source-abbrev ac-source-words-in-buffer ac-source-files-in-current-dir ac-source-symbols)))
+
 (provide 'emacs)
