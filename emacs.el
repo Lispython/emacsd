@@ -3,9 +3,8 @@
 (add-to-list 'load-path "/usr/share/emacs23/site-lisp/ecb")
 
 (require 'font-lock) (if (fboundp 'global-font-lock-mode) (global-font-lock-mode 1)) 
-(require 'auto-complete)
-(require 'python-mode)
 (require 'color-theme)
+(require 'auto-complete)
 (require 'auto-complete-config)
 (require 'yasnippet)
 (require 'ipython)
@@ -13,14 +12,13 @@
 (require 'django-html-mode)
 (require 'ecb)
 
-(scroll-bar-mode nil)
-(menu-bar-mode nil)        ;; this too
+;;(scroll-bar-mode nil) ;;hide scrroll bar
+;;(menu-bar-mode nil)        ;; this too
 (column-number-mode t)    ;; but this one is good
 ;;(ido-mode t)
 
 ;; Turn on column number mode
-(setq column-number-mode t) ;;turn on column number mode
-(setq show-paren-mode t) ;;hightlight brackets
+(show-paren-mode t) ;;hightlight brackets
 (fset 'yes-or-no-p 'y-or-n-p) 
 
 (setq default-tab-width 4) 
@@ -32,6 +30,8 @@
 (color-theme-tty-dark)
 
 (modify-coding-system-alist 'file ".*" 'utf-8) ;; fuck cp1251 and koi-8
+
+;;initialize yasnippet
 (yas/initialize)
 (yas/load-directory "~/.emacs.d/snippets")
 
@@ -41,8 +41,6 @@
 (defadvice py-execute-buffer (around python-keep-focus activate)
  "return focus to python code buffer"
  (save-excursion ad-do-it))
-
-(load-library "init_python")
 
 (defmacro lisp-slime (lisp path &optional coding)
  (let ((funname (intern (format "%s-slime" lisp))))
@@ -68,12 +66,21 @@
 (add-to-list 'auto-mode-alist '("\\.json$" . espresso-mode))
 (add-to-list 'auto-mode-alist '("\\.html$" . django-html-mode))
 
-(setq auto-mode-alist (cons '("\\.py$" . python-mode) auto-mode-alist))
+(set-default-font "Monospace-9") ;;default font
 
-(setq interpreter-mode-alist (cons '("python" . python-mode) interpreter-mode-alist))
-(autoload 'python-mode "python-mode" "Python editing mode." t)
+(when (require 'auto-complete nil t)
+  (require 'auto-complete-yasnippet)
+  (require 'auto-complete-python)
+  (require 'auto-complete-css) 
+  (require 'auto-complete-cpp)  
+  (require 'auto-complete-emacs-lisp)  
+  (require 'auto-complete-semantic)  
+  (require 'auto-complete-gtags)
 
-(setq semantic-load-turn-useful-things-on t)
+  (global-auto-complete-mode t)
+  (setq ac-auto-start 3)
+  (setq ac-dwim t)
+  (set-default 'ac-sources '(ac-source-yasnippet ac-source-abbrev ac-source-words-in-buffer ac-source-files-in-current-dir ac-source-symbols))
 
-
+;;;(load-library "init_python")
 (provide 'emacs)

@@ -83,13 +83,16 @@ cand)
 ; 1) Do a yasnippet expansion
 ; 2) Do a Rope code completion
 ; 3) Do an indent
-(interactive)
-(if (eql (ac-start) 0)
-(indent-for-tab-command)))
+  (interactive)
+  (if (eql (ac-start) 0)
+	  (indent-for-tab-command)))
+
 (defadvice ac-start (before advice-turn-on-auto-start activate)
-(set (make-local-variable 'ac-auto-start) t))
+  (set (make-local-variable 'ac-auto-start) t))
+
 (defadvice ac-cleanup (after advice-turn-off-auto-start activate)
-(set (make-local-variable 'ac-auto-start) nil))
+  (set (make-local-variable 'ac-auto-start) nil))
+
 (define-key py-mode-map "\t" 'ryan-python-tab)
 
 
