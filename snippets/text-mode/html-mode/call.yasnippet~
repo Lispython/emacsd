@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: call
+# key: call
+# --
+{% call ${1: macros} %}
+   $2 
+{% endcall %}

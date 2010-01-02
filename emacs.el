@@ -1,3 +1,4 @@
+
 (add-to-list 'load-path "~/.emacs.d/") 
 (load-file "/usr/share/emacs23/site-lisp/cedet-common/cedet.el")
 (add-to-list 'load-path "/usr/share/emacs23/site-lisp/ecb")
@@ -10,9 +11,19 @@
 (require 'python-mode)
 (require 'js2-mode)
 (require 'ipython)
+(require 'ansi-color)
 (require 'espresso)
 (require 'django-html-mode)
+(require 'smart-operator)
 (require 'ecb)
+(require 'pymacs)
+
+(when (require 'auto-complete nil t)
+  (require 'auto-complete-yasnippet)
+  (require 'auto-complete-python)
+  (require 'auto-complete-css) 
+  (require 'auto-complete-emacs-lisp)
+)
 
 ;;(scroll-bar-mode nil) ;;hide scrroll bar
 ;;(menu-bar-mode nil)        ;; this too
@@ -22,14 +33,14 @@
 ;; Turn on column number mode
 (show-paren-mode t) ;;hightlight brackets
 (fset 'yes-or-no-p 'y-or-n-p) 
-
+(setq inhibit-splash-screen t) ;;;do't show splash screen
 (setq default-tab-width 4) 
 
-(global-auto-complete-mode t)
+;;(global-auto-complete-mode t)
 ;;;(global-font-lock-mode 1)
 ;;;(setq color-theme-is-global t)
 (color-theme-initialize)
-(color-theme-tty-dark)
+(color-theme-charcoal-black)
 
 (modify-coding-system-alist 'file ".*" 'utf-8) ;; fuck cp1251 and koi-8
 (set-default-font "Monospace-9") ;;default font
@@ -82,16 +93,28 @@
 			(smart-operator-mode-on)))
 
 
-(when (require 'auto-complete nil t)
-  (require 'auto-complete-yasnippet)
-  (require 'auto-complete-python)
-  (require 'auto-complete-css) 
-  (require 'auto-complete-emacs-lisp)  
-  (require 'auto-complete-semantic)  
-  (require 'auto-complete-gtags)
+;;(when (require 'auto-complete nil t)
+  ;;(require 'auto-complete-yasnippet)
+  ;;(require 'auto-complete-python)
+  ;;(require 'auto-complete-css) 
+  ;;(require 'auto-complete-emacs-lisp)  
+  ;;(require 'auto-complete-semantic)  
+  ;;(require 'auto-complete-gtags)
+  ;;(setq ac-auto-start 3)
+;;  (setq ac-dwim t)
+  ;;(set-default 'ac-sources '( ac-source-ropemacs  ac-source-css-keywords ac-source-abbrev ac-source-words-in-buffer ac-source-files-in-current-dir ac-source-symbols)))
 
-  (setq ac-auto-start 3)
-  (setq ac-dwim t)
-  (set-default 'ac-sources '( ac-source-ropemacs  ac-source-css-keywords ac-source-abbrev ac-source-words-in-buffer ac-source-files-in-current-dir ac-source-symbols)))
+;;; Comment and uncomment function
+(defun comment-or-uncomment-this (&optional lines)
+  (interactive "P")
+  (if mark-active
+      (if (< (mark) (point))
+          (comment-or-uncomment-region (mark) (point))
+		(comment-or-uncomment-region (point) (mark)))
+	(comment-or-uncomment-region
+	 (line-beginning-position)
+	 (line-end-position lines))))
+
+(load-library "init_python")
 
 (provide 'emacs)
