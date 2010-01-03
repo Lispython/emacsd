@@ -1,5 +1,11 @@
 
 (add-to-list 'load-path "~/.emacs.d/") 
+(set-default-font "Consolas-8") ;;default font
+
+;; the following is size 7 for me...
+;;(set-face-font 'default "-unknown-Envy Code R-normal-normal-normal-*-13-*-*-*-m-0-iso10646-1")
+;;(set-default-font "Envy Code R-7") ;; doesn't work consistently ;(
+
 (load-file "/usr/share/emacs23/site-lisp/cedet-common/cedet.el")
 (add-to-list 'load-path "/usr/share/emacs23/site-lisp/ecb")
 
@@ -18,32 +24,28 @@
 (require 'ecb)
 (require 'pymacs)
 
-(when (require 'auto-complete nil t)
-  (require 'auto-complete-yasnippet)
-  (require 'auto-complete-python)
-  (require 'auto-complete-css) 
-  (require 'auto-complete-emacs-lisp)
-)
 
-;;(scroll-bar-mode nil) ;;hide scrroll bar
+(scroll-bar-mode nil) ;;hide scrroll bar
 ;;(menu-bar-mode nil)        ;; this too
+(tool-bar-mode nil) ;; this too
 (column-number-mode t)    ;; but this one is good
 ;;(ido-mode t)
 
 ;; Turn on column number mode
 (show-paren-mode t) ;;hightlight brackets
 (fset 'yes-or-no-p 'y-or-n-p) 
-(setq inhibit-splash-screen t) ;;;do't show splash screen
+;;;(setq inhibit-splash-screen t) ;;;do't show splash screen
 (setq default-tab-width 4) 
 
 ;;(global-auto-complete-mode t)
 ;;;(global-font-lock-mode 1)
-;;;(setq color-theme-is-global t)
+(setq color-theme-is-global t)
 (color-theme-initialize)
-(color-theme-charcoal-black)
+(color-theme-tango)
+
+(global-auto-complete-mode t)
 
 (modify-coding-system-alist 'file ".*" 'utf-8) ;; fuck cp1251 and koi-8
-(set-default-font "Monospace-9") ;;default font
 
 ;;initialize yasnippet
 (yas/initialize)
@@ -84,25 +86,47 @@
 (add-to-list 'auto-mode-alist '("\\.py\\'" . python-mode))
 (add-to-list 'interpreter-mode-alist '("python" . python-mode))
 
+(when (require 'auto-complete nil t)
+  (require 'auto-complete-yasnippet)
+  (require 'auto-complete-python)
+  (require 'auto-complete-css) 
+  (require 'auto-complete-emacs-lisp)  
+  (require 'auto-complete-semantic)  
+  (require 'auto-complete-gtags)
+  (setq ac-auto-start 2)
+  (setq ac-dwim t)
+  (set-default 'ac-sources '(ac-source-words-in-buffer ac-source-symbols)))
+
+(add-hook 'css-mode-hook (lambda ()
+						   (message "css mode hook")
+						   (setq css-indent-offset 2)
+						   ;; (setq ac-sources '(ac-source-words-in-buffer ac-source-symbols))))
+						   (setq ac-sources '(ac-source-css-keywords))))
+
+(add-hook 'lisp-mode-hook (lambda ()
+							(message "lisp mode hook")
+							;; (setq ac-sources '(ac-source-words-in-buffer ac-source-symbols))))
+							(setq ac-sources '(ac-source-abbrev ac-source-words-in-buffer ac-source-files-in-current-dir ac-source-symbols ac-emacs-lisp-sources))
+))
+
+(add-hook 'emacs-lisp-mode-hook (lambda ()
+							(message "emacs lisp mode hook")
+							;; (setq ac-sources '(ac-source-words-in-buffer ac-source-symbols))))
+							(setq ac-sources '(ac-source-abbrev ac-source-words-in-buffer ac-source-files-in-current-dir ac-source-symbols ac-emacs-lisp-aources))
+))
+
+
 (add-hook 'python-mode-hook
 		  (lambda ()
+			(message "python mode hook")
 			(set-variable 'py-indent-offset 4)
-
 			(set-variable 'indent-tabs-mode nil)
 			(define-key py-mode-map (kbd "RET") 'newline-and-indent)
-			(smart-operator-mode-on)))
+			(smart-operator-mode-on)
+			(setq 'ac-sources '(ac-source-ropemacs ))))
 
-
-;;(when (require 'auto-complete nil t)
-  ;;(require 'auto-complete-yasnippet)
-  ;;(require 'auto-complete-python)
-  ;;(require 'auto-complete-css) 
-  ;;(require 'auto-complete-emacs-lisp)  
-  ;;(require 'auto-complete-semantic)  
-  ;;(require 'auto-complete-gtags)
-  ;;(setq ac-auto-start 3)
-;;  (setq ac-dwim t)
-  ;;(set-default 'ac-sources '( ac-source-ropemacs  ac-source-css-keywords ac-source-abbrev ac-source-words-in-buffer ac-source-files-in-current-dir ac-source-symbols)))
+(add-hook 'espresso-mode-hook (lambda ()
+                                (setq espresso-indent-level 2)))
 
 ;;; Comment and uncomment function
 (defun comment-or-uncomment-this (&optional lines)
@@ -116,5 +140,14 @@
 	 (line-end-position lines))))
 
 (load-library "init_python")
+
+(defun autocompile ()
+  "Compile itself if this is config file"
+  (interactive)
+  (if (or
+       (string-match ".emacs.d/load/[a-zA-z_\+\-]*.el$" (buffer-file-name)))
+      (byte-compile-file (buffer-file-name))))
+
+(add-hook 'after-save-hook 'autocompile)
 
 (provide 'emacs)
