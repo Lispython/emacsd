@@ -7,7 +7,7 @@
 (add-hook 'python-mode-hook
 		  (lambda ()
 			(set-variable 'py-indent-offset 4)
-										;(set-variable 'py-smart-indentation nil)
+			(set-variable 'py-smart-indentation nil)
 			(set-variable 'indent-tabs-mode nil)
 			(define-key py-mode-map (kbd "RET") 'newline-and-indent)
 										;(define-key py-mode-map [tab] 'yas/expand)
