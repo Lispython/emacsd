@@ -24,10 +24,11 @@
 (require 'espresso)
 (require 'django-html-mode)
 (require 'smart-operator)
-(require 'ecb)
+;;;(require 'ecb)
 (require 'pymacs)
 (require 'go-mode-load)
 (require 'zencoding-mode)
+(require 'rainbow-mode)
 (setq tramp-default-method "ssh")
 
 (scroll-bar-mode nil) ;;hide scrroll bar
@@ -91,11 +92,12 @@
 (add-to-list 'auto-mode-alist '("\\.json$" . espresso-mode))
 (add-to-list 'auto-mode-alist '("\\.html$" . django-html-mode))
 (add-to-list 'auto-mode-alist '("\\.css$" . css-mode))
+(add-to-list 'auto-mode-alist '("\\.html$" . rainbow-mode))
+(add-to-list 'auto-mode-alist '("\\.css$" . rainbow-mode))
 
 (autoload 'python-mode "python-mode" "Python Mode." t)
 (add-to-list 'auto-mode-alist '("\\.py\\'" . python-mode))
 (add-to-list 'interpreter-mode-alist '("python" . python-mode))
-
 (when (require 'auto-complete nil t)
   ;;(require 'auto-complete-yasnippet)
   (require 'auto-complete-python)
