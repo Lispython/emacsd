@@ -18,7 +18,7 @@
 (require 'yasnippet)
 (require 'python-mode)
 (require 'css-mode)
-;;(require 'js2-mode)
+(require 'js2-mode)
 (require 'ipython)
 (require 'ansi-color)
 (require 'espresso)
@@ -29,6 +29,7 @@
 (require 'go-mode-load)
 (require 'zencoding-mode)
 (require 'rainbow-mode)
+
 (setq tramp-default-method "ssh")
 
 (scroll-bar-mode nil) ;;hide scrroll bar
@@ -88,12 +89,14 @@
        (common-lisp-hyperspec symbol-name)
      (call-interactively 'common-lisp-hyperspec))))
 
-(add-to-list 'auto-mode-alist '("\\.js$" . espresso-mode))
-(add-to-list 'auto-mode-alist '("\\.json$" . espresso-mode))
+;;(add-to-list 'auto-mode-alist '("\\.js$" . espresso-mode))
+;;(add-to-list 'auto-mode-alist '("\\.json$" . espresso-mode))
+;;(autoload 'js2-mode "js2-mode" nil t)
+(add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
+(add-to-list 'auto-mode-alist '("\\.json$" . js2-mode))
 (add-to-list 'auto-mode-alist '("\\.html$" . django-html-mode))
 (add-to-list 'auto-mode-alist '("\\.css$" . css-mode))
-(add-to-list 'auto-mode-alist '("\\.html$" . rainbow-mode))
-(add-to-list 'auto-mode-alist '("\\.css$" . rainbow-mode))
+(rainbow-mode t)
 
 (autoload 'python-mode "python-mode" "Python Mode." t)
 (add-to-list 'auto-mode-alist '("\\.py\\'" . python-mode))
