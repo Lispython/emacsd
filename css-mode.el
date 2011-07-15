@@ -1,4 +1,3 @@
-
 ;;;; A major mode for editing CSS.
 
 ;;; Adds font locking, some rather primitive indentation handling and

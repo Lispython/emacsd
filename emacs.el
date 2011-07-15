@@ -1,14 +1,16 @@
-
 (add-to-list 'load-path "~/.emacs.d/") 
 ;;(set-default-font "Consolas-8") ;;default font
 ;;the following is size 7 for me...
 (set-face-font 'default "-unknown-Envy Code R-normal-normal-normal-*-13-*-*-*-m-0-iso10646-1")
-(set-frame-font "Envy Code R-7") ;; doesn't work consistently ;(
+;(set-frame-font "Envy Code R-7") ;; doesn't work consistently ;(
 
 ;;;(load-file "/usr/share/emacs23/site-lisp/cedet-common/cedet.el")
 ;;;;(add-to-list 'load-path "/usr/share/emacs23/site-lisp/ecb")
 ;; Remote file editing via ssh
 (add-to-list 'load-path "~/.emacs.d/tramp-files/lisp")
+(add-to-list 'load-path "~/.emacs.d/slime/")
+;;add jabber mode
+(add-to-list 'load-path "~/.emacs.d/emacs-jabber/")
 
 (require 'font-lock) (if (fboundp 'global-font-lock-mode) (global-font-lock-mode 1)) 
 (require 'tramp)
@@ -16,7 +18,7 @@
 (require 'auto-complete)
 (require 'auto-complete-config)
 (require 'yasnippet)
-(require 'python-mode)
+;;;(require 'python-mode)
 (require 'css-mode)
 (require 'js2-mode)
 (require 'ipython)
@@ -24,11 +26,26 @@
 (require 'espresso)
 (require 'django-html-mode)
 (require 'smart-operator)
-;;;(require 'ecb)
+;;(require 'ecb)
 (require 'pymacs)
 (require 'go-mode-load)
-(require 'zencoding-mode)
+;;(require 'zencoding-mode)
 (require 'rainbow-mode)
+(require 'http-twiddle)
+(require 'regex-tool)
+(require 'slime)
+(require 'lambda-mode)
+(require 'python-pep8)
+(require 'python-pylint)
+(require 'hyperspec)
+(require 'jabber-autoloads)
+
+
+
+(add-hook 'lisp-mode-hook (lambda () (slime-mode t)))
+;;(add-hook 'inferior-lisp-mode-hook (lambda () (inferior-slime-mode t)))
+;; Optionally, specify the lisp program you are using. Default is "lisp"
+
 
 (setq tramp-default-method "ssh")
 
@@ -52,8 +69,8 @@
 ;;;(global-font-lock-mode 1)
 (setq color-theme-is-global t)
 (color-theme-initialize)
-(color-theme-tango)
-
+(color-theme-solarized t)
+;;;(color-theme-tango)
 ;;;(global-auto-complete-mode t)
 
 (modify-coding-system-alist 'file ".*" 'utf-8) ;; fuck cp1251 and koi-8
@@ -64,10 +81,12 @@
 
 
 (setq ipython-command "/var/github/python2.6/bin/ipython")
-
-(defadvice py-execute-buffer (around python-keep-focus activate)
+(setq py-python-command-args '( "-colors" "Linux"))
+;;(setq py-python-command "/var/github/python2.6/bin/python2.6")
+;;(defadvice py-execute-buffer (around python-keep-focus activate)
  "return focus to python code buffer"
- (save-excursion ad-do-it))
+;; (save-excursion ad-do-it))
+
 
 (defmacro lisp-slime (lisp path &optional coding)
  (let ((funname (intern (format "%s-slime" lisp))))
@@ -80,7 +99,15 @@
 (lisp-slime sbcl "/usr/bin/sbcl")
 (lisp-slime clisp "/usr/bin/clisp")
 
-(require 'hyperspec)
+
+(slime-setup '(slime-repl slime-js))
+
+(global-set-key [f5] 'slime-js-reload)
+(add-hook 'js2-mode-hook
+		  (lambda ()
+			(slime-js-minor-mode 1)))
+
+
 
 (defun hyperspec-lookup (&optional symbol-name)
  (interactive)
@@ -96,11 +123,11 @@
 (add-to-list 'auto-mode-alist '("\\.json$" . js2-mode))
 (add-to-list 'auto-mode-alist '("\\.html$" . django-html-mode))
 (add-to-list 'auto-mode-alist '("\\.css$" . css-mode))
-(rainbow-mode t)
 
-(autoload 'python-mode "python-mode" "Python Mode." t)
-(add-to-list 'auto-mode-alist '("\\.py\\'" . python-mode))
-(add-to-list 'interpreter-mode-alist '("python" . python-mode))
+
+;;(setq py-python-command "/var/github/python2.6/bin/python2.6")
+;;(setq py-jython-command "/usr/bin/jython")
+
 (when (require 'auto-complete nil t)
   ;;(require 'auto-complete-yasnippet)
   (require 'auto-complete-python)
@@ -113,9 +140,9 @@
   (set-default 'ac-sources '(ac-source-words-in-buffer ac-source-symbols)))
 
 (add-hook 'css-mode-hook (lambda ()
-						   (message "css mode hook")
-						   (setq css-indent-offset 2)
-						   ;;(setq ac-sources '(ac-source-words-in-buffer ac-source-symbols))))
+		   (message "css mode hook")
+		   (rainbow-mode t)
+		   ;;(setq ac-sources '(ac-source-words-in-buffer ac-source-symbols))))
 (setq ac-sources '(ac-source-css-keywords))))
 
 (add-hook 'lisp-mode-hook (lambda ()
@@ -134,17 +161,29 @@
 (add-hook 'python-mode-hook
 		  (lambda ()
 			(message "python mode hook")
-			(set-variable 'py-indent-offset 4)
-			(set-variable 'indent-tabs-mode T)
-			(define-key py-mode-map (kbd "RET") 'newline-and-indent)
-			(smart-operator-mode-on)
-			(setq 'ac-sources '(ac-source-ropemacs ))
+;;			(smart-operator-mode-on)
+;;			(setq 'ac-sources '(ac-source-ropemacs ))
 ))
-
+(setq lambda-symbol (string (make-char 'greek-iso8859-7 107)))
+(add-hook 'python-mode-hook 'lambda-mode)
 (add-hook 'espresso-mode-hook (lambda ()
                                 (setq espresso-indent-level 2)))
 
-(add-hook 'sgml-mode-hook 'zencoding-mode) ;; Auto-start on any markup modes
+;;;(add-hook 'sgml-mode-hook 'zencoding-mode) ;; Auto-start on any markup modes
+
+(defun annotate-pdb ()
+  (interactive)
+  (highlight-lines-matching-regexp "import pdb")
+  (highlight-lines-matching-regexp "pdb.set_trace()"))
+
+(defun python-add-breakpoint ()
+  (interactive)
+  (py-newline-and-indent)
+  (insert "import ipdb; ipdb.set_trace()")
+  (highlight-lines-matching-regexp "^[ 	]*import ipdb; ipdb.set_trace()"))
+(define-key py-mode-map (kbd "C-c C-t") 'python-add-breakpoint)
+(add-hook 'python-mode-hook 'annotate-pdb)
+
 
 ;;; Comment and uncomment function
 (defun comment-or-uncomment-this (&optional lines)
@@ -159,15 +198,26 @@
 
 (load-library "init_python")
 
+(setq jabber-account-list
+    (quote (
+           ("s2nek@jabber.ru" (:password . "628mWct=") (:network-server . "jabber.ru") (:connection-type . starttls))
+           )
+    )
+)
+
+(setq browse-url-browser-function 'browse-url-generic
+      browse-url-generic-program "google-chrome")
+
 (defun autocompile ()
   "Compile itself if this is config file"
   (interactive)
   (if (or
        (string-match ".emacs.d/[a-zA-z_\+\-]*.el$" (buffer-file-name))
 	   (string-match ".emacs.d/tramp/[a-zA-z_\+\-]*.el$" (buffer-file-name))
+	   (string-match ".emacs.d/themes/[a-zA-z_\+\-]*.el$" (buffer-file-name))
 	   )
       (byte-compile-file (buffer-file-name))))
 
-;;(add-hook 'after-save-hook 'autocompile)
+(add-hook 'after-save-hook 'autocompile)
 
 (provide 'emacs)
