@@ -1,4 +1,4 @@
-(add-to-list 'load-path "~/.emacs.d/") 
+(add-to-list 'load-path "~/.emacs.d/")
 ;;(set-default-font "Consolas-8") ;;default font
 ;;the following is size 7 for me...
 (set-face-font 'default "-unknown-Envy Code R-normal-normal-normal-*-13-*-*-*-m-0-iso10646-1")
@@ -11,8 +11,14 @@
 (add-to-list 'load-path "~/.emacs.d/slime/")
 ;;add jabber mode
 (add-to-list 'load-path "~/.emacs.d/emacs-jabber/")
+;;(add-to-list 'load-path "~/.emacs.d/python-mode-6.0/")
 
-(require 'font-lock) (if (fboundp 'global-font-lock-mode) (global-font-lock-mode 1)) 
+(setq pylookup-dir "~/.emacs.d/pylookup/")
+
+(add-to-list 'load-path pylookup-dir)
+
+
+(require 'font-lock) (if (fboundp 'global-font-lock-mode) (global-font-lock-mode 1))
 (require 'tramp)
 (require 'color-theme)
 (require 'auto-complete)
@@ -21,7 +27,7 @@
 ;;;(require 'python-mode)
 (require 'css-mode)
 (require 'js2-mode)
-(require 'ipython)
+
 (require 'ansi-color)
 (require 'espresso)
 (require 'django-html-mode)
@@ -57,9 +63,9 @@
 
 ;; Turn on column number mode
 (show-paren-mode t) ;;hightlight brackets
-(fset 'yes-or-no-p 'y-or-n-p) 
+(fset 'yes-or-no-p 'y-or-n-p)
 (setq inhibit-splash-screen t) ;;;do't show splash screen
-(setq default-tab-width 4) 
+(setq default-tab-width 4)
 
 ; Makes clipboard work
 (setq x-select-enable-clipboard t)
@@ -81,11 +87,13 @@
 
 
 (setq ipython-command "/var/github/python2.6/bin/ipython")
-(setq py-python-command-args '( "-colors" "Linux"))
-;;(setq py-python-command "/var/github/python2.6/bin/python2.6")
+;;(setq py-python-command-args '("-colors" "Linux"))
+;;(setq py-python-command "/var/github/python2.6/bin/ipython")
 ;;(defadvice py-execute-buffer (around python-keep-focus activate)
- "return focus to python code buffer"
+;; "return focus to python code buffer"
 ;; (save-excursion ad-do-it))
+
+
 
 
 (defmacro lisp-slime (lisp path &optional coding)
@@ -131,9 +139,9 @@
 (when (require 'auto-complete nil t)
   ;;(require 'auto-complete-yasnippet)
   (require 'auto-complete-python)
-  ;;(require 'auto-complete-css) 
-  ;;(require 'auto-complete-emacs-lisp)  
-  ;;(require 'auto-complete-semantic)  
+  ;;(require 'auto-complete-css)
+  ;;(require 'auto-complete-emacs-lisp)
+  ;;(require 'auto-complete-semantic)
   ;;(require 'auto-complete-gtags)
   (setq ac-auto-start 2)
   (setq ac-dwim t)
@@ -171,6 +179,23 @@
 
 ;;;(add-hook 'sgml-mode-hook 'zencoding-mode) ;; Auto-start on any markup modes
 
+(add-hook 'before-save-hook 'delete-trailing-whitespace)
+
+(eval-when-compile (require 'pylookup))
+
+;; set executable file and db file
+(setq pylookup-program (concat pylookup-dir "/pylookup.py"))
+(setq pylookup-db-file (concat pylookup-dir "/pylookup.db"))
+
+;; to speedup, just load it on demand
+(autoload 'pylookup-lookup "pylookup"
+  "Lookup SEARCH-TERM in the Python HTML indexes." t)
+
+(autoload 'pylookup-update "pylookup"
+  "Run pylookup-update and create the database at `pylookup-db-file'." t)
+
+
+
 (defun annotate-pdb ()
   (interactive)
   (highlight-lines-matching-regexp "import pdb")
@@ -181,7 +206,8 @@
   (py-newline-and-indent)
   (insert "import ipdb; ipdb.set_trace()")
   (highlight-lines-matching-regexp "^[ 	]*import ipdb; ipdb.set_trace()"))
-(define-key py-mode-map (kbd "C-c C-t") 'python-add-breakpoint)
+
+;(define-key py-mode-map (kbd "C-c C-t") 'python-add-breakpoint)
 (add-hook 'python-mode-hook 'annotate-pdb)
 
 
@@ -197,6 +223,8 @@
 	 (line-end-position lines))))
 
 (load-library "init_python")
+
+(require 'ipython)
 
 (setq jabber-account-list
     (quote (

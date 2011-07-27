@@ -13,3 +13,4 @@ auto-save-list/*
 *~
 *.elc
 session.*
+tramp
