@@ -1,3 +1,6 @@
 [submodule "emacs-jabber"]
 	path = emacs-jabber
 	url = git://catap.ru/emacs-jabber/emacs-jabber.git
+[submodule "magit"]
+	path = magit
+	url = https://github.com/magit/magit.git
