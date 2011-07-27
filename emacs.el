@@ -48,6 +48,10 @@
 (require 'jabber-autoloads)
 (require 'magit)
 
+(require 'anything)
+
+(require 'anything-ipython)
+
 
 
 
@@ -182,6 +186,15 @@
 
 ;;;(add-hook 'sgml-mode-hook 'zencoding-mode) ;; Auto-start on any markup modes
 
+(add-hook 'python-mode-hook #'(lambda ()
+                                 (define-key py-mode-map (kbd "M-<tab>") 'anything-ipython-complete)))
+(add-hook 'ipython-shell-hook #'(lambda ()
+                                   (define-key py-mode-map (kbd "M-<tab>") 'anything-ipython-complete)))
+
+(when (require 'anything-show-completion nil t)
+   (use-anything-show-completion 'anything-ipython-complete
+                                 '(length initial-pattern)))
+
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
 (eval-when-compile (require 'pylookup))
@@ -210,7 +223,7 @@
   (insert "import ipdb; ipdb.set_trace()")
   (highlight-lines-matching-regexp "^[ 	]*import ipdb; ipdb.set_trace()"))
 
-;(define-key py-mode-map (kbd "C-c C-t") 'python-add-breakpoint)
+(define-key py-mode-map (kbd "C-c C-t") 'python-add-breakpoint)
 (add-hook 'python-mode-hook 'annotate-pdb)
 
 
