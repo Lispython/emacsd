@@ -12,6 +12,7 @@
 ;;add jabber mode
 (add-to-list 'load-path "~/.emacs.d/emacs-jabber/")
 ;;(add-to-list 'load-path "~/.emacs.d/python-mode-6.0/")
+(add-to-list 'load-path "~/.emacs.d/magit/")
 
 (setq pylookup-dir "~/.emacs.d/pylookup/")
 
@@ -45,6 +46,8 @@
 (require 'python-pylint)
 (require 'hyperspec)
 (require 'jabber-autoloads)
+(require 'magit)
+
 
 
 
