@@ -11,6 +11,7 @@
 (add-to-list 'load-path "~/.emacs.d/slime/")
 ;;add jabber mode
 (add-to-list 'load-path "~/.emacs.d/emacs-jabber/")
+(add-to-list 'load-path "~/.emacs.d/python-mode-6.0")
 
 (require 'font-lock) (if (fboundp 'global-font-lock-mode) (global-font-lock-mode 1)) 
 (require 'tramp)
@@ -21,7 +22,7 @@
 ;;;(require 'python-mode)
 (require 'css-mode)
 (require 'js2-mode)
-(require 'ipython)
+;;(require 'ipython)
 (require 'ansi-color)
 (require 'espresso)
 (require 'django-html-mode)
@@ -181,7 +182,9 @@
   (py-newline-and-indent)
   (insert "import ipdb; ipdb.set_trace()")
   (highlight-lines-matching-regexp "^[ 	]*import ipdb; ipdb.set_trace()"))
-(define-key py-mode-map (kbd "C-c C-t") 'python-add-breakpoint)
+
+;(define-key py-mode-map (kbd "C-c C-t") 'python-add-breakpoint)
+
 (add-hook 'python-mode-hook 'annotate-pdb)
 
 

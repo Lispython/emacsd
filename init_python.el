@@ -103,6 +103,9 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Auto Syntax Error Hightlight
 (when (load "flymake" t)
+  (custom-set-faces
+   '(flymake-errline ((((class color)) (:background "red"))))
+   '(flymake-warnline ((((class color)) (:background "orange")))))
   (defun flymake-pyflakes-init ()
     (let* ((temp-file (flymake-init-create-temp-buffer-copy
 					   'flymake-create-temp-inplace))
