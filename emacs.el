@@ -5,7 +5,7 @@
 ;(set-frame-font "Envy Code R-7") ;; doesn't work consistently ;(
 
 ;;;(load-file "/usr/share/emacs23/site-lisp/cedet-common/cedet.el")
-;;;;(add-to-list 'load-path "/usr/share/emacs23/site-lisp/ecb")
+;;;(add-to-list 'load-path "/usr/share/emacs23/site-lisp/ecb")
 ;; Remote file editing via ssh
 (add-to-list 'load-path "~/.emacs.d/tramp-files/lisp")
 (add-to-list 'load-path "~/.emacs.d/slime/")
@@ -18,6 +18,8 @@
 
 (add-to-list 'load-path pylookup-dir)
 
+(load-file "~/.emacs.d/nxml-mode/rng-auto.el")
+
 
 (require 'font-lock) (if (fboundp 'global-font-lock-mode) (global-font-lock-mode 1))
 (require 'tramp)
@@ -25,7 +27,7 @@
 (require 'auto-complete)
 (require 'auto-complete-config)
 (require 'yasnippet)
-;;;(require 'python-mode)
+;;(require 'python-mode)
 (require 'css-mode)
 (require 'js2-mode)
 
@@ -123,7 +125,6 @@
 			(slime-js-minor-mode 1)))
 
 
-
 (defun hyperspec-lookup (&optional symbol-name)
  (interactive)
  (let ((browse-url-browser-function 'w3m-browse-url))
@@ -131,11 +132,11 @@
        (common-lisp-hyperspec symbol-name)
      (call-interactively 'common-lisp-hyperspec))))
 
-;;(add-to-list 'auto-mode-alist '("\\.js$" . espresso-mode))
-;;(add-to-list 'auto-mode-alist '("\\.json$" . espresso-mode))
+;;add-to-list 'auto-mode-alist '("\\.js$" . espresso-mode))
+(add-to-list 'auto-mode-alist '("\\.json$" . espresso-mode))
 ;;(autoload 'js2-mode "js2-mode" nil t)
 (add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
-(add-to-list 'auto-mode-alist '("\\.json$" . js2-mode))
+;;(add-to-list 'auto-mode-alist '("\\.json$" . js2-mode))
 (add-to-list 'auto-mode-alist '("\\.html$" . django-html-mode))
 (add-to-list 'auto-mode-alist '("\\.css$" . css-mode))
 
@@ -215,7 +216,9 @@
 (defun annotate-pdb ()
   (interactive)
   (highlight-lines-matching-regexp "import pdb")
-  (highlight-lines-matching-regexp "pdb.set_trace()"))
+  (highlight-lines-matching-regexp "pdb.set_trace()")
+  (highlight-lines-matching-regexp "import rpdb2")
+  (highlight-lines-matching-regexp "rpdb2.start_embedded_debugger("))
 
 (defun python-add-breakpoint ()
   (interactive)
@@ -239,6 +242,7 @@
 	 (line-end-position lines))))
 
 (load-library "init_python")
+;(load-library "recompiler")
 
 (require 'ipython)
 

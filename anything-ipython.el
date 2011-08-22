@@ -1,33 +1,33 @@
-;;; anything-ipython.el --- 
-;; 
+;;; anything-ipython.el ---
+;;
 ;; Author: Thierry Volpiatto
 ;; Maintainer: Thierry Volpiatto
-;; 
+;;
 ;; Created: sam. juil. 25 18:48:31 2009 (+0200)
-;; Version: 
+;; Version:
 ;; X-URL: http://mercurial.intuxication.org/hg/anythingipython
-;; Keywords: ipython, python, completion. 
-;; Compatibility: 
-;; 
+;; Keywords: ipython, python, completion.
+;; Compatibility:
+;;
 ;; This program is free software; you can redistribute it and/or
 ;; modify it under the terms of the GNU General Public License as
 ;; published by the Free Software Foundation; either version 3, or
 ;; (at your option) any later version.
-;; 
+;;
 ;; This program is distributed in the hope that it will be useful,
 ;; but WITHOUT ANY WARRANTY; without even the implied warranty of
 ;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
 ;; General Public License for more details.
-;; 
+;;
 ;; You should have received a copy of the GNU General Public License
 ;; along with this program; see the file COPYING.  If not, write to
 ;; the Free Software Foundation, Inc., 51 Franklin Street, Fifth
 ;; Floor, Boston, MA 02110-1301, USA.
-;; 
+;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; 
-;; 
-;;; Commentary: 
+;;
+;;
+;;; Commentary:
 ;;  ==========
 ;;
 ;; Tested on emacs23.1 with python2.6, ipython-9.1 and python-mode.el.
@@ -38,7 +38,7 @@
 ;;  ============
 ;;
 ;;  ipython (http://ipython.scipy.org/), ipython.el, python-mode.el.
-;;  It's better to have rlcompleter2 (http://codespeak.net/rlcompleter2/) 
+;;  It's better to have rlcompleter2 (http://codespeak.net/rlcompleter2/)
 ;;  Note that to use rlcompleter2, you have to add these lines in your
 ;;  your ~/.ipython/ipy_user_conf.py
 ;;
@@ -48,7 +48,7 @@
 ;;  You may want to use also anything-show-completion.el:(facultative)
 ;;  http://www.emacswiki.org/cgi-bin/emacs/anything-show-completion.el
 ;;
-;;  Install: 
+;;  Install:
 ;;  =======
 ;;
 ;; Setup anything python:
@@ -69,7 +69,7 @@
 ;;   (use-anything-show-completion 'anything-ipython-complete
 ;;                                 '(length initial-pattern)))
 ;;
-;;  Usage: 
+;;  Usage:
 ;;  =====
 ;; 1) From your *.py file, start interpreter with C-c !
 ;; 2) Import module(s) you need for completion from interpreter.
@@ -81,13 +81,13 @@
 ;; 3) Use M-x anything-ipython-complete or M-<tab> to have completion.
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; 
+;;
 ;;; Change log:
 ;;
 ;; http://mercurial.intuxication.org/hg/anythingipython
-;; 
+;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; 
+;;
 ;;; Code:
 
 ;; <2009-07-25 Sam. 18:03>
@@ -112,7 +112,7 @@ Return a completion list according to `pattern'."
          (sep                               ";")
          (ipy-shell-proc                    (get-buffer-process (current-buffer)))
          (loc-py-buff-proc                  (get-process py-which-bufname))
-         (python-process                    (or ipy-shell-proc loc-py-buff-proc)) 
+         (python-process                    (or ipy-shell-proc loc-py-buff-proc))
          (cmd-args                          (format ipython-completion-command-string pattern))
          (completions                       nil)
          (completion-table                  nil)
@@ -120,9 +120,9 @@ Return a completion list according to `pattern'."
          ;; i.e transform all shell color char from the ipython output
          ;; in text properties understandable by lisp.
          (comint-preoutput-filter-functions (append
-                                             comint-preoutput-filter-functions 
+                                             comint-preoutput-filter-functions
                                              '(ansi-color-filter-apply
-                                               (lambda (string) 
+                                               (lambda (string)
                                                  (setq ugly-return (concat ugly-return string))
                                                  "")))))
     (process-send-string python-process cmd-args)
@@ -157,7 +157,7 @@ Return a completion list according to `pattern'."
   "Get the pattern to complete from."
   (let ((beg (save-excursion
                (skip-chars-backward "a-z0-9A-Z_./" (point-at-bol))
-               (point))) 
+               (point)))
         (end (point)))
     (buffer-substring-no-properties beg end)))
 
@@ -183,7 +183,7 @@ Return a completion list according to `pattern'."
                 (throw 'continue nil))
               (throw 'break nil))))))
   (message "All imports from `%s' done" (buffer-name)))
-  
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Provide

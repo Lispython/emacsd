@@ -1,0 +1,17 @@
+# -*- mode: snippet -*-
+# contributor : Alexandr Lispython (alex@obout.ru)
+# name: moduledoc
+# key: moduledco
+# --
+"""
+${1:`(file-name-nondirectory
+              (file-name-sans-extension (or (buffer-file-name) (buffer-name))))`}
+${1:$(make-string (string-width text) ?\~)}
+
+${2: module description}
+
+:copyright: (c) 2011 by ${3:Alexandr Sokolovskiy (alex@obout.ru)}.
+:license: BSD, see LICENSE for more details.
+"""
+
+$0

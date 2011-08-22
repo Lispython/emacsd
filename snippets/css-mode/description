@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: description
+# key: desc
+# group: css-mode
+# expand-env: ((yas/indent-line 'fixed) (yas/wrap-around-region 'nil))
+# --
+/*-------------------------------------------------------------------
+[Master StyleSheet]
+
+Project:        ${1:PROJACT NAME}
+Description:    ${2:PROJACT DESCRIPTION}
+Version:        ${3:V1}
+Assigned to:    ${4:Alexandr}
+Primary use:    $1
+*/
