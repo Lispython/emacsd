@@ -135,20 +135,24 @@
 
 ;; AUTO COMPLETE CONFIGS
 (add-to-list 'ac-dictionary-directories "~/.emacs.d/dict/")
-(setq ac-auto-start 3)
+(ac-config-default)
+(setq ac-auto-start t)
 (setq ac-auto-show-menu 0.8)
 (setq ac-quick-help-delay 0.5)
 (setq ac-dwim t)
-(ac-config-default)
+;;(setq ac-sources '(ac-source-abbrev ac-source-dictionary ac-source-words-in-same-mode-buffers))
 
 ;; KEYMAPS
 (define-key ac-mode-map (kbd "C-c h") 'ac-last-quick-help)
 (define-key ac-mode-map (kbd "C-c H") 'ac-last-help)
 (define-key ac-mode-map (kbd "TAB") 'auto-complete)
+;;auto complete
+;;(define-key ac-complete-mode-map "\t" 'auto-complete)
+;;(define-key ac-mode-map "\r" nil)
 
 
 ;; DEPRICATED FOR AUTO COMPLETE 1.4
-;; (when (require 'auto-complete nil t)
+;; (when (require 'auto-complete nil t)w
 ;; ;;  (add-to-list 'ac-dictionary-directories "~/.emacs.d/ac-dict")
 
 ;;   (setq ac-auto-start 2)
@@ -188,6 +192,7 @@
 	 (line-end-position lines))))
 
 (load-library "init_python")
+(load-library "css-mode-init")
 ;(load-library "recompiler")
 
 (require 'ipython)
@@ -223,24 +228,25 @@
 						   (message "css mode hook")
 						   (rainbow-mode t)
 						   ;;(setq ac-sources '(ac-source-words-in-buffer ac-source-symbols))))
-						   (setq ac-sources '(ac-source-css-keywords))))
+;;						   (setq ac-sources '(ac-source-css-keywords))
+))
 
 (add-hook 'lisp-mode-hook (lambda ()
 							(message "lisp mode hook")
 ;;							 (setq ac-sources '(ac-source-words-in-buffer ac-source-symbols))))
-							(setq ac-sources '(ac-source-abbrev ac-source-words-in-buffer
-																ac-source-files-in-current-dir
-																ac-source-symbols ac-emacs-lisp-sources))
+		;;					(setq ac-sources '(ac-source-abbrev ac-source-words-in-buffer
+		;;														ac-source-files-in-current-dir
+		;;														ac-source-symbols ac-emacs-lisp-sources))
 							))
 
 (add-hook 'emacs-lisp-mode-hook (lambda ()
 								  (message "emacs lisp mode hook")
 								  ;; (setq ac-sources '(ac-source-words-in-buffer
 								  ;; 					 ac-source-symbols))
-								  ;; (setq ac-sources '(ac-source-abbrev
-								  ;; 					 ac-source-words-in-buffer
-								  ;; 					 ac-source-files-in-current-dir
-								  ;; 					 ac-source-symbols ac-emacs-lisp-aources))
+								   ;; (setq ac-sources '(ac-source-abbrev
+								   ;; 					 ac-source-words-in-buffer
+								   ;; 					 ac-source-files-in-current-dir
+								   ;; 					 ac-source-symbols ac-emacs-lisp-sources))
 								  ))
 
 
