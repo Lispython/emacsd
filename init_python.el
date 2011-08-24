@@ -163,6 +163,7 @@
 			(smart-operator-mode-on)
 			(annotate-pdb)
 			(lambda-mode)
+            (ac-ropemacs-initialize)
 			;;TODO: use virtualenv version
 			;;(setq pymacs-python-command py-python-command)
 			(set-variable 'py-indent-offset 4)
@@ -170,11 +171,12 @@
 			(set-variable 'indent-tabs-mode nil)
 			;; (setq 'ac-sources '(ac-source-ropemacs ))
 			;; (setq yas/after-exit-snippet-hook 'indent-according-to-mode)
-			(set (make-local-variable 'ac-sources)
-				 (append ac-sources '(ac-source-rope)))
-			(set (make-local-variable 'ac-find-function) 'ac-python-find)
-			(set (make-local-variable 'ac-candidate-function) 'ac-python-candidate)
-			(set (make-local-variable 'ac-auto-start) nil)))
+;			(set (make-local-variable 'ac-sources)
+;				 (append ac-sources '(ac-source-rope)))
+;			(set (make-local-variable 'ac-find-function) 'ac-python-find)
+;			(set (make-local-variable 'ac-candidate-function) 'ac-python-candidate)
+;			(set (make-local-variable 'ac-auto-start) nil)
+))
 
 
 ;;(add-hook 'python-mode-hook 'annotate-pdb)

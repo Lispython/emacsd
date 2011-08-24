@@ -138,21 +138,21 @@
 (ac-config-default)
 (setq ac-auto-start t)
 (setq ac-auto-show-menu 0.8)
-(setq ac-quick-help-delay 0.5)
+(setq ac-quick-help-delay 0.3)
 (setq ac-dwim t)
-;;(setq ac-sources '(ac-source-abbrev ac-source-dictionary ac-source-words-in-same-mode-buffers))
+(setq ac-sources '(ac-source-abbrev ac-source-dictionary ac-source-words-in-same-mode-buffers))
 
 ;; KEYMAPS
 (define-key ac-mode-map (kbd "C-c h") 'ac-last-quick-help)
 (define-key ac-mode-map (kbd "C-c H") 'ac-last-help)
-(define-key ac-mode-map (kbd "TAB") 'auto-complete)
+(define-key ac-mode-map (kbd "M-TAB") 'auto-complete)
 ;;auto complete
 ;;(define-key ac-complete-mode-map "\t" 'auto-complete)
 ;;(define-key ac-mode-map "\r" nil)
 
 
 ;; DEPRICATED FOR AUTO COMPLETE 1.4
-;; (when (require 'auto-complete nil t)w
+;; (when (require 'auto-complete nil t)
 ;; ;;  (add-to-list 'ac-dictionary-directories "~/.emacs.d/ac-dict")
 
 ;;   (setq ac-auto-start 2)

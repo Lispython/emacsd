@@ -14,11 +14,32 @@ package.  Note that the latest X/Emacs releases contain this package.")
 	))
 
 ;;(when (require 'auto-complete nil t))
+(defun ac-css-mode-candidates ()
+  "thisandthat."
+  (list "mymode" "mymode candi" "another candidate" "mymode2 csss")
+)
+
+(defun ac-css-mode-documentation (item)
+  (if (stringp item)
+    (let (s)
+      (setq s "help text string")
+
+    ))
+)
+
+
+(ac-define-source css-mode-r
+  '((candidates . ac-css-mode-candidates)
+    (document . ac-css-mode-documentation)
+;;    (prefix . ac-css-prefix)
+    (requires . 0)))
+
 
 (add-hook 'css-mode-hook (lambda ()
 						   (message "css mode hook")
 				           (rainbow-mode t)
                            (setq ac-sources (append '(ac-source-css-property) ac-sources))
+                           (setq ac-sources (append '(ac-source-css-mode-r) ac-sources))
 						   (if css-menu (easy-menu-add css-menu))
 
 ;;(setq ac-sources (append '(ac-source-css-property) ac-sources))
