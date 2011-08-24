@@ -16,3 +16,4 @@ session.*
 tramp
 venv/*
 venv
+ac-comphist.dat
