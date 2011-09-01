@@ -136,16 +136,22 @@
 ;; AUTO COMPLETE CONFIGS
 (add-to-list 'ac-dictionary-directories "~/.emacs.d/dict/")
 (ac-config-default)
-(setq ac-auto-start t)
+(setq ac-auto-start 1)
 (setq ac-auto-show-menu 0.8)
 (setq ac-quick-help-delay 0.3)
 (setq ac-dwim t)
 (setq ac-sources '(ac-source-abbrev ac-source-dictionary ac-source-words-in-same-mode-buffers))
 
+(defun smart-tab ()
+  (interactive)
+  (if (eql (ac-start) 0)
+      (indent-for-tab-command)))
+
 ;; KEYMAPS
 (define-key ac-mode-map (kbd "C-c h") 'ac-last-quick-help)
 (define-key ac-mode-map (kbd "C-c H") 'ac-last-help)
-(define-key ac-mode-map (kbd "M-TAB") 'auto-complete)
+(define-key ac-mode-map (kbd "TAB") 'auto-complete)
+(define-key py-mode-map "\t" 'smart-tab)
 ;;auto complete
 ;;(define-key ac-complete-mode-map "\t" 'auto-complete)
 ;;(define-key ac-mode-map "\r" nil)
@@ -193,6 +199,7 @@
 
 (load-library "init_python")
 (load-library "css-mode-init")
+(load-library "go-mode-init")
 ;(load-library "recompiler")
 
 (require 'ipython)
