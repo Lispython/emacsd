@@ -13,3 +13,6 @@
 [submodule "swank-js"]
 	path = swank-js
 	url = https://github.com/ivan4th/swank-js.git
+[submodule "slime"]
+	path = slime
+	url = git://github.com/Lispython/slime.git

@@ -11,6 +11,8 @@
 ;;; Remote file editing via ssh
 (add-to-list 'load-path "~/.emacs.d/tramp-files/lisp")
 (add-to-list 'load-path "~/.emacs.d/slime/")
+(add-to-list 'load-path "~/.emacs.d/slime/contrib/")
+
 ;;(add-to-list 'load-path "~/.emacs.d/virtualenv/")
 ;;add jabber mode
 ;;(add-to-list 'load-path "~/.emacs.d/emacs-jabber/")
@@ -61,7 +63,7 @@
 (require 'hyperspec)
 (require 'anything-ipython)
 (require 'pymacs)
-
+;;(require 'slime-autoloads)
 
 
 ;;SET VARIABLES OF EMACS
@@ -113,6 +115,9 @@
 
 ;;LISP-MODE
 ;;Common lisp compiler
+(setq slime-backend "~/.emacs.d/slime/swank-loader.lisp")
+(setq slime-startup-animation t)
+
 (defmacro lisp-slime (lisp path &optional coding)
   (let ((funname (intern (format "%s-slime" lisp))))
 	`(defun ,funname ()
@@ -123,6 +128,11 @@
 
 (lisp-slime sbcl "/usr/bin/sbcl")
 (lisp-slime clisp "/usr/bin/clisp")
+
+(slime-setup '(slime-fancy slime-asdf slime-banner slime-repl slime-scratch))
+
+;;(slime-setup '(slime-repl)) ; repl only
+
 
 ;;;SWANK-JS connection to slime
 ;;(slime-setup '(slime-repl slime-js))
@@ -198,8 +208,8 @@
 	 (line-end-position lines))))
 
 (load-library "init_python")
-(load-library "css-mode-init")
-(load-library "go-mode-init")
+;;(load-library "css-mode-init")
+;;(load-library "go-mode-init")
 ;(load-library "recompiler")
 
 (require 'ipython)
