@@ -20,7 +20,7 @@
 						  (message "GO mode hook")
 						  (setq ac-sources '(ac-source-abbrev ac-source-dictionary ac-source-words-in-same-mode-buffers))
 
-						  (setq ac-sources (append '(ac-source-go-mode) ac-sources))
+;;						  (setq ac-sources (append '(ac-source-go-mode) ac-sources))
 						  ))
 
 (provide 'go-mode-init)

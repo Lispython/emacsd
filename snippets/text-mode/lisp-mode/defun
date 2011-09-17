@@ -1,0 +1,10 @@
+# -*- coding: utf-8 -*-
+# key: defun
+# name: (defun func-name (arguments-name ...) function-body)
+# contributor: Alexandr Lispython (alex@obout.ru)
+# expand-env: ((yas/indent-line 'fixed) (yas/wrap-around-region 'nil))
+# --
+(defun ${1:func_name} (${2:arguments-names})
+  "${3:docstring}"
+    $0
+)
