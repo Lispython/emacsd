@@ -217,6 +217,7 @@
 	 (line-end-position lines))))
 
 (load-library "init_python")
+(load-library "org-mode-init")
 ;;(load-library "css-mode-init")
 ;;(load-library "go-mode-init")
 ;(load-library "recompiler")
@@ -293,6 +294,5 @@
 
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 (add-hook 'after-save-hook 'autocompile)
-
 
 (provide 'emacs)
