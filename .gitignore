@@ -13,3 +13,8 @@ auto-save-list/*
 *~
 *.elc
 session.*
+tramp
+venv/*
+venv
+ac-comphist.dat
+.cvsignore

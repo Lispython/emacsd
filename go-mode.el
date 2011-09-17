@@ -106,6 +106,21 @@ some syntax analysis.")
   "Basic font lock keywords for Go mode.  Highlights keywords,
 built-ins, functions, and some types.")
 
+(defcustom go-block-comment-prefix "//"
+  "*String used by \\[comment-region] to comment out a block of code.
+This should follow the convention for non-indenting comment lines so
+that the indentation commands won't get confused (i.e., the string
+should be of the form `#x...' where `x' is not a blank or a tab, and
+`...' is arbitrary).  However, this string should not end in whitespace."
+  :type 'string
+  :group 'go)
+
+(defun go-comment-region (beg end &optional arg)
+  "Like `comment-region' but uses double hash (`//') comment starter."
+  (interactive "r\nP")
+  (let ((comment-start go-block-comment-prefix))
+    (comment-region beg end arg)))
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Key map
 ;;
@@ -115,10 +130,31 @@ built-ins, functions, and some types.")
     (define-key m "}" #'go-mode-insert-and-indent)
     (define-key m ")" #'go-mode-insert-and-indent)
     (define-key m ":" #'go-mode-delayed-electric)
+    (define-key m "\C-c\C-f" 'gofmt)
+	(define-key m "\C-c#" 'go-comment-region)
     ;; In case we get : indentation wrong, correct ourselves
     (define-key m "=" #'go-mode-insert-and-indent)
     m)
   "Keymap used by Go mode to implement electric keys.")
+
+
+(defvar go-menu nil
+  "Menu for GO Mode.
+This menu will get created automatically if you have the `easymenu'
+package.  Note that the latest X/Emacs releases contain this package.")
+
+(easy-menu-define
+  go-menu go-mode-map "Go Mode menu"
+  '("GO"
+	["Insert and indent" go-mode-insert-and-indent]
+	["Delayed electric" go-mode-delayed-electric]
+	["Format with gofmt" gofmt]
+    "-----"
+	["Comment region" go-comment-region (mark)]
+	["Uncomment Region" (go-comment-region (point) (mark) '(4)) (mark)]
+	"-"
+	))
+
 
 (defun go-mode-insert-and-indent (key)
   "Invoke the global binding of KEY, then reindent the line."
@@ -462,6 +498,9 @@ functions, and some types.  It also provides indentation that is
   (set (make-local-variable 'font-lock-defaults)
        '(go-mode-font-lock-keywords nil nil nil nil))
 
+  (if go-menu
+	  (easy-menu-add go-menu))
+
   ;; Remove stale text properties
   (save-restriction
     (widen)
@@ -502,7 +541,7 @@ Useful for development work."
 
 (defun gofmt ()
   "Pipe the current buffer through the external tool `gofmt`."
-  
+
   (interactive)
   ;; for some reason save-excursion isn't working
   ;; probably because shell-command-on-region deletes the contents of the

@@ -1,0 +1,13 @@
+# -*- mode: snippet -*-
+# name: packagedoc
+# key: packagedoc
+# --
+
+;;; -*- Mode: ${1:$$(yas/choose-value '("LISP" "ELISP"))}; Syntax: ${2:$$(yas/choose-value '("COMMON-LISP"))}; Package: ${4:`(file-name-nondirectory (file-name-sans-extension (or (buffer-file-name) (buffer-name))))`}; Base: 10 -*-
+;;;
+;;;
+;;; ${5:module description }
+;;;
+;;; :copyright: (c) 2011 by ${7:Alexandr Lispython (alex@obout.ru)}.
+;;; :license: BSD, see LICENSE for more details.
+"""
