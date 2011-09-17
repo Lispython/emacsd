@@ -19,3 +19,6 @@
 [submodule "auto-complete-modes/ac-slime"]
 	path = auto-complete-modes/ac-slime
 	url = git@github.com:Lispython/ac-slime.git
+[submodule "snippets/text-mode/go-mode"]
+        path = snippets/text-mode/go-mode
+        url = git@github.com:Lispython/go-mode-yasnippets.git
