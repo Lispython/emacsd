@@ -172,18 +172,9 @@
 			(set-variable 'py-indent-offset 4)
 			(set-variable 'py-smart-indentation nil)
 			(set-variable 'indent-tabs-mode nil)
-			;; (setq 'ac-sources '(ac-source-ropemacs ))
-			;; (setq yas/after-exit-snippet-hook 'indent-according-to-mode)
-;			(set (make-local-variable 'ac-sources)
-;				 (append ac-sources '(ac-source-rope)))
-;			(set (make-local-variable 'ac-find-function) 'ac-python-find)
-;			(set (make-local-variable 'ac-candidate-function) 'ac-python-candidate)
-;			(set (make-local-variable 'ac-auto-start) nil)
+            (font-lock-add-keywords nil '(("\\<\\(FIXME\\|TODO\\|BUG\\):" 1 font-lock-warning-face t)))
 ))
 
-
-;;(add-hook 'python-mode-hook 'annotate-pdb)
-;;(add-hook 'python-mode-hook 'lambda-mode)
 (add-hook 'find-file-hook 'flymake-find-file-hook)
 
-(provide 'init_python)
+(provide 'python-mode-init)

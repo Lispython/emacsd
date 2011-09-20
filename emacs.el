@@ -216,7 +216,7 @@
 	 (line-beginning-position)
 	 (line-end-position lines))))
 
-(load-library "init_python")
+(load-library "python-mode-init")
 (load-library "org-mode-init")
 ;;(load-library "css-mode-init")
 ;;(load-library "go-mode-init")
@@ -255,6 +255,8 @@
 							(message "css mode hook")
 							(slime-mode t)
                             (define-key lisp-mode-map "\C-c \C-b" 'slime-eval-buffer)
+                            (font-lock-add-keywords nil
+                                '(("\\<\\(FIXME\\|TODO\\|BUG\\):" 1 font-lock-warning-face t)))
 							(yas/minor-mode-on)))
 
 (add-hook 'slime-mode-hook 'set-up-slime-ac)
@@ -289,7 +291,7 @@
 ;;(add-hook 'python-mode-hook #'(lambda ()
 ;;                                 (define-key py-mode-map (kbd "M-<tab>") 'anything-ipython-complete)))
 
-(add-hook 'ipython-shell-hook #'(lambda ()
+(add-hook 'ipython-shell-hook (lambda ()
 								  (define-key py-mode-map (kbd "M-<tab>") 'anything-ipython-complete)))
 
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
