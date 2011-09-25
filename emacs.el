@@ -15,6 +15,8 @@
 (add-to-list 'load-path "~/.emacs.d/slime/")
 (add-to-list 'load-path "~/.emacs.d/slime/contrib/")
 (add-to-list 'load-path "~/.emacs.d/js-swank/")
+(add-to-list 'load-path "~/.emacs.d/jshint-mode/")
+
 
 ;;(add-to-list 'load-path "~/.emacs.d/virtualenv/")
 ;;add jabber mode
@@ -72,6 +74,8 @@
 (require 'anything-ipython)
 (require 'pymacs)
 (require 'hide-region)
+(require 'flymake-jshint)
+
 
 ;;SET VARIABLES OF EMACS
 (setq tramp-default-method "ssh")

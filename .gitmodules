@@ -25,3 +25,6 @@
 [submodule "jslint"]
 	path = jslint
 	url = https://github.com/douglascrockford/JSLint.git
+[submodule "jshint-mode"]
+	path = jshint-mode
+	url = https://github.com/daleharvey/jshint-mode.git

@@ -18,3 +18,5 @@ venv/*
 venv
 ac-comphist.dat
 .cvsignore
+venvs/*
+node_modules/*
