@@ -14,6 +14,7 @@
 (add-to-list 'load-path "~/.emacs.d/tramp-files/lisp")
 (add-to-list 'load-path "~/.emacs.d/slime/")
 (add-to-list 'load-path "~/.emacs.d/slime/contrib/")
+(add-to-list 'load-path "~/.emacs.d/js-swank/")
 
 ;;(add-to-list 'load-path "~/.emacs.d/virtualenv/")
 ;;add jabber mode
@@ -70,6 +71,7 @@
 (require 'hyperspec)
 (require 'anything-ipython)
 (require 'pymacs)
+(require 'hide-region)
 
 ;;SET VARIABLES OF EMACS
 (setq tramp-default-method "ssh")
@@ -133,20 +135,10 @@
 
 (lisp-slime sbcl "/usr/bin/sbcl")
 (lisp-slime clisp "/usr/bin/clisp")
+(lisp-slime js "node /home/alex/.emacs.d/swank-js/swank.js")
 
 (slime-setup '(slime-fancy slime-asdf slime-banner slime-repl slime-scratch slime-highlight-edits slime-sbcl-exts slime-tramp slime-indentation
-))
-
-;;(slime-setup '(slime-repl)) ; repl only
-
-
-;;;SWANK-JS connection to slime
-;;(slime-setup '(slime-repl slime-js))
-;;(global-set-key [f5] 'slime-js-reload)
-;;(add-hook 'js2-mode-hook
-;;		  (lambda ()
-;;			(slime-js-minor-mode 1)))
-
+slime-js))
 
 
 ;; AUTO COMPLETE CONFIGS
@@ -163,14 +155,18 @@
 
 (defun smart-tab ()
   (interactive)
-  (if (eql (ac-start) 0)
+  (if (eql (ac-start) nil)
       (indent-for-tab-command)))
 
 ;; KEYMAPS
 (define-key ac-mode-map (kbd "C-c h") 'ac-last-quick-help)
 (define-key ac-mode-map (kbd "C-c H") 'ac-last-help)
-(define-key ac-mode-map (kbd "TAB") 'auto-complete)
+;;(define-key ac-mode-map (kbd "TAB") 'auto-complete)
+(define-key ac-mode-map (kbd "TAB") 'smart-tab)
 (define-key py-mode-map "\t" 'smart-tab)
+(global-set-key (kbd "C-c h r") 'hide-region-hide)
+(global-set-key (kbd "C-c h u") 'hide-region-unhide)
+
 ;;auto complete
 ;;(define-key ac-complete-mode-map "\t" 'auto-complete)
 ;;(define-key ac-mode-map "\r" nil)
@@ -218,7 +214,8 @@
 
 (load-library "python-mode-init")
 (load-library "org-mode-init")
-;;(load-library "css-mode-init")
+(load-library "js-mode-init")
+(load-library "css-mode-init")
 ;;(load-library "go-mode-init")
 ;(load-library "recompiler")
 

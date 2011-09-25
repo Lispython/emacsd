@@ -22,3 +22,6 @@
 [submodule "snippets/text-mode/go-mode"]
         path = snippets/text-mode/go-mode
         url = git@github.com:Lispython/go-mode-yasnippets.git
+[submodule "jslint"]
+	path = jslint
+	url = https://github.com/douglascrockford/JSLint.git
