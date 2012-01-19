@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# name: defsystem
+# key: defsystem
+# --
+
+(in-package :asdf)
+
+(defsystem "${1:system-name}"
+	:description "${2:description}"
+    :version "${3:version}"
+    :author "${4:auhtor}"
+    :licence "${5:license}"
+    :components ((:file "packages")
+	))
+
+$0

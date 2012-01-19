@@ -74,7 +74,7 @@
 (require 'anything-ipython)
 (require 'pymacs)
 (require 'hide-region)
-(require 'flymake-jshint)
+;;(require 'flymake-jshint)
 
 
 ;;SET VARIABLES OF EMACS
@@ -85,6 +85,7 @@
 ;; Turn on column number mode
 (column-number-mode t) ;; but this one is good
 ;;(ido-mode t)
+(setq flymake-start-syntax-check-on-find-file nil)
 
 (show-paren-mode t) ;;hightlight brackets
 (fset 'yes-or-no-p 'y-or-n-p)
@@ -92,9 +93,17 @@
 (setq default-tab-width 4)
 (modify-coding-system-alist 'file ".*" 'utf-8) ;; fuck cp1251 and koi-8
 
+;;; Current line hightlight
+(global-hl-line-mode t)
+;(set-face-background 'hl-line "#330")  ;; Emacs 22 Only
+
 ; Makes clipboard work
 (setq x-select-enable-clipboard t)
 (setq interprogram-paste-function 'x-cut-buffer-or-selection-value)
+(delete-selection-mode t) ;; Delete selected by Ctrl-D
+(transient-mark-mode t) ;;hightlight by C-Space
+;; enable horizontal scrolling
+;;(hscroll-global-mode t)
 
 ;;THEMES
 (setq color-theme-is-global t)
@@ -220,6 +229,7 @@ slime-js))
 (load-library "org-mode-init")
 (load-library "js-mode-init")
 (load-library "css-mode-init")
+(load-library "sudo-save")
 ;;(load-library "go-mode-init")
 ;(load-library "recompiler")
 
@@ -241,6 +251,31 @@ slime-js))
 
 ;;(add-hook 'inferior-lisp-mode-hook (lambda () (inferior-slime-mode t)))
 ;; Optionally, specify the lisp program you are using. Default is "lisp"
+
+(setq ibuffer-saved-filter-groups
+	  (quote (("default"
+			   ("dired" (mode . dired-mode))
+			   ("erc" (mode . erc-mode))
+			   ("planner" (or
+						   (name . "^\\*Calendar\\*$")
+						   (name . "^diary$")
+						   (mode . muse-mode)))
+			   ("emacs" (or
+						 (name . "^\\*scratch\\*$")
+						 (name . "^\\*Messages\\*$")))
+			   ("gnus" (or
+						(mode . message-mode)
+						(mode . bbdb-mode)
+						(mode . mail-mode)
+						(mode . gnus-group-mode)
+						(mode . gnus-summary-mode)
+						(mode . gnus-article-mode)
+						(name . "^\\.bbdb$")
+						(name . "^\\.newsrc-dribble")))))))
+(add-hook 'ibuffer-mode-hook
+		  (lambda ()
+			(ibuffer-switch-to-saved-filter-groups "default")))
+
 
 (add-hook 'slime-mode-hook (lambda ()
                           (message "Lisp mode hook")

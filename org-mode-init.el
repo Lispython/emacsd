@@ -10,7 +10,7 @@
 (setf org-todo-keyword-faces '(("NEXT" . (:foreground "yellow" :background "red" :bold t :weight bold))
 			       ("TODO" . (:foreground "cyan" :background "steelblue" :bold t :weight bold))
 			       ("WAITING" . (:foreground "yellow" :background "magenta2" :bold t :weight bold))
-			       ("DONE" . (:foreground "gray50" :background "gray30"))))
+			       ("DONE" . (:foreground "green" :background "base03"))))
 
 
 (add-hook 'org-mode-hook (lambda ()
@@ -22,4 +22,9 @@
 ))
 
 
+
+(defun org-my()
+  (interactive)
+  (find-file "~/gtd.org")
+)
 (provide 'org-mode-init)
