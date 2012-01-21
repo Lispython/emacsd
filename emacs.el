@@ -65,6 +65,7 @@
 ;;;(require 'zencoding-mode)
 (require 'rainbow-mode)
 (require 'http-twiddle)
+(require 'fill-column-indicator)
 
 ;;;PYTHON REQUIREMENTS
 (require 'lambda-mode)
@@ -117,6 +118,15 @@
 ;;MODES VARIABLES
 (global-auto-complete-mode t)
 ;;;(global-font-lock-mode 1)
+
+;;FILL
+
+(setq fci-rule-width 1)
+;;(setq fci-rule-color "darkblue")
+(setq fci-rule-column 80)
+
+(define-globalized-minor-mode global-fci-mode fci-mode (lambda () (fci-mode 1)))
+(global-fci-mode 1)
 
 
 ;; YASNIPPET
