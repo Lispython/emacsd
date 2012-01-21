@@ -15,13 +15,13 @@
 	url = https://github.com/ivan4th/swank-js.git
 [submodule "slime"]
 	path = slime
-	url = git://github.com/Lispython/slime.git
+	url = https://github.com/Lispython/slime.git
 [submodule "auto-complete-modes/ac-slime"]
 	path = auto-complete-modes/ac-slime
-	url = git@github.com:Lispython/ac-slime.git
+	url = https://github.com/Lispython/ac-slime.git
 [submodule "snippets/text-mode/go-mode"]
         path = snippets/text-mode/go-mode
-        url = git@github.com:Lispython/go-mode-yasnippets.git
+        url = https://github.com/Lispython/go-mode-yasnippets.git
 [submodule "jslint"]
 	path = jslint
 	url = https://github.com/douglascrockford/JSLint.git
