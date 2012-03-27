@@ -39,7 +39,8 @@
 (load-file "~/.emacs.d/nxml-mode/rng-auto.el")
 
 ;;GLOBAL REQUIREMENTS
-(require 'font-lock) (if (fboundp 'global-font-lock-mode) (global-font-lock-mode 1))
+(require 'font-lock) (if (fboundp 'global-font-lock-mode)
+						 (global-font-lock-mode 1))
 (require 'tramp)
 (require 'color-theme)
 ;;(require 'auto-complete)
@@ -59,7 +60,7 @@
 (require 'regex-tool)
 (require 'slime)
 (require 'magit)
-(require 'jabber-autoloads)
+;(require 'jabber-autoloads)
 ;;;(require 'python-mode)
 ;;;(require 'ecb)
 ;;;(require 'zencoding-mode)
@@ -125,8 +126,9 @@
 ;;(setq fci-rule-color "darkblue")
 (setq fci-rule-column 80)
 
-(define-globalized-minor-mode global-fci-mode fci-mode (lambda () (fci-mode 1)))
-(global-fci-mode 1)
+;; (define-globalized-minor-mode global-fci-mode fci-mode
+;;   (lambda () (fci-mode 1)))
+;; (global-fci-mode 1)
 
 
 ;; YASNIPPET
@@ -160,8 +162,10 @@
 (lisp-slime clisp "/usr/bin/clisp")
 (lisp-slime js "node /home/alex/.emacs.d/swank-js/swank.js")
 
-(slime-setup '(slime-fancy slime-asdf slime-banner slime-repl slime-scratch slime-highlight-edits slime-sbcl-exts slime-tramp slime-indentation
-slime-js))
+(slime-setup '(slime-fancy slime-asdf slime-banner slime-repl
+						   slime-scratch slime-highlight-edits slime-sbcl-exts slime-tramp slime-indentation
+;;						   slime-js))
+))
 
 
 ;; AUTO COMPLETE CONFIGS
@@ -255,6 +259,7 @@ slime-js))
 	   (string-match ".emacs.d/themes/[a-zA-z_\+\-]*.el$" (buffer-file-name))
 	   )
       (byte-compile-file (buffer-file-name))))
+
 
 
 ;;; HOOKS FOR MODES
