@@ -28,6 +28,8 @@
 (add-to-list 'load-path "~/.emacs.d/auto-complete/")
 (add-to-list 'load-path "~/.emacs.d/auto-complete-modes/")
 (add-to-list 'load-path "~/.emacs.d/auto-complete-modes/ac-slime/")
+(add-to-list 'load-path "~/.emacs.d/mo-git-blame/")
+
 ;;(add-to-list 'load-path "~/.emacs.d/auto-complete/ext/")
 
 (add-to-list 'load-path "~/.emacs.d/magit/")
@@ -347,5 +349,9 @@
 
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 (add-hook 'after-save-hook 'autocompile)
+
+
+(autoload 'mo-git-blame-file "mo-git-blame" nil t)
+(autoload 'mo-git-blame-current "mo-git-blame" nil t)
 
 (provide 'emacs)
