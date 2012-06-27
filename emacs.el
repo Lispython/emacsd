@@ -95,6 +95,7 @@
 (fset 'yes-or-no-p 'y-or-n-p)
 (setq inhibit-splash-screen t) ;;;do't show splash screen
 (setq default-tab-width 4)
+(desktop-save-mode t)
 (modify-coding-system-alist 'file ".*" 'utf-8) ;; fuck cp1251 and koi-8
 
 ;;; Current line hightlight

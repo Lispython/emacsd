@@ -5,9 +5,9 @@
 (setq ipython-command "~./emacs.d/venv/bin/ipython")
 (setq ipython-completion-command-string "print(';'.join(get_ipython().Completer.complete('%s')[1])) #PYTHON-MODE SILENT\n")
 
-(setq py-python-command-args '("-colors" "Linux"))
+;;(setq py-python-command-args '("-colors" "Linux"))
 ;;(setq py-python-command "/var/github/python2.6/bin/ipython")
-;;(setq py-python-command "/var/github/python2.6/bin/python2.6")
+;;(setq py-python-command "/var/github/python2.6/bin/python2.7")
 ;;(setq py-jython-command "/usr/bin/jython")
 ;;(defadvice py-execute-buffer (around python-keep-focus activate)
 ;; "return focus to python code buffer"
@@ -27,7 +27,7 @@
 (autoload 'pymacs-eval "pymacs" nil t)
 (autoload 'pymacs-exec "pymacs" nil t)
 (autoload 'pymacs-load "pymacs" nil t)
-(setq pymacs-python-command "~/.emacs.d/venv/bin/python2.6")
+(setq pymacs-python-command "~/.emacs.d/venv/bin/python")
 ;;(eval-after-load "pymacs"
 ;;  '(add-to-list 'pymacs-load-path YOUR-PYMACS-DIRECTORY"))
 (pymacs-load "ropemacs" "rope-")
