@@ -94,7 +94,8 @@
 (show-paren-mode t) ;;hightlight brackets
 (fset 'yes-or-no-p 'y-or-n-p)
 (setq inhibit-splash-screen t) ;;;do't show splash screen
-(setq default-tab-width 4)
+;;(setq default-tab-width 4)
+(setq tab-with 4)
 (desktop-save-mode t)
 (modify-coding-system-alist 'file ".*" 'utf-8) ;; fuck cp1251 and koi-8
 
@@ -151,6 +152,7 @@
 ;;LISP-MODE
 ;;Common lisp compiler
 (setq slime-backend "~/.emacs.d/slime/swank-loader.lisp")
+(setq inferior-lisp-program "/usr/bin/sbcl")
 (setq slime-startup-animation t)
 
 (defmacro lisp-slime (lisp path &optional coding)
