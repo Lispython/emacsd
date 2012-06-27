@@ -69,8 +69,8 @@
 some syntax analysis.")
 
 (defvar go-mode-font-lock-keywords
-  (let ((builtins '("cap" "close" "closed" "len" "make" "new"
-                    "panic" "panicln" "print" "println"))
+  (let ((builtins '("append" "cap" "close" "complex" "copy" "imag" "len"
+                    "make" "new" "panic" "print" "println" "real" "recover"))
         (constants '("nil" "true" "false" "iota"))
         (type-name "\\s *\\(?:[*(]\\s *\\)*\\(?:\\w+\\s *\\.\\s *\\)?\\(\\w+\\)")
         )
@@ -106,21 +106,6 @@ some syntax analysis.")
   "Basic font lock keywords for Go mode.  Highlights keywords,
 built-ins, functions, and some types.")
 
-(defcustom go-block-comment-prefix "//"
-  "*String used by \\[comment-region] to comment out a block of code.
-This should follow the convention for non-indenting comment lines so
-that the indentation commands won't get confused (i.e., the string
-should be of the form `#x...' where `x' is not a blank or a tab, and
-`...' is arbitrary).  However, this string should not end in whitespace."
-  :type 'string
-  :group 'go)
-
-(defun go-comment-region (beg end &optional arg)
-  "Like `comment-region' but uses double hash (`//') comment starter."
-  (interactive "r\nP")
-  (let ((comment-start go-block-comment-prefix))
-    (comment-region beg end arg)))
-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Key map
 ;;
@@ -130,31 +115,10 @@ should be of the form `#x...' where `x' is not a blank or a tab, and
     (define-key m "}" #'go-mode-insert-and-indent)
     (define-key m ")" #'go-mode-insert-and-indent)
     (define-key m ":" #'go-mode-delayed-electric)
-    (define-key m "\C-c\C-f" 'gofmt)
-	(define-key m "\C-c#" 'go-comment-region)
     ;; In case we get : indentation wrong, correct ourselves
     (define-key m "=" #'go-mode-insert-and-indent)
     m)
   "Keymap used by Go mode to implement electric keys.")
-
-
-(defvar go-menu nil
-  "Menu for GO Mode.
-This menu will get created automatically if you have the `easymenu'
-package.  Note that the latest X/Emacs releases contain this package.")
-
-(easy-menu-define
-  go-menu go-mode-map "Go Mode menu"
-  '("GO"
-	["Insert and indent" go-mode-insert-and-indent]
-	["Delayed electric" go-mode-delayed-electric]
-	["Format with gofmt" gofmt]
-    "-----"
-	["Comment region" go-comment-region (mark)]
-	["Uncomment Region" (go-comment-region (point) (mark) '(4)) (mark)]
-	"-"
-	))
-
 
 (defun go-mode-insert-and-indent (key)
   "Invoke the global binding of KEY, then reindent the line."
@@ -498,9 +462,6 @@ functions, and some types.  It also provides indentation that is
   (set (make-local-variable 'font-lock-defaults)
        '(go-mode-font-lock-keywords nil nil nil nil))
 
-  (if go-menu
-	  (easy-menu-add go-menu))
-
   ;; Remove stale text properties
   (save-restriction
     (widen)
@@ -537,21 +498,47 @@ Useful for development work."
   (require 'go-mode)
   (go-mode))
 
-(provide 'go-mode)
-
+;;;###autoload
 (defun gofmt ()
-  "Pipe the current buffer through the external tool `gofmt`."
+ "Pipe the current buffer through the external tool `gofmt`.
+Replace the current buffer on success; display errors on failure."
 
-  (interactive)
-  ;; for some reason save-excursion isn't working
-  ;; probably because shell-command-on-region deletes the contents of the
-  ;; region before filling in the new values
-  ;; so we will save the point/mark by hand
-  ;; similarly we can't use push-mark/pop-mark
-  (let ((old-mark (mark t)) (old-point (point)))
-    (save-restriction
-      (let (deactivate-mark)
-        (widen)
-        (shell-command-on-region (point-min) (point-max) "gofmt" t t shell-command-default-error-buffer)))
-    (goto-char (min old-point (point-max)))
-    (if old-mark (set-mark (min old-mark (point-max))))))
+ (interactive)
+ (let ((srcbuf (current-buffer)))
+   (with-temp-buffer
+     (let ((outbuf (current-buffer))
+           (errbuf (get-buffer-create "*Gofmt Errors*"))
+           (coding-system-for-read 'utf-8)    ;; use utf-8 with subprocesses
+           (coding-system-for-write 'utf-8))
+       (with-current-buffer errbuf (erase-buffer))
+       (with-current-buffer srcbuf
+         (save-restriction
+           (let (deactivate-mark)
+             (widen)
+             (if (= 0 (shell-command-on-region (point-min) (point-max) "gofmt"
+                                               outbuf nil errbuf))
+                 ;; gofmt succeeded: replace the current buffer with outbuf,
+                 ;; restore the mark and point, and discard errbuf.
+                 (let ((old-mark (mark t)) (old-point (point)))
+                   (erase-buffer)
+                   (insert-buffer-substring outbuf)
+                   (goto-char (min old-point (point-max)))
+                   (if old-mark (push-mark (min old-mark (point-max)) t))
+                   (kill-buffer errbuf))
+
+               ;; gofmt failed: display the errors
+               (display-buffer errbuf)))))
+
+       ;; Collapse any window opened on outbuf if shell-command-on-region
+       ;; displayed it.
+       (delete-windows-on outbuf)))))
+
+;;;###autoload
+(defun gofmt-before-save ()
+ "Add this to .emacs to run gofmt on the current buffer when saving:
+ (add-hook 'before-save-hook #'gofmt-before-save)"
+
+ (interactive)
+ (when (eq major-mode 'go-mode) (gofmt)))
+
+(provide 'go-mode)
