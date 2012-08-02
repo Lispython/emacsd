@@ -29,6 +29,8 @@
 (add-to-list 'load-path "~/.emacs.d/auto-complete-modes/")
 (add-to-list 'load-path "~/.emacs.d/auto-complete-modes/ac-slime/")
 (add-to-list 'load-path "~/.emacs.d/mo-git-blame/")
+(add-to-list 'load-path "~/.emacs.d/ext/yasnippet")
+(add-to-list 'load-path "~/.emacs.d/ext")
 
 ;;(add-to-list 'load-path "~/.emacs.d/auto-complete/ext/")
 
@@ -78,6 +80,8 @@
 (require 'anything-ipython)
 (require 'pymacs)
 (require 'hide-region)
+(require 'scheme48)
+(require 'slime-scheme)
 ;;(require 'flymake-jshint)
 
 
@@ -134,10 +138,16 @@
 ;;   (lambda () (fci-mode 1)))
 ;; (global-fci-mode 1)
 
-
 ;; YASNIPPET
 (yas/initialize)
-(yas/load-directory "~/.emacs.d/snippets")
+
+(setq yas/snippet-dirs '("~/.emacs.d/ext/yasnippet/snippets" "~/.emacs.d/snippets"))
+
+(setq yas/root-directory '("~/.emacs.d/ext/yasnippet/snippets" "~/.emacs.d/snippets" ))
+
+;; Map `yas/load-directory' to every element
+(mapc 'yas/load-directory yas/root-directory)
+(yas/global-mode 1)
 
 ;; MODES AUTO DETECT
 ;;add-to-list 'auto-mode-alist '("\\.js$" . espresso-mode))
@@ -151,8 +161,10 @@
 
 ;;LISP-MODE
 ;;Common lisp compiler
+;;(load (expand-file-name "~/.emacs.d/slime-helper.el"))
 (setq slime-backend "~/.emacs.d/slime/swank-loader.lisp")
 (setq inferior-lisp-program "/usr/bin/sbcl")
+
 (setq slime-startup-animation t)
 
 (defmacro lisp-slime (lisp path &optional coding)
@@ -165,11 +177,16 @@
 
 (lisp-slime sbcl "/usr/bin/sbcl")
 (lisp-slime clisp "/usr/bin/clisp")
+;;;(lisp-slime scheme "/usr/bin/scheme48")
+
 (lisp-slime js "node /home/alex/.emacs.d/swank-js/swank.js")
 
 (slime-setup '(slime-fancy slime-asdf slime-banner slime-repl
-						   slime-scratch slime-highlight-edits slime-sbcl-exts slime-tramp slime-indentation
-;;						   slime-js))
+			   slime-scratch
+			   ;;slime-highlight-edits
+			   slime-sbcl-exts slime-tramp slime-indentation
+			   slime-autodoc
+			   ;;						   slime-js))
 ))
 
 
