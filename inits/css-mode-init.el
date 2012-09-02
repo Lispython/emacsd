@@ -49,5 +49,3 @@ package.  Note that the latest X/Emacs releases contain this package.")
 (add-hook 'css-mode-hook
           (lambda ()
             (define-key css-mode-map "\M-\C-x" 'slime-js-refresh-css)))
-
-(provide 'css-mode-init)

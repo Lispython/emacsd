@@ -138,5 +138,3 @@
 						   (slime-js-minor-mode t)))
 
 (global-set-key [f5] 'slime-js-reload)
-
-(provide 'js-mode-init)

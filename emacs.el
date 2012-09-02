@@ -1,11 +1,22 @@
-(add-to-list 'load-path "~/.emacs.d/")
+(defconst **emacs-dir** "~/.emacs.d/"
+  "Top level emacs directory")
+
+(defconst **emacs-ext-dir** (concat **emacs-dir** "ext/")
+  "Directory that store third party modes/etc/")
+
+(add-to-list 'load-path **emacs-dir**)
 (setq emacs-d-dir "~/.emacs.d/pylookup/")
 ;;(set-default-font "Consolas-8") ;;default font
 ;;the following is size 7 for me...
 
-(set-face-font 'default "-unknown-Envy Code R-normal-normal-normal-*-13-*-*-*-m-0-iso10646-1")
+;;(set-face-font 'default "-unknown-Envy Code R-normal-normal-normal-*-13-*-*-*-m-0-iso10646-1")
+;;(set-face-font 'default "-outline-Bitstream Vera Sans Mono-normal-r-normal-normal-12-90-96-96-c-*-iso8859-1")
+(set-face-font 'default "-unknown-Anonymous Pro-normal-normal-normal-*-12-*-*-*-m-0-iso10646-1")
+;;(set-frame-font "Envy Code R-7") ;; doesn't work consistently ;
 
-;;(set-frame-font "Envy Code R-7") ;; doesn't work consistently ;(
+;; Font family
+(set-frame-font "-unknown-Anonymous Pro-normal-normal-normal-*-12-*-*-*-m-0-iso10646-1")
+
 
 ;;(load-file "/usr/share/emacs23/site-lisp/cedet-common/cedet.el")
 ;;(add-to-list 'load-path "/usr/share/emacs23/site-lisp/ecb")
@@ -35,6 +46,7 @@
 ;;(add-to-list 'load-path "~/.emacs.d/auto-complete/ext/")
 
 (add-to-list 'load-path "~/.emacs.d/magit/")
+(add-to-list 'load-path "~/.emacs.d/inits/")
 
 (setq pylookup-dir "~/.emacs.d/pylookup/")
 (add-to-list 'load-path pylookup-dir)
@@ -44,16 +56,25 @@
 
 ;;GLOBAL REQUIREMENTS
 (require 'font-lock) (if (fboundp 'global-font-lock-mode)
-						 (global-font-lock-mode 1))
-(require 'tramp)
-(require 'color-theme)
-;;(require 'auto-complete)
-(require 'auto-complete-config)
-(require 'ac-slime)
-(require 'yasnippet)
-(require 'anything)
-(require 'ansi-color)
-(require 'smart-operator)
+			 (global-font-lock-mode 1))
+
+(mapc 'require '(tramp
+		 color-theme
+		 auto-complete-config
+		 ac-slime
+		 yasnippet
+		 anything
+		 ansi-color
+		 smart-operator))
+;; (require 'tramp)
+;; (require 'color-theme)
+;; ;;(require 'auto-complete)
+;; (require 'auto-complete-config)
+;; (require 'ac-slime)
+;; (require 'yasnippet)
+;; (require 'anything)
+;; (require 'ansi-color)
+;; (require 'smart-operator)
 
 ;;MODES
 (require 'go-mode-load)
@@ -86,7 +107,6 @@
 
 
 ;;SET VARIABLES OF EMACS
-(setq tramp-default-method "ssh")
 (scroll-bar-mode nil) ;hide scrroll bar
 ;;(menu-bar-mode nil) ;this too
 (tool-bar-mode nil) ;hide tool bar too
@@ -261,13 +281,18 @@
 	 (line-beginning-position)
 	 (line-end-position lines))))
 
-(load-library "python-mode-init")
-(load-library "org-mode-init")
-(load-library "js-mode-init")
-(load-library "css-mode-init")
-(load-library "sudo-save")
-;;(load-library "go-mode-init")
-;(load-library "recompiler")
+(load "outline-mode-init.el")
+(load "ibuffer-mode-init.el")
+(load "python-mode-init.el")
+(load "org-mode-init.el")
+(load "js-mode-init.el")
+(load "css-mode-init.el")
+(load "sudo-save.el")
+(load "org-readme.el")
+(load "bash-completion-init.el")
+(load "tramp-mode-init.el")
+;;(load "go-mode-init")
+;;(load "recompiler")
 
 (require 'ipython)
 
@@ -289,48 +314,29 @@
 ;;(add-hook 'inferior-lisp-mode-hook (lambda () (inferior-slime-mode t)))
 ;; Optionally, specify the lisp program you are using. Default is "lisp"
 
-(setq ibuffer-saved-filter-groups
-	  (quote (("default"
-			   ("dired" (mode . dired-mode))
-			   ("erc" (mode . erc-mode))
-			   ("planner" (or
-						   (name . "^\\*Calendar\\*$")
-						   (name . "^diary$")
-						   (mode . muse-mode)))
-			   ("emacs" (or
-						 (name . "^\\*scratch\\*$")
-						 (name . "^\\*Messages\\*$")))
-			   ("gnus" (or
-						(mode . message-mode)
-						(mode . bbdb-mode)
-						(mode . mail-mode)
-						(mode . gnus-group-mode)
-						(mode . gnus-summary-mode)
-						(mode . gnus-article-mode)
-						(name . "^\\.bbdb$")
-						(name . "^\\.newsrc-dribble")))))))
-(add-hook 'ibuffer-mode-hook
-		  (lambda ()
-			(ibuffer-switch-to-saved-filter-groups "default")))
 
 
-(add-hook 'slime-mode-hook (lambda ()
-                          (message "Lisp mode hook")
-                          (set-up-slime-ac))
+(add-hook 'slime-mode-hook
+	  (lambda ()
+	    (message "Lisp mode hook")
+	    ;; (set-face-font 'default "-unknown-Envy Code R-normal-normal-normal-*-13-*-*-*-m-0-iso10646-1")
+	    (set-up-slime-ac))
 ;;     					 (setq ac-sources '(ac-source-words-in-buffer ac-source-symbols))))
 		;;					(setq ac-sources '(ac-source-abbrev ac-source-words-in-buffer
 		;;														ac-source-files-in-current-dir
 		;;														ac-source-symbols ac-emacs-lisp-sources))
 )
 
-(add-hook 'lisp-mode-hook (lambda ()
-                            (setq lisp-indent-function 'common-lisp-indent-function)
-							(message "css mode hook")
-							(slime-mode t)
-                            (define-key lisp-mode-map "\C-c \C-b" 'slime-eval-buffer)
-                            (font-lock-add-keywords nil
-                                '(("\\<\\(FIXME\\|TODO\\|BUG\\):" 1 font-lock-warning-face t)))
-							(yas/minor-mode-on)))
+(add-hook 'lisp-mode-hook
+	  (lambda ()
+	    ;; (set-face-font 'default "-unknown-Envy Code R-normal-normal-normal-*-13-*-*-*-m-0-iso10646-1")
+	    (setq lisp-indent-function 'common-lisp-indent-function)
+	    (message "css mode hook")
+	    (slime-mode t)
+	    (define-key lisp-mode-map "\C-c \C-b" 'slime-eval-buffer)
+	    (font-lock-add-keywords nil
+				    '(("\\<\\(FIXME\\|TODO\\|BUG\\):" 1 font-lock-warning-face t)))
+	    (yas/minor-mode-on)))
 
 (add-hook 'slime-mode-hook 'set-up-slime-ac)
 (add-hook 'slime-repl-mode-hook 'set-up-slime-ac)
@@ -339,6 +345,7 @@
 (add-hook 'css-mode-hook (lambda ()
 						   (message "css mode hook")
 						   (rainbow-mode t)
+						   ;; (set-face-font 'default "-unknown-Envy Code R-normal-normal-normal-*-13-*-*-*-m-0-iso10646-1")
 						   ;;(setq ac-sources '(ac-source-words-in-buffer ac-source-symbols))))
 ;;						   (setq ac-sources '(ac-source-css-keywords))
 ))
@@ -346,6 +353,7 @@
 
 (add-hook 'emacs-lisp-mode-hook (lambda ()
 								  (message "emacs lisp mode hook")
+								  ;; (set-face-font 'default "-unknown-Envy Code R-normal-normal-normal-*-13-*-*-*-m-0-iso10646-1")
 								  ;; (setq ac-sources '(ac-source-words-in-buffer
 								  ;; 					 ac-source-symbols))
 								   ;; (setq ac-sources '(ac-source-abbrev
@@ -357,6 +365,7 @@
 
 
 (add-hook 'espresso-mode-hook (lambda ()
+				;; (set-face-font 'default "-unknown-Envy Code R-normal-normal-normal-*-13-*-*-*-m-0-iso10646-1")
                                 (setq espresso-indent-level 2)))
 
 ;;;(add-hook 'sgml-mode-hook 'zencoding-mode) ;; Auto-start on any markup modes

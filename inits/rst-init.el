@@ -48,6 +48,3 @@
   (rst-make-markup rst-output-buffer-name)
   (browse-url-of-buffer rst-output-buffer-name))
 
-
-
-(provide 'rst-init)
