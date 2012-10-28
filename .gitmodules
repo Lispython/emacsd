@@ -43,3 +43,6 @@
 [submodule "ext/org-readme"]
 	path = ext/org-readme
 	url = https://github.com/mlf176f2/org-readme.git
+[submodule "ext/yaml-mode"]
+	path = ext/yaml-mode
+	url = https://github.com/yoshiki/yaml-mode.git

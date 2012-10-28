@@ -11,11 +11,11 @@
 
 ;;(set-face-font 'default "-unknown-Envy Code R-normal-normal-normal-*-13-*-*-*-m-0-iso10646-1")
 ;;(set-face-font 'default "-outline-Bitstream Vera Sans Mono-normal-r-normal-normal-12-90-96-96-c-*-iso8859-1")
-(set-face-font 'default "-unknown-Anonymous Pro-normal-normal-normal-*-12-*-*-*-m-0-iso10646-1")
+(set-face-font 'default "-unknown-Anonymous Pro-normal-normal-normal-*-14-*-*-*-m-0-iso10646-1")
 ;;(set-frame-font "Envy Code R-7") ;; doesn't work consistently ;
 
 ;; Font family
-(set-frame-font "-unknown-Anonymous Pro-normal-normal-normal-*-12-*-*-*-m-0-iso10646-1")
+(set-frame-font "-unknown-Anonymous Pro-normal-normal-normal-*-14-*-*-*-m-0-iso10646-1")
 
 
 ;;(load-file "/usr/share/emacs23/site-lisp/cedet-common/cedet.el")
@@ -291,6 +291,8 @@
 (load "org-readme.el")
 (load "bash-completion-init.el")
 (load "tramp-mode-init.el")
+(load "yaml-mode-init.el")
+
 ;;(load "go-mode-init")
 ;;(load "recompiler")
 

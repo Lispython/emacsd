@@ -10,8 +10,9 @@ ${1:$(make-string (string-width text) ?\~)}
 
 ${2: module description}
 
-:copyright: (c) 2011 by ${3:Alexandr Sokolovskiy (alex@obout.ru)}.
-:license: BSD, see LICENSE for more details.
+:copyright: (c) `(format-time-string "%Y")` by ${3:Alexandr Lispython (alex@obout.ru)}.
+:license: ${4:$$(yas/choose-value '("ISC" "MIT" "GPLv2" "GPLv3" "Apache License v2.0" "BSD"))}, see LICENSE for more details.
+:github: http://github.com/Lispython/${5:projectname}
 """
 
 $0
