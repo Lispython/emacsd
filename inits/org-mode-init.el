@@ -67,8 +67,8 @@
 (add-hook 'org-mode-hook
 	  (lambda ()
 	    (message "org mode hook")
-	    (set-face-font 'default "-unknown-Anonymous Pro-normal-normal-normal-*-12-*-*-*-m-0-iso10646-1")
-	    (set-default-font "-unknown-Anonymous Pro-normal-normal-normal-*-12-*-*-*-m-0-iso10646-1")
+	    (set-face-font 'default "-unknown-Anonymous Pro-normal-normal-normal-*-14-*-*-*-m-0-iso10646-1")
+	    (set-default-font "-unknown-Anonymous Pro-normal-normal-normal-*-14-*-*-*-m-0-iso10646-1")
 
 	    ;; yasnippet (allow yasnippet to do it's thing in org files)
 	    (make-variable-buffer-local 'yas/trigger-key)
@@ -136,6 +136,10 @@
 (defun work-org ()
   (interactive)
   (find-file (concat **org-root** "work.org")))
+
+(defun main-org ()
+  (interactive)
+  (find-file (concat **org-root** "main.org")))
 
 (setq org-capture-templates
       '(("t" "Todo" entry (file+headline "~/Dropbox/.org/gtd.org" "Tasks")
