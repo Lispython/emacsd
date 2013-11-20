@@ -103,7 +103,7 @@
 (require 'hide-region)
 (require 'scheme48)
 (require 'slime-scheme)
-(require 'go-autocomplete)
+;;(require 'go-autocomplete)
 ;;(require 'flymake-jshint)
 
 
