@@ -7,9 +7,6 @@
 [submodule "virtualenv"]
 	path = virtualenv
 	url = https://github.com/aculich/virtualenv.el.git
-[submodule "auto-complete"]
-	path = auto-complete
-	url = https://github.com/m2ym/auto-complete.git
 [submodule "swank-js"]
 	path = swank-js
 	url = https://github.com/ivan4th/swank-js.git
