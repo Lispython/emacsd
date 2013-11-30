@@ -18,9 +18,6 @@
 (set-frame-font "-unknown-Anonymous Pro-normal-normal-normal-*-14-*-*-*-m-0-iso10646-1")
 
 
-;;(load-file "/usr/share/emacs23/site-lisp/cedet-common/cedet.el")
-;;(add-to-list 'load-path "/usr/share/emacs23/site-lisp/ecb")
-
 ;;; Remote file editing via ssh
 (add-to-list 'load-path "~/.emacs.d/tramp-files/lisp")
 (add-to-list 'load-path "~/.emacs.d/slime/")
@@ -53,7 +50,6 @@
 (setq pylookup-dir "~/.emacs.d/pylookup/")
 (add-to-list 'load-path pylookup-dir)
 
-
 (load-file "~/.emacs.d/nxml-mode/rng-auto.el")
 
 ;;GLOBAL REQUIREMENTS
@@ -69,15 +65,6 @@
 		 ansi-color
 		 ;;smart-operator
 		 ))
-;; (require 'tramp)
-;; (require 'color-theme)
-;; ;;(require 'auto-complete)
-;; (require 'auto-complete-config)
-;; (require 'ac-slime)
-;; (require 'yasnippet)
-;; (require 'anything)
-;; (require 'ansi-color)
-;; (require 'smart-operator)
 
 ;;MODES
 (require 'go-mode-load)
@@ -101,8 +88,7 @@
 (require 'python-pep8)
 (require 'python-pylint)
 (require 'hyperspec)
-(require 'anything-ipython)
-(require 'pymacs)
+;;(require 'pymacs)
 (require 'hide-region)
 (require 'scheme48)
 (require 'slime-scheme)
@@ -236,29 +222,13 @@
 (define-key ac-mode-map (kbd "C-c H") 'ac-last-help)
 ;;(define-key ac-mode-map (kbd "TAB") 'auto-complete)
 (define-key ac-mode-map (kbd "TAB") 'smart-tab)
-(define-key py-mode-map "\t" 'smart-tab)
+
 (global-set-key (kbd "C-c h r") 'hide-region-hide)
 (global-set-key (kbd "C-c h u") 'hide-region-unhide)
 
 ;;auto complete
 ;;(define-key ac-complete-mode-map "\t" 'auto-complete)
 ;;(define-key ac-mode-map "\r" nil)
-
-
-;; DEPRICATED FOR AUTO COMPLETE 1.4
-;; (when (require 'auto-complete nil t)
-;; ;;  (add-to-list 'ac-dictionary-directories "~/.emacs.d/ac-dict")
-
-;;   (setq ac-auto-start 2)
-;;   (setq ac-dwim t)
-;;   ;;(require 'auto-complete-yasnippet)
-;;   (require 'auto-complete-python)
-;;   ;;(require 'auto-complete-css)
-;;   (require 'auto-complete-emacs-lisp)
-;;   ;;(require 'auto-complete-semantic)
-;;   ;;(require 'auto-complete-gtags)
-;;   (set-default 'ac-sources '(ac-source-words-in-buffer
-;; 							 ac-source-symbols)))
 
 
 (when (require 'anything-show-completion nil t)
@@ -300,7 +270,6 @@
 ;;(load "go-mode-init")
 ;;(load "recompiler")
 
-(require 'ipython)
 
 
 (defun autocompile ()
@@ -319,7 +288,6 @@
 
 ;;(add-hook 'inferior-lisp-mode-hook (lambda () (inferior-slime-mode t)))
 ;; Optionally, specify the lisp program you are using. Default is "lisp"
-
 
 
 (add-hook 'slime-mode-hook

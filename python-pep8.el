@@ -30,6 +30,8 @@
 ;;
 ;;; Code:
 
+(require 'compile)
+
 (defgroup python-pep8 nil
   "Minor mode for running pep8"
   :prefix "python-pep8-"

@@ -1,8 +1,15 @@
+
+
 (defconst *org-root* "~/Dropbox/.org/"
   "Own org directory")
 
 (add-to-list 'load-path (concat **emacs-ext-dir** "org-mode/lisp"))
 (add-to-list 'load-path (concat **emacs-ext-dir** "org-mode/contrib/lisp"))
+;;; Remember mode
+(add-to-list 'load-path (concat **emacs-ext-dir** "org-mode/remember"))
+
+(require 'remember)
+(require 'org-remember)
 
 (require 'org-install)
 (require 'ob-tangle)

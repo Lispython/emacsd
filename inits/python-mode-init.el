@@ -156,7 +156,7 @@
 (define-key py-mode-map (kbd "RET") 'newline-and-indent)
 (define-key py-mode-map (kbd "C-c l") 'pylookup-lookup)
 ;(define-key py-mode-map [tab] 'yas/expand)
-
+(define-key py-mode-map "\t" 'smart-tab)
 
 ;; HOOKS
 (add-hook 'python-mode-hook

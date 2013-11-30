@@ -48,3 +48,7 @@
 	path = ext/org-mode
 	url = git@github.com:Lispython/org-mode.git
 	branch = master
+[submodule "ext/remember"]
+	path = ext/remember
+	url = git://repo.or.cz/remember-el.git
+	branch = master
