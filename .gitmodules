@@ -43,3 +43,7 @@
 [submodule "ext/yaml-mode"]
 	path = ext/yaml-mode
 	url = https://github.com/yoshiki/yaml-mode.git
+[submodule "ext/auto-complete"]
+	path = ext/auto-complete
+	url = https://github.com/auto-complete/auto-complete.git
+	branch = master
