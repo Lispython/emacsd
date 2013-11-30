@@ -44,3 +44,7 @@
 	path = ext/auto-complete
 	url = https://github.com/auto-complete/auto-complete.git
 	branch = master
+[submodule "ext/org-mode"]
+	path = ext/org-mode
+	url = git@github.com:Lispython/org-mode.git
+	branch = master
