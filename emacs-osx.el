@@ -98,8 +98,10 @@
 
 ;;SET VARIABLES OF EMACS
 (scroll-bar-mode nil) ;hide scrroll bar
-;;(menu-bar-mode nil) ;this too
+(scroll-bar-mode -1)
+(menu-bar-mode nil) ;this too
 (tool-bar-mode nil) ;hide tool bar too
+(tool-bar-mode -1)
 ;; Turn on column number mode
 (column-number-mode t) ;; but this one is good
 ;;(ido-mode t)
@@ -119,7 +121,9 @@
 
 ; Makes clipboard work
 (setq x-select-enable-clipboard t)
-(setq interprogram-paste-function 'x-cut-buffer-or-selection-value)
+;;(setq interprogram-paste-function 'x-cut-buffer-or-selection-value)
+;;for emacs 2.4
+(setq interprogram-paste-function 'x-selection-value)
 (delete-selection-mode t) ;; Delete selected by Ctrl-D
 (transient-mark-mode t) ;;hightlight by C-Space
 ;; enable horizontal scrolling
