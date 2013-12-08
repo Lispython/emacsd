@@ -11,11 +11,11 @@
 
 ;;(set-face-font 'default "-unknown-Envy Code R-normal-normal-normal-*-13-*-*-*-m-0-iso10646-1")
 ;;(set-face-font 'default "-outline-Bitstream Vera Sans Mono-normal-r-normal-normal-12-90-96-96-c-*-iso8859-1")
-(set-face-font 'default "-unknown-Anonymous Pro-normal-normal-normal-*-14-*-*-*-m-0-iso10646-1")
+;;(set-face-font 'default "-unknown-Anonymous Pro-normal-normal-normal-*-14-*-*-*-m-0-iso10646-1")
 ;;(set-frame-font "Envy Code R-7") ;; doesn't work consistently ;
 
 ;; Font family
-(set-frame-font "-unknown-Anonymous Pro-normal-normal-normal-*-14-*-*-*-m-0-iso10646-1")
+;;(set-frame-font "-unknown-Anonymous Pro-normal-normal-normal-*-14-*-*-*-m-0-iso10646-1")
 
 
 ;;; Remote file editing via ssh
@@ -107,10 +107,11 @@
 ;;(ido-mode t)
 (setq flymake-start-syntax-check-on-find-file nil)
 
+;; Don't disable
 (show-paren-mode t) ;;hightlight brackets
 (fset 'yes-or-no-p 'y-or-n-p)
 (setq inhibit-splash-screen t) ;;;do't show splash screen
-;;(setq default-tab-width 4)
+(setq default-tab-width 4)
 (setq tab-with 4)
 (desktop-save-mode t)
 (modify-coding-system-alist 'file ".*" 'utf-8) ;; fuck cp1251 and koi-8
@@ -259,6 +260,7 @@
 	 (line-beginning-position)
 	 (line-end-position lines))))
 
+(load "virtualenv-init.el")
 (load "outline-mode-init.el")
 (load "ibuffer-mode-init.el")
 (load "python-mode-init.el")
@@ -286,7 +288,7 @@
 	   )
       (byte-compile-file (buffer-file-name))))
 
-
+;;(byte-recompile-directory (expand-file-name "~/.emacs.d") 0)
 
 ;;; HOOKS FOR MODES
 
