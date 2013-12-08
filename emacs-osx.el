@@ -63,7 +63,7 @@
 		 yasnippet
 		 anything
 		 ansi-color
-		 ;;smart-operator
+		 smart-operator
 		 ))
 
 ;;MODES
