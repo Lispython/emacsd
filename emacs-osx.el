@@ -30,7 +30,7 @@
 ;;add jabber mode
 (add-to-list 'load-path "~/.emacs.d/emacs-jabber/")
 
-;;(add-to-list 'load-path "~/.emacs.d/python-mode-6.0/")
+(add-to-list 'load-path "~/.emacs.d/ext/python-mode-6.0/")
 
 ;;AUTO COMPLETE
 (add-to-list 'load-path "~/.emacs.d/ext/auto-complete/lib/popup")

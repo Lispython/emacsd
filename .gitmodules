@@ -52,3 +52,7 @@
 	path = ext/remember
 	url = git://repo.or.cz/remember-el.git
 	branch = master
+[submodule "ext/python-mode"]
+	path = ext/python-mode
+	url = https://github.com/emacsmirror/python-mode.git
+	branch = master
