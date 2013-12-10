@@ -2,8 +2,10 @@
 (setq lambda-symbol (string (make-char 'greek-iso8859-7 107)))
 
 ;;IPYTHON MODE
-(setq ipython-command "~./emacs.d/venv/bin/ipython")
+(setq ipython-command "~/.emacs.d/venv/bin/ipython")
 (setq ipython-completion-command-string "print(';'.join(get_ipython().Completer.complete('%s')[1])) #PYTHON-MODE SILENT\n")
+
+(setq py-shell-name "~/.emacs/d./venv/bib/ipython")
 
 ;;(setq py-python-command-args '("-colors" "Linux"))
 ;;(setq py-python-command "/var/github/python2.6/bin/ipython")
