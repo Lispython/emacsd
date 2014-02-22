@@ -31,6 +31,7 @@
 (add-to-list 'load-path "~/.emacs.d/emacs-jabber/")
 
 (add-to-list 'load-path "~/.emacs.d/ext/python-mode/")
+(add-to-list 'load-path (concat **emacs-ext-dir "go-mode"))
 
 ;;AUTO COMPLETE
 (add-to-list 'load-path "~/.emacs.d/ext/auto-complete/lib/popup")
