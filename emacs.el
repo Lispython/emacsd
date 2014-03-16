@@ -34,6 +34,8 @@
 (add-to-list 'load-path "~/.emacs.d/emacs-jabber/")
 
 ;;(add-to-list 'load-path "~/.emacs.d/python-mode-6.0/")
+(add-to-list 'load-path (concat **emacs-ext-dir** "python-mode"))
+
 (add-to-list 'load-path (concat **emacs-ext-dir** "go-mode"))
 
 ;;AUTO COMPLETE
@@ -90,7 +92,7 @@
 (require 'slime)
 ;;(require 'magit)
 ;(require 'jabber-autoloads)
-;;;(require 'python-mode)
+(require 'python-mode)
 ;;;(require 'ecb)
 ;;;(require 'zencoding-mode)
 (require 'rainbow-mode)
@@ -112,7 +114,11 @@
 
 
 ;;SET VARIABLES OF EMACS
-(scroll-bar-mode nil) ;hide scrroll bar
+;;(scroll-bar-mode -1) ;hide scrroll bar
+(if (display-graphic-p)
+    (progn
+      (tool-bar-mode -1)
+      (scroll-bar-mode -1)))
 ;;(menu-bar-mode nil) ;this too
 (tool-bar-mode nil) ;hide tool bar too
 ;; Turn on column number mode
