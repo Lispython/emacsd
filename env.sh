@@ -2,11 +2,10 @@
 
 REQ_FILE=./req.txt
 
+if [ ! -d "./buildenv.sh" ]; then
 
-if [ ! -d "./tools/buildenv.sh" ]; then
-
-	curl https://raw.github.com/Lispython/buildenv.sh/master/buildenv.sh > tools/buildenv.sh
+	curl https://raw.github.com/Lispython/buildenv.sh/master/buildenv.sh > ./buildenv.sh
 
 fi
 
-. ./tools/buildenv.sh
+. ./buildenv.sh
