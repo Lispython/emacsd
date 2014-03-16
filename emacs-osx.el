@@ -31,7 +31,7 @@
 (add-to-list 'load-path "~/.emacs.d/emacs-jabber/")
 
 (add-to-list 'load-path "~/.emacs.d/ext/python-mode/")
-(add-to-list 'load-path (concat **emacs-ext-dir "go-mode"))
+(add-to-list 'load-path (concat **emacs-ext-dir** "go-mode"))
 
 ;;AUTO COMPLETE
 (add-to-list 'load-path "~/.emacs.d/ext/auto-complete/lib/popup")
@@ -195,7 +195,7 @@
 (lisp-slime clisp "/usr/bin/clisp")
 ;;;(lisp-slime scheme "/usr/bin/scheme48")
 
-(lisp-slime js "node /home/alex/.emacs.d/swank-js/swank.js")
+;;(lisp-slime js (concat "node " (concat **emacs-dir** "swank-js/swank.js")))
 
 (slime-setup '(slime-fancy slime-asdf slime-banner slime-repl
 			   slime-scratch

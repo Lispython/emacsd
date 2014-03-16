@@ -1,0 +1,4 @@
+ipython
+pep8
+pylint
+hg+http://bitbucket.org/agr/rope#egg=rope

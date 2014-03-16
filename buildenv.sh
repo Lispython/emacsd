@@ -11,7 +11,8 @@ echo $CURRENT_PATH
 echo $PIP_PATH
 echo $PYTHON
 
-virtualenv --python=python2.7 --no-site-packages --clear $VENV
+./env.sh dev_py
+
 source "$VENV/bin/activate"
 
 $VENV/bin/easy_install pip
