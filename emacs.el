@@ -140,7 +140,8 @@
 
 ; Makes clipboard work
 (setq x-select-enable-clipboard t)
-(setq interprogram-paste-function 'x-cut-buffer-or-selection-value)
+;(setq interprogram-paste-function 'x-cut-buffer-or-selection-value)
+(setq interprogram-paste-function 'x-selection-value)
 (delete-selection-mode t) ;; Delete selected by Ctrl-D
 (transient-mark-mode t) ;;hightlight by C-Space
 ;; enable horizontal scrolling
@@ -397,3 +398,4 @@
 (autoload 'mo-git-blame-current "mo-git-blame" nil t)
 
 (provide 'emacs)
+
