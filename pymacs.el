@@ -1,10 +1,10 @@
 ;;; pymacs.el --- Interface between Emacs Lisp and Python
 
-;; Copyright © 2001, 2002, 2003, 2012 Progiciels Bourbeau-Pinard inc.
+;; Copyright © 2001-2003, 2012, 2013 Progiciels Bourbeau-Pinard inc.
 
 ;; Author: François Pinard <pinard@iro.umontreal.ca>
 ;; Maintainer: François Pinard <pinard@iro.umontreal.ca>
-;; Created: 2001
+;; URL: https://github.com/pinard/Pymacs
 ;; Version: 0.25
 ;; Keywords: Python interface protocol
 
@@ -20,7 +20,7 @@
 ;;
 ;; You should have received a copy of the GNU General Public License
 ;; along with this program; if not, write to the Free Software Foundation,
-;; Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.  */
+;; Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
 ;;; Commentary:
 
@@ -42,6 +42,12 @@
   "Set to t if hash tables are available.")
 
 (eval-and-compile
+
+  ;; pymacs-called-interactively-p
+  (defalias 'pymacs-called-interactively-p
+    (cond ((fboundp 'called-interactively-p) 'called-interactively-p)
+          ;; Emacs before 22.
+          (t 'interactive-p)))
 
   ;; pymacs-cancel-timer
   (defalias 'pymacs-cancel-timer
@@ -140,6 +146,11 @@ If `nil', calling a zombie will merely produce a diagnostic message.")
 
 (defvar pymacs-load-history nil "Pymacs loading history.")
 
+(defvar pymacs-after-load-functions nil
+  "Special hook run after loading a Python module.
+Each function there is called with a single argument, the Python
+module name passed to as the first argument of `pymacs-load'.")
+
 ;;;###autoload
 (defun pymacs-load (module &optional prefix noerror)
   "Import the Python module named MODULE into Emacs.
@@ -155,16 +166,16 @@ If NOERROR is not nil, do not raise error when the module is not found."
                                nil nil default)))
      (list module prefix)))
   (message "Pymacs loading %s..." module)
-  (let ((lisp-code (pymacs-call "pymacs_load_helper" module prefix)))
+  (let ((lisp-code (pymacs-call "pymacs_load_helper" module prefix noerror)))
     (cond (lisp-code (let ((result (eval lisp-code)))
                        (add-to-list 'pymacs-load-history
                                     (list module prefix noerror)
                                     ;; append so that order is kept
                                     'append)
                        (message "Pymacs loading %s...done" module)
+                       (run-hook-with-args 'pymacs-after-load-functions module)
                        result))
-          (noerror (message "Pymacs loading %s...failed" module) nil)
-          (t (pymacs-report-error "Pymacs loading %s...failed" module)))))
+          (noerror (message "Pymacs loading %s...failed" module) nil))))
 
 ;;;###autoload
 (defun pymacs-autoload (function module &optional prefix docstring interactive)
@@ -198,7 +209,7 @@ which is the default."
   "Compile TEXT as a Python expression, and return its value."
   (interactive "sPython expression: ")
   (let ((value (pymacs-serve-until-reply "eval" `(princ ,text))))
-    (when (interactive-p)
+    (when (pymacs-called-interactively-p)
       (message "%S" value))
     value))
 
@@ -208,7 +219,7 @@ which is the default."
 This functionality is experimental, and does not appear to be useful."
   (interactive "sPython statements: ")
   (let ((value (pymacs-serve-until-reply "exec" `(princ ,text))))
-    (when (interactive-p)
+    (when (pymacs-called-interactively-p)
       (message "%S" value))
     value))
 
@@ -508,6 +519,8 @@ The timer is used only if `post-gc-hook' is not available.")
                               (encode-coding-string expression 'utf-8)
                             (copy-sequence expression))))
                (set-text-properties 0 (length text) nil text)
+               (when multibyte
+                 (princ "b"))
                (princ (mapconcat 'identity
                                  (split-string (prin1-to-string text) "\n")
                                  "\\n"))
@@ -680,7 +693,7 @@ Killing the Pymacs helper might create zombie objects.  Kill? "))
            (remove-hook 'post-gc-hook 'pymacs-schedule-gc))
           ((pymacs-timerp pymacs-gc-timer)
            (pymacs-cancel-timer pymacs-gc-timer)))
-    (when pymacs-transit-buffer
+    (when (buffer-live-p pymacs-transit-buffer)
       (kill-buffer pymacs-transit-buffer))
     (setq pymacs-gc-inhibit nil
           pymacs-gc-timer nil
