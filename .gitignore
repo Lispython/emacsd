@@ -20,3 +20,6 @@ ac-comphist.dat
 .cvsignore
 venvs/*
 node_modules/*
+
+.emacs.desktop
+.emacs.desktop.lock
