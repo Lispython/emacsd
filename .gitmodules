@@ -56,3 +56,10 @@
 	path = ext/python-mode
 	url = https://github.com/emacsmirror/python-mode.git
 	branch = master
+[submodule "ext/less-css-mode"]
+	path = ext/less-css-mode
+	url = https://github.com/purcell/less-css-mode.git
+[submodule "ext/restclient"]
+	path = ext/restclient
+	url = https://github.com/pashky/restclient.el.git
+	branch = master

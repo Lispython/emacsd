@@ -42,6 +42,7 @@
 (add-to-list 'load-path "~/.emacs.d/mo-git-blame/")
 (add-to-list 'load-path "~/.emacs.d/ext/yasnippet")
 (add-to-list 'load-path "~/.emacs.d/ext")
+(add-to-list 'load-path "~/.emacs.d/ext/restclient")
 
 ;;(add-to-list 'load-path "~/.emacs.d/ext/auto-complete/ext/")
 
@@ -75,6 +76,7 @@
 (require 'django-html-mode)
 (require 'regex-tool)
 (require 'slime)
+(require 'restclient)
 ;;(require 'magit)
 ;(require 'jabber-autoloads)
 ;;;(require 'python-mode)
@@ -112,7 +114,7 @@
 (show-paren-mode t) ;;hightlight brackets
 (fset 'yes-or-no-p 'y-or-n-p)
 (setq inhibit-splash-screen t) ;;;do't show splash screen
-(setq default-tab-width 4)
+;;(setq default-tab-width 4)
 (setq tab-with 4)
 (desktop-save-mode t)
 (modify-coding-system-alist 'file ".*" 'utf-8) ;; fuck cp1251 and koi-8
@@ -166,13 +168,16 @@
 (yas/global-mode 1)
 
 ;; MODES AUTO DETECT
-;;add-to-list 'auto-mode-alist '("\\.js$" . espresso-mode))
+(add-to-list 'auto-mode-alist '("\\.js$" . espresso-mode))
 (add-to-list 'auto-mode-alist '("\\.json$" . espresso-mode))
 ;;(autoload 'js2-mode "js2-mode" nil t)
-(add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
+;;(add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
+(add-to-list 'auto-mode-alist '("\\.jsx$" . espresso-mode))
 ;;(add-to-list 'auto-mode-alist '("\\.json$" . js2-mode))
 (add-to-list 'auto-mode-alist '("\\.html$" . django-html-mode))
 (add-to-list 'auto-mode-alist '("\\.css$" . css-mode))
+(add-to-list 'auto-mode-alist '("\\.less$" . css-mode))
+
 
 
 ;;LISP-MODE
@@ -333,7 +338,7 @@
 
 
 (add-hook 'emacs-lisp-mode-hook (lambda ()
-								  (message "emacs lisp mode hook")
+				  (message "emacs lisp mode hook")
 								  ;; (set-face-font 'default "-unknown-Envy Code R-normal-normal-normal-*-13-*-*-*-m-0-iso10646-1")
 								  ;; (setq ac-sources '(ac-source-words-in-buffer
 								  ;; 					 ac-source-symbols))

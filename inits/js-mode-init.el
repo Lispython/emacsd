@@ -49,6 +49,14 @@
 ;; run M-x flymake-mode to turn flymake on and off
 ;;
 
+
+
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;
+;;;TMP disabled flymake
+;;;;;;;;;;;;;;;;;;;;;;;;
+
 (require 'flymake)
 
 (defcustom jshint-mode-mode "jshint"
@@ -114,27 +122,27 @@
                            "--form" (format "mode=%s" jshint-mode-mode)
                            jshint-url)))))
 
-(setq flymake-allowed-file-name-masks
-      (cons '(".+\\.js$"
-	      flymake-jshint-init
-	      flymake-simple-cleanup
-	      flymake-get-real-file-name)
-	    flymake-allowed-file-name-masks))
+;; (setq flymake-allowed-file-name-masks
+;;       (cons '(".+\\.js$"
+;; 	      ;;flymake-jshint-init
+;; 	      flymake-simple-cleanup
+;; 	      flymake-get-real-file-name)
+;; 	    flymake-allowed-file-name-masks))
 
-(setq flymake-err-line-patterns
-      (cons '("^Lint at line \\([[:digit:]]+\\) character \\([[:digit:]]+\\): \\(.+\\)$"
-	      nil 1 2 3)
-	    flymake-err-line-patterns))
+;; (setq flymake-err-line-patterns
+;;       (cons '("^Lint at line \\([[:digit:]]+\\) character \\([[:digit:]]+\\): \\(.+\\)$"
+;; 	      nil 1 2 3)
+;; 	    flymake-err-line-patterns))
 
 
 
-(add-hook 'javascript-mode-hook (lambda ()
-								  (flymake-mode t)))
+;; ;; (add-hook 'javascript-mode-hook (lambda ()
+;; ;; 								  (flymake-mode t)))
 
-(add-hook 'espresso-mode-hook (lambda ()
-								(flymake-mode t)))
+;; ;; (add-hook 'espresso-mode-hook (lambda ()
+;; ;; 								(flymake-mode t)))
 
-(add-hook 'js2-mode-hook (lambda ()
-						   (slime-js-minor-mode t)))
+;; ;; (add-hook 'js2-mode-hook (lambda ()
+;; ;; 						   (slime-js-minor-mode t)))
 
-(global-set-key [f5] 'slime-js-reload)
+;; (global-set-key [f5] 'slime-js-reload)
