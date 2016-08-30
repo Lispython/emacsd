@@ -59,6 +59,9 @@
 (require 'font-lock)
 (require 'cl)
 
+;; For css-mode, temporarily.
+(defalias 'apropos-macrop 'macrop)
+
 ;;; The code itself
 
 ; Customizable variables:

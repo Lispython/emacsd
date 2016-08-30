@@ -25,9 +25,6 @@
 [submodule "jshint-mode"]
 	path = jshint-mode
 	url = https://github.com/daleharvey/jshint-mode.git
-[submodule "mo-git-blame"]
-	path = mo-git-blame
-	url = git://github.com/mbunkus/mo-git-blame.git
 [submodule "ext/yasnippet"]
 	path = ext/yasnippet
 	url = https://github.com/capitaomorte/yasnippet.git

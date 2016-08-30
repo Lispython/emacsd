@@ -6,10 +6,11 @@
 (add-to-list 'load-path (concat **emacs-ext-dir** "org-mode/lisp"))
 (add-to-list 'load-path (concat **emacs-ext-dir** "org-mode/contrib/lisp"))
 ;;; Remember mode
-(add-to-list 'load-path (concat **emacs-ext-dir** "org-mode/remember"))
+;;(add-to-list 'load-path (concat **emacs-ext-dir** "org-mode/remember"))
 
-(require 'remember)
-(require 'org-remember)
+;; 
+;; (require 'remember)
+;; (require 'org-remember)
 
 (require 'org-install)
 (require 'ob-tangle)
@@ -33,7 +34,7 @@
 
 
 (setq org-startup-indented t)
-(org-remember-insinuate)
+;;(org-remember-insinuate)
 
 ;;logging
 
@@ -50,7 +51,7 @@
 (global-set-key (kbd "C-c l") 'org-store-link)
 (global-set-key (kbd "C-c a") 'org-agenda)
 (global-set-key (kbd "C-c C-a") 'org-show-all)
-(define-key global-map (kbd "C-c r") 'org-remember)
+;;(define-key global-map (kbd "C-c r") 'org-remember)
 
 (setq org-default-notes-file (concat org-directory "/notes.org"))
 
