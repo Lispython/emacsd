@@ -7,6 +7,8 @@
 
 (setq py-shell-name "~/.emacs.d/venv/bin/ipython")
 
+(setq py-block-comment-prefix "#")
+
 ;;(setq py-python-command-args '("-colors" "Linux"))
 ;;(setq py-python-command "/var/github/python2.6/bin/ipython")
 ;;(setq py-python-command "/var/github/python2.6/bin/python2.7")
@@ -105,22 +107,22 @@
 
 
 ;; Auto Syntax Error Hightlight
-(when (load "flymake" t)
-  (custom-set-faces
-   '(flymake-errline ((((class color)) (:background "red"))))
-   '(flymake-warnline ((((class color)) (:background "orange")))))
-  (defun flymake-pyflakes-init ()
-    (let* ((temp-file (flymake-init-create-temp-buffer-copy
-					   'flymake-create-temp-inplace))
-		   (local-file (file-relative-name
-						temp-file
-						(file-name-directory buffer-file-name))))
-      ;;USE pyflakes command for check file
-	  ;; can use epylint.py in emacs.d/epylint.py
-	  (list "pyflakes" (list local-file)))
-	)
-  (add-to-list 'flymake-allowed-file-name-masks
-			   '("\\.py\\'" flymake-pyflakes-init)))
+;; (when (load "flymake" t)
+;;   (custom-set-faces
+;;    '(flymake-errline ((((class color)) (:background "red"))))
+;;    '(flymake-warnline ((((class color)) (:background "orange")))))
+;;   (defun flymake-pyflakes-init ()
+;;     (let* ((temp-file (flymake-init-create-temp-buffer-copy
+;; 					   'flymake-create-temp-inplace))
+;; 		   (local-file (file-relative-name
+;; 						temp-file
+;; 						(file-name-directory buffer-file-name))))
+;;       ;;USE pyflakes command for check file
+;; 	  ;; can use epylint.py in emacs.d/epylint.py
+;; 	  (list "pyflakes" (list local-file)))
+;; 	)
+;;   (add-to-list 'flymake-allowed-file-name-masks
+;; 			   '("\\.py\\'" flymake-pyflakes-init)))
 
 
 ;;PYLOOKUP
@@ -177,4 +179,28 @@
             (font-lock-add-keywords nil '(("\\<\\(FIXME\\|TODO\\|BUG\\):" 1 font-lock-warning-face t)))
 ))
 
-(add-hook 'find-file-hook 'flymake-find-file-hook)
+;;(add-hook 'find-file-hook 'flymake-find-file-hook)
+
+
+(require 'flycheck)
+
+;; We can safely declare this function, since we'll only call it in Python Mode,
+;; that is, when python.el was already loaded.
+(declare-function python-shell-calculate-exec-path "python")
+
+(defun flycheck-virtualenv-set-python-executables ()
+  "Set Python executables for the current buffer."
+  (let ((exec-path (python-shell-calculate-exec-path)))
+    (setq-local flycheck-python-pylint-executable
+                (executable-find "pylint"))
+    (setq-local flycheck-python-flake8-executable
+                (executable-find "flake8"))))
+
+(defun flycheck-virtualenv-setup ()
+  "Setup Flycheck for the current virtualenv."
+  (when (derived-mode-p 'python-mode)
+    (add-hook 'hack-local-variables-hook
+              #'flycheck-virtualenv-set-python-executables 'local)))
+
+(provide 'python-mode-init)
+;;; python-mode-init.el ends here

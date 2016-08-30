@@ -1,4 +1,11 @@
 ipython
-pep8
-pylint
+pep8==1.7.0
+
 hg+http://bitbucket.org/agr/rope#egg=rope
+flake8==3.0.1
+
+pyflakes==1.2.3
+pylint==1.6.4
+
+autoflake==0.6.6
+autopep8==1.2.4

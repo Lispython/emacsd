@@ -1,0 +1,5 @@
+max-complexity = 10
+
+ignore = F999,E501,E128,E124,E402,W503,E731,C901
+max-line-length = 100
+exclude = .git,*/south_migrations/*,node_modules/*,bower_components/*,docs/*,migrations/*,templates/*,venv/*,dist/*,__pycache__

@@ -4,6 +4,16 @@
 (defconst **emacs-ext-dir** (concat **emacs-dir** "ext/")
   "Directory that store third party modes/etc/")
 
+
+(require 'package) ;; You might already have this line
+(add-to-list 'package-archives
+             '("melpa" . "https://melpa.org/packages/"))
+(when (< emacs-major-version 24)
+  ;; For important compatibility libraries like cl-lib
+  (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/")))
+(package-initialize) ;; You might already have this line
+
+
 (add-to-list 'load-path **emacs-dir**)
 (setq emacs-d-dir "~/.emacs.d/pylookup/")
 ;;(set-default-font "Consolas-8") ;;default font
@@ -31,6 +41,7 @@
 (add-to-list 'load-path "~/.emacs.d/emacs-jabber/")
 
 (add-to-list 'load-path "~/.emacs.d/ext/python-mode/")
+
 (add-to-list 'load-path (concat **emacs-ext-dir** "go-mode"))
 
 ;;AUTO COMPLETE
@@ -43,6 +54,7 @@
 (add-to-list 'load-path "~/.emacs.d/ext/yasnippet")
 (add-to-list 'load-path "~/.emacs.d/ext")
 (add-to-list 'load-path "~/.emacs.d/ext/restclient")
+(add-to-list 'load-path "~/.emacs.d/ext/editorconfig/")
 
 ;;(add-to-list 'load-path "~/.emacs.d/ext/auto-complete/ext/")
 
@@ -53,6 +65,7 @@
 (add-to-list 'load-path pylookup-dir)
 
 (load-file "~/.emacs.d/nxml-mode/rng-auto.el")
+
 
 ;;GLOBAL REQUIREMENTS
 (require 'font-lock) (if (fboundp 'global-font-lock-mode)
@@ -98,6 +111,10 @@
 ;;(require 'go-autocomplete)
 ;;(require 'flymake-jshint)
 
+(require 'multiple-cursors)
+
+(require 'flycheck)
+(global-flycheck-mode)
 
 ;;SET VARIABLES OF EMACS
 (scroll-bar-mode nil) ;hide scrroll bar
@@ -108,7 +125,7 @@
 ;; Turn on column number mode
 (column-number-mode t) ;; but this one is good
 ;;(ido-mode t)
-(setq flymake-start-syntax-check-on-find-file nil)
+;;(setq flymake-start-syntax-check-on-find-file nil)
 
 ;; Don't disable
 (show-paren-mode t) ;;hightlight brackets
@@ -116,6 +133,7 @@
 (setq inhibit-splash-screen t) ;;;do't show splash screen
 ;;(setq default-tab-width 4)
 (setq tab-with 4)
+(setq-default indent-tabs-mode nil)
 (desktop-save-mode t)
 (modify-coding-system-alist 'file ".*" 'utf-8) ;; fuck cp1251 and koi-8
 
@@ -166,14 +184,14 @@
 ;; Map `yas/load-directory' to every element
 (mapc 'yas/load-directory yas/root-directory)
 (yas/global-mode 1)
-
 ;; MODES AUTO DETECT
-(add-to-list 'auto-mode-alist '("\\.js$" . espresso-mode))
-(add-to-list 'auto-mode-alist '("\\.json$" . espresso-mode))
-;;(autoload 'js2-mode "js2-mode" nil t)
-;;(add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
+;;(add-to-list 'auto-mode-alist '("\\.js$" . espresso-mode))
+;;(add-to-list 'a>uto-mode-alist '("\\.json$" . espresso-mode))
+(autoload 'js2-mode "js2-mode" nil t)
+(add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
 (add-to-list 'auto-mode-alist '("\\.jsx$" . espresso-mode))
-;;(add-to-list 'auto-mode-alist '("\\.json$" . js2-mode))
+(add-to-list 'auto-mode-alist '("\\.json$" . js2-mode))
+
 (add-to-list 'auto-mode-alist '("\\.html$" . django-html-mode))
 (add-to-list 'auto-mode-alist '("\\.css$" . css-mode))
 (add-to-list 'auto-mode-alist '("\\.less$" . css-mode))
@@ -278,7 +296,9 @@
 (load "bash-completion-init.el")
 (load "tramp-mode-init.el")
 (load "yaml-mode-init.el")
-
+(load "sgml-mode-init.el")
+(load "autopep8-init.el")
+(load "flycheck-init.el")
 ;;(load "go-mode-init")
 ;;(load "recompiler")
 
