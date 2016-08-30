@@ -40,7 +40,7 @@
 ;;add jabber mode
 (add-to-list 'load-path "~/.emacs.d/emacs-jabber/")
 
-(add-to-list 'load-path "~/.emacs.d/ext/python-mode/")
+;;(add-to-list 'load-path "~/.emacs.d/ext/python-mode/")
 
 (add-to-list 'load-path (concat **emacs-ext-dir** "go-mode"))
 
@@ -111,10 +111,12 @@
 ;;(require 'go-autocomplete)
 ;;(require 'flymake-jshint)
 
+(require 'powerline)
+
 (require 'multiple-cursors)
 
 (require 'flycheck)
-(global-flycheck-mode)
+;;(global-flycheck-mode)
 
 ;;SET VARIABLES OF EMACS
 (scroll-bar-mode nil) ;hide scrroll bar
@@ -159,6 +161,10 @@
 
 (setq browse-url-browser-function 'browse-url-generic
       browse-url-generic-program "google-chrome")
+
+
+(powerline-default-theme)
+
 
 ;;MODES VARIABLES
 (global-auto-complete-mode t)
@@ -380,7 +386,7 @@
 ;;                                 (define-key py-mode-map (kbd "M-<tab>") 'anything-ipython-complete)))
 
 (add-hook 'ipython-shell-hook (lambda ()
-								  (define-key py-mode-map (kbd "M-<tab>") 'anything-ipython-complete)))
+                                (define-key py-mode-map (kbd "M-<tab>") 'anything-ipython-complete)))
 
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 (add-hook 'after-save-hook 'autocompile)
