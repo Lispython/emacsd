@@ -4,6 +4,8 @@
 (defconst **emacs-ext-dir** (concat **emacs-dir** "ext/")
   "Directory that store third party modes/etc/")
 
+(defconst **themes-dir** (concat **emacs-dir** "themes/")
+  "Directory than store editor themes")
 
 (require 'package) ;; You might already have this line
 (add-to-list 'package-archives
@@ -71,15 +73,21 @@
 (require 'font-lock) (if (fboundp 'global-font-lock-mode)
 			 (global-font-lock-mode 1))
 
+(require 'ansi-color)
+(require 'anything)
+(require 'yasnippet)
+(require 'color-theme)
+
+;;(add-to-list 'custom-theme-load-path **themes-dir**)
+
 (mapc 'require '(tramp
-		 color-theme
 		 auto-complete-config
 		 ac-slime
-		 yasnippet
-		 anything
 		 ansi-color
 		 smart-operator
 		 ))
+
+
 
 ;;MODES
 (require 'go-mode-load)
@@ -157,6 +165,10 @@
 (setq color-theme-is-global t)
 (color-theme-initialize)
 (color-theme-solarized t)
+;;(color-theme-solarized t)
+;;(load-theme 'solarized t)
+
+
 ;;;(color-theme-tango)
 
 (setq browse-url-browser-function 'browse-url-generic
@@ -305,6 +317,8 @@
 (load "sgml-mode-init.el")
 (load "autopep8-init.el")
 (load "flycheck-init.el")
+(load "crontab-init.el")
+
 ;;(load "go-mode-init")
 ;;(load "recompiler")
 
