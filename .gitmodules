@@ -1,9 +1,6 @@
 [submodule "emacs-jabber"]
 	path = emacs-jabber
 	url = git://catap.ru/emacs-jabber/emacs-jabber.git
-[submodule "magit"]
-	path = magit
-	url = https://github.com/magit/magit.git
 [submodule "virtualenv"]
 	path = virtualenv
 	url = https://github.com/aculich/virtualenv.el.git
@@ -37,10 +34,6 @@
 [submodule "ext/yaml-mode"]
 	path = ext/yaml-mode
 	url = https://github.com/yoshiki/yaml-mode.git
-[submodule "ext/auto-complete"]
-	path = ext/auto-complete
-	url = https://github.com/auto-complete/auto-complete.git
-	branch = master
 [submodule "ext/org-mode"]
 	path = ext/org-mode
 	url = git@github.com:Lispython/org-mode.git
