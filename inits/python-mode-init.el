@@ -17,6 +17,31 @@
 ;; "return focus to python code buffer"
 ;; (save-excursion ad-do-it))
 
+;; (defun setup-ropemacs ()
+;;   "Setup the ropemacs harness"
+;;   (setenv "PYTHONPATH"
+;;           (concat
+;;            (getenv "PYTHONPATH") path-separator
+;;            (concat dotfiles-dir "python-libs/")))
+;;   (pymacs-load "ropemacs" "rope-")
+
+;;   ;; Stops from erroring if there's a syntax err
+;;   (setq ropemacs-codeassist-maxfixes 3)
+;;   (setq ropemacs-guess-project t)
+;;   (setq ropemacs-enable-autoimport t)
+
+;;   ;; Adding hook to automatically open a rope project if there is one
+;;   ;; in the current or in the upper level directory
+;;   (add-hook 'python-mode-hook
+;;             (lambda ()
+;;               (cond ((file-exists-p ".ropeproject")
+;;                      (rope-open-project default-directory))
+;;                     ((file-exists-p "../.ropeproject")
+;;                      (rope-open-project (concat default-directory "..")))
+;;                     )))
+;;   )
+
+
 
 (autoload 'python-mode "python-mode" "Python Mode." t)
 
@@ -170,7 +195,8 @@
 			(smart-operator-mode-on)
 			(annotate-pdb)
 			(lambda-mode)
-            (ac-ropemacs-initialize)
+                        (flycheck-mode)
+                        (ac-ropemacs-initialize)
 			;;TODO: use virtualenv version
 			;;(setq pymacs-python-command py-python-command)
 			(set-variable 'py-indent-offset 4)
@@ -181,26 +207,31 @@
 
 ;;(add-hook 'find-file-hook 'flymake-find-file-hook)
 
+(setq virtualenv-workon-home (getenv "PYENV_WORKON_HOME"))
 
-(require 'flycheck)
+;; Python or python mode?
+(eval-after-load 'python
+  '(progn
+     ;;==================================================
+     ;; Ropemacs Configuration
+     ;;==================================================
+     ;;(setup-ropemacs)
 
-;; We can safely declare this function, since we'll only call it in Python Mode,
-;; that is, when python.el was already loaded.
-(declare-function python-shell-calculate-exec-path "python")
+     ;;==================================================
+     ;; Virtualenv Commands
+     ;;==================================================
+     ;; (autoload 'virtualenv-activate "default"
+     ;;   "Activate a Virtual Environment specified by PATH" t)
 
-(defun flycheck-virtualenv-set-python-executables ()
-  "Set Python executables for the current buffer."
-  (let ((exec-path (python-shell-calculate-exec-path)))
-    (setq-local flycheck-python-pylint-executable
-                (executable-find "pylint"))
-    (setq-local flycheck-python-flake8-executable
-                (executable-find "flake8"))))
+     ;; (autoload 'virtualenv-workon "default"
+     ;;   "Activate a Virtual Environment present using virtualenvwrapper" t)
+     )
+  )
 
-(defun flycheck-virtualenv-setup ()
-  "Setup Flycheck for the current virtualenv."
-  (when (derived-mode-p 'python-mode)
-    (add-hook 'hack-local-variables-hook
-              #'flycheck-virtualenv-set-python-executables 'local)))
+
+(setq pyenv-show-active-python-in-modeline t)
+
+(load "python-mode-env.el")
 
 (provide 'python-mode-init)
 ;;; python-mode-init.el ends here

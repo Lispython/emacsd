@@ -1,3 +1,5 @@
+(setq debug-on-error t)
+
 (defconst **emacs-dir** "~/.emacs.d/"
   "Top level emacs directory")
 
@@ -77,6 +79,7 @@
 (require 'anything)
 (require 'yasnippet)
 (require 'color-theme)
+(require 'ac-emoji)
 
 ;;(add-to-list 'custom-theme-load-path **themes-dir**)
 
@@ -91,6 +94,7 @@
 
 ;;MODES
 (require 'go-mode-load)
+(require 'docker)
 (require 'css-mode)
 (require 'js2-mode)
 (require 'espresso)
@@ -122,6 +126,12 @@
 (require 'powerline)
 
 (require 'multiple-cursors)
+
+;; (require 'pyenv-mode)
+;; (pyenv-mode)
+
+;; (require 'pyenv-mode-auto)
+
 
 (require 'flycheck)
 ;;(global-flycheck-mode)
@@ -171,8 +181,11 @@
 
 ;;;(color-theme-tango)
 
-(setq browse-url-browser-function 'browse-url-generic
-      browse-url-generic-program "google-chrome")
+;; (setq browse-url-browser-function 'browse-url-generic
+;;       browse-url-generic-program "google-chrome")
+
+(setq browse-url-browser-function 'browse-url-default-windows-browser)
+(setq browse-url-browser-function 'browse-url-default-macosx-browser)
 
 
 (powerline-default-theme)
@@ -302,6 +315,7 @@
 	 (line-beginning-position)
 	 (line-end-position lines))))
 
+(load "env-init.el")
 (load "virtualenv-init.el")
 (load "outline-mode-init.el")
 (load "ibuffer-mode-init.el")
@@ -318,6 +332,8 @@
 (load "autopep8-init.el")
 (load "flycheck-init.el")
 (load "crontab-init.el")
+(load "ac-emoji.el")
+
 
 ;;(load "go-mode-init")
 ;;(load "recompiler")
