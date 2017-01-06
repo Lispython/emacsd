@@ -25,3 +25,4 @@ node_modules/*
 .emacs.desktop.lock
 
 elpa/*
+url/*
