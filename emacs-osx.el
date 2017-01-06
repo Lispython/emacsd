@@ -83,12 +83,16 @@
 
 ;;(add-to-list 'custom-theme-load-path **themes-dir**)
 
-(mapc 'require '(tramp
-		 auto-complete-config
-		 ac-slime
-		 ansi-color
-		 smart-operator
-		 ))
+;; (mapc 'require '(tramp
+;; 		 auto-complete-config
+;; 		 ac-slime
+;; 		 ansi-color
+;; 		 ))
+
+(require 'tramp)
+(require 'auto-complete-config)
+(require 'ac-slime)
+(require 'ansi-color)
 
 
 
@@ -333,6 +337,7 @@
 (load "flycheck-init.el")
 (load "crontab-init.el")
 (load "ac-emoji.el")
+(load "markdown-init.el")
 
 
 ;;(load "go-mode-init")
