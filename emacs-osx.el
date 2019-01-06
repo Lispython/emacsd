@@ -9,6 +9,8 @@
 (defconst **themes-dir** (concat **emacs-dir** "themes/")
   "Directory than store editor themes")
 
+(defconst **docker-run** "docker run --rm -i emacsd")
+
 (require 'package) ;; You might already have this line
 (add-to-list 'package-archives
              '("melpa" . "https://melpa.org/packages/"))
@@ -34,8 +36,8 @@
 
 ;;; Remote file editing via ssh
 (add-to-list 'load-path "~/.emacs.d/tramp-files/lisp")
-(add-to-list 'load-path "~/.emacs.d/slime/")
-(add-to-list 'load-path "~/.emacs.d/slime/contrib/")
+;(add-to-list 'load-path "~/.emacs.d/slime/")
+;(add-to-list 'load-path "~/.emacs.d/slime/contrib/")
 (add-to-list 'load-path "~/.emacs.d/js-swank/")
 (add-to-list 'load-path "~/.emacs.d/jshint-mode/")
 
@@ -53,12 +55,13 @@
 (add-to-list 'load-path "~/.emacs.d/ext/auto-complete/lib/fuzzy")
 (add-to-list 'load-path "~/.emacs.d/ext/auto-complete/")
 (add-to-list 'load-path "~/.emacs.d/auto-complete-modes/")
-(add-to-list 'load-path "~/.emacs.d/auto-complete-modes/ac-slime/")
+;(add-to-list 'load-path "~/.emacs.d/auto-complete-modes/ac-slime/")
 (add-to-list 'load-path "~/.emacs.d/mo-git-blame/")
 (add-to-list 'load-path "~/.emacs.d/ext/yasnippet")
 (add-to-list 'load-path "~/.emacs.d/ext")
 (add-to-list 'load-path "~/.emacs.d/ext/restclient")
 (add-to-list 'load-path "~/.emacs.d/ext/editorconfig/")
+(add-to-list 'load-path "~/.emacs.d/ext/auto-highlight-symbol/")
 
 ;;(add-to-list 'load-path "~/.emacs.d/ext/auto-complete/ext/")
 
@@ -80,6 +83,7 @@
 (require 'yasnippet)
 (require 'color-theme)
 (require 'ac-emoji)
+(require 'cc-mode)
 
 ;;(add-to-list 'custom-theme-load-path **themes-dir**)
 
@@ -91,9 +95,7 @@
 
 (require 'tramp)
 (require 'auto-complete-config)
-(require 'ac-slime)
 (require 'ansi-color)
-
 
 
 ;;MODES
@@ -137,7 +139,7 @@
 ;; (require 'pyenv-mode-auto)
 
 
-(require 'flycheck)
+;;(require 'flycheck)
 ;;(global-flycheck-mode)
 
 ;;SET VARIABLES OF EMACS
@@ -233,35 +235,6 @@
 
 
 
-;;LISP-MODE
-;;Common lisp compiler
-;;(load (expand-file-name "~/.emacs.d/slime-helper.el"))
-(setq slime-backend "~/.emacs.d/slime/swank-loader.lisp")
-(setq inferior-lisp-program "/usr/bin/sbcl")
-
-(setq slime-startup-animation t)
-
-(defmacro lisp-slime (lisp path &optional coding)
-  (let ((funname (intern (format "%s-slime" lisp))))
-	`(defun ,funname ()
-	   (interactive)
-	   (let ((inferior-lisp-program ,path)
-			 (slime-net-coding-system (or ,coding 'utf-8-unix)))
-		 (slime)))))
-
-(lisp-slime sbcl "/usr/bin/sbcl")
-(lisp-slime clisp "/usr/bin/clisp")
-;;;(lisp-slime scheme "/usr/bin/scheme48")
-
-;;(lisp-slime js (concat "node " (concat **emacs-dir** "swank-js/swank.js")))
-
-(slime-setup '(slime-fancy slime-asdf slime-banner slime-repl
-			   slime-scratch
-			   ;;slime-highlight-edits
-			   slime-sbcl-exts slime-tramp slime-indentation
-			   slime-autodoc
-			   ;;						   slime-js))
-))
 
 
 ;; AUTO COMPLETE CONFIGS
@@ -273,8 +246,6 @@
 (setq ac-dwim t)
 (setq ac-sources '(ac-source-abbrev ac-source-dictionary ac-source-words-in-same-mode-buffers))
 
-(eval-after-load "auto-complete"
-     '(add-to-list 'ac-modes 'slime-repl-mode))
 
 (defun smart-tab ()
   (interactive)
@@ -296,8 +267,9 @@
 
 
 (when (require 'anything-show-completion nil t)
-  (use-anything-show-completion 'anything-ipython-complete
-								'(length initial-pattern)))
+  (use-anything-show-completion
+   'anything-ipython-complete
+   '(length initial-pattern)))
 
 
 (defun hyperspec-lookup (&optional symbol-name)
@@ -338,6 +310,9 @@
 (load "crontab-init.el")
 (load "ac-emoji.el")
 (load "markdown-init.el")
+(load "slime-init.el")
+(load "highlight-symbol-init.el")
+(load "clang-init.el")
 
 
 ;;(load "go-mode-init")
@@ -359,34 +334,6 @@
 
 ;;; HOOKS FOR MODES
 
-;;(add-hook 'inferior-lisp-mode-hook (lambda () (inferior-slime-mode t)))
-;; Optionally, specify the lisp program you are using. Default is "lisp"
-
-
-(add-hook 'slime-mode-hook
-	  (lambda ()
-	    (message "Lisp mode hook")
-	    ;; (set-face-font 'default "-unknown-Envy Code R-normal-normal-normal-*-13-*-*-*-m-0-iso10646-1")
-	    (set-up-slime-ac))
-;;     					 (setq ac-sources '(ac-source-words-in-buffer ac-source-symbols))))
-		;;					(setq ac-sources '(ac-source-abbrev ac-source-words-in-buffer
-		;;														ac-source-files-in-current-dir
-		;;														ac-source-symbols ac-emacs-lisp-sources))
-)
-
-(add-hook 'lisp-mode-hook
-	  (lambda ()
-	    ;; (set-face-font 'default "-unknown-Envy Code R-normal-normal-normal-*-13-*-*-*-m-0-iso10646-1")
-	    (setq lisp-indent-function 'common-lisp-indent-function)
-	    (message "css mode hook")
-	    (slime-mode t)
-	    (define-key lisp-mode-map "\C-c \C-b" 'slime-eval-buffer)
-	    (font-lock-add-keywords nil
-				    '(("\\<\\(FIXME\\|TODO\\|BUG\\):" 1 font-lock-warning-face t)))
-	    (yas/minor-mode-on)))
-
-(add-hook 'slime-mode-hook 'set-up-slime-ac)
-(add-hook 'slime-repl-mode-hook 'set-up-slime-ac)
 
 
 (add-hook 'css-mode-hook (lambda ()
