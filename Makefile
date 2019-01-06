@@ -45,3 +45,8 @@ build-pymacs:
 
 	@echo "pymacs.el generated"
 	cp /tmp/Pymacs/pymacs.el ~/.emacs.d/pymacs.el
+
+
+docker-build:
+	@echo "Build docker packages"
+	docker build  --rm -t emacsd ./

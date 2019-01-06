@@ -53,3 +53,9 @@
 	path = ext/editorconfig
 	url = https://github.com/editorconfig/editorconfig-emacs.git
 	branch = master
+[submodule "ext/highlight-symbol"]
+	path = ext/highlight-symbol
+	url = https://github.com/nschum/highlight-symbol.el.git
+[submodule "ext/auto-highlight-symbol"]
+	path = ext/auto-highlight-symbol
+	url = https://github.com/mhayashi1120/auto-highlight-symbol-mode.git
