@@ -62,6 +62,16 @@
 (pymacs-load "ropemacs" "rope-")
 (setq ropemacs-enable-autoimport t)
 
+;; (defun load-ropemacs ()
+;;   "Load pymacs and ropemacs"
+;;   (interactive)
+;;   (require 'pymacs)
+;;   (pymacs-load "ropemacs" "rope-")
+;;   ;; Automatically save project python buffers before refactorings
+;;   (setq ropemacs-confirm-saving 'nil)
+;; )
+;; (global-set-key "\C-xpl" 'load-ropemacs)
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Auto-completion
 ;;;  Integrates:
@@ -190,21 +200,25 @@
 ;; HOOKS
 (add-hook 'python-mode-hook
           (lambda ()
-			(message "python mode hook")
-			(auto-complete-mode t)
-			(smart-operator-mode-on)
-			(annotate-pdb)
-			(lambda-mode)
-                        (flycheck-mode)
-                        (ac-ropemacs-initialize)
-			;;TODO: use virtualenv version
-			;;(setq pymacs-python-command py-python-command)
-			(set-variable 'py-indent-offset 4)
-			(set-variable 'py-smart-indentation nil)
-			(set-variable 'indent-tabs-mode nil)
+            (message "python mode hook")
+            (auto-complete-mode t)
+            (annotate-pdb)
+            (lambda-mode)
+            (flycheck-mode)
+            (ac-ropemacs-initialize)
+            ;;TODO: use virtualenv version
+            ;;(setq pymacs-python-command py-python-command)
+            (set-variable 'py-indent-offset 4)
+            (set-variable 'py-smart-indentation nil)
+            (set-variable 'indent-tabs-mode nil)
             (font-lock-add-keywords nil '(("\\<\\(FIXME\\|TODO\\|BUG\\):" 1 font-lock-warning-face t)))
-))
+            ))
 
+(add-hook 'python-mode-hook
+          (lambda ()
+            (require 'sphinx-doc)
+            (sphinx-doc-mode t)
+            ))
 ;;(add-hook 'find-file-hook 'flymake-find-file-hook)
 
 (setq virtualenv-workon-home (getenv "PYENV_WORKON_HOME"))
