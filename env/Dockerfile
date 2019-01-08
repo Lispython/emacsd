@@ -50,19 +50,30 @@ RUN exec $SHELL
 
 RUN eval "$(pyenv init -)"
 
-RUN pyenv install 2.7
+RUN pyenv install 2.7.15 && \
+    pyenv install 3.6.8
 
 #&& \
 #    pyenv install 3.5.0 && \
 #    pyenv install 3.6.0
 
-RUN pyenv local 2.7 # 3.6.0
+RUN pyenv local 2.7.15 3.6.8
 
 COPY req.txt /req.txt
+COPY req_3_only.txt /req_3_only.txt
 
-RUN pip2.7 install -U -r /req.txt
-#&& pip3.6 install -U -r /req.txt && pip3.5 install -U -r /req.txt
+RUN pip2.7 install -U pip && \
+    pip3.6 install -U pip && \
+    pip2.7 install -U -r /req.txt && \
+    pip3.6 install -U -r /req.txt && \
+    pip3.6 install -U -r /req_3_only.txt
+## && pip3.5 install -U -r /req.txt
 
+
+COPY env.sh /usr/bin/env.sh
+
+
+RUN chmod +x /usr/bin/env.sh
 #RUN pyenv shell 2.7
 
 CMD ["echo", "emacsd docker work"]

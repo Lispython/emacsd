@@ -49,4 +49,5 @@ build-pymacs:
 
 docker-build:
 	@echo "Build docker packages"
-	docker build  --rm -t emacsd ./
+	# docker build  --rm -t emacsd ./
+	docker build --rm -t emacsd --file=./env/Dockerfile ./env/

@@ -20,6 +20,7 @@
 (package-initialize) ;; You might already have this line
 
 
+
 (add-to-list 'load-path **emacs-dir**)
 (setq emacs-d-dir "~/.emacs.d/pylookup/")
 ;;(set-default-font "Consolas-8") ;;default font
@@ -291,6 +292,12 @@
 	 (line-beginning-position)
 	 (line-end-position lines))))
 
+(use-package exec-path-from-shell
+  :if (memq window-system '(mac ns))
+  :ensure t
+  :config
+  (exec-path-from-shell-initialize))
+
 (load "env-init.el")
 (load "virtualenv-init.el")
 (load "outline-mode-init.el")
@@ -313,6 +320,7 @@
 (load "slime-init.el")
 (load "highlight-symbol-init.el")
 (load "clang-init.el")
+(load "debug-init.el")
 
 
 ;;(load "go-mode-init")
