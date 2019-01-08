@@ -41,7 +41,7 @@
       ;;      )
 
       ;;(message (format "File exists %s" (concat "/usr/src/app/" (symbol-value value))))
-      (format "%s:%s" file-name "/usr/src/app/setup.cfg"))
+      (format "%s:%s" file-name (concat "/usr/src/app/" value)))
     ))
 
 
@@ -69,13 +69,10 @@
 
             "--format=default"
 
-            "--no-isort-config"
-
             (option "--max-complexity" flycheck-flake8-maximum-complexity nil
                     flycheck-option-int)
             (option "--max-line-length" flycheck-flake8-maximum-line-length nil
                     flycheck-option-int)
-            "--stdin-display-name=/usr/src/app/checking_file.py"
 
             (eval (flycheck-option-config-file-eval flycheck-flake8rc))
 
@@ -129,6 +126,8 @@
 
 
 ;;(flycheck-python-docker-setup)
+
+(add-to-list 'flycheck-disabled-checkers 'python-flake8)
 
 (flycheck-python-docker-flake8-setup)
 
