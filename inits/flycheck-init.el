@@ -34,25 +34,37 @@
 
 
 (defun flycheck-option-check-config-file-volume (value)
+  ;;(with-temp-message (format "flycheck-option-check-config-file-volume: %s" value))
   (let ((file-name (flycheck-locate-config-file value 'python-docker-flake8)))
-    (when (file-exists-p file-name)
-      ;; (len ((config-filename (symbol-value value)))
-      ;;      (message (format "flycheck-option-check-config-file-volume: %s" "bbb"))
-      ;;      )
+    (unless (eq file-name nil)
+      ;;(with-temp-message (format "flycheck-option-check-config-file-volume file-name: %s" file-name))
 
-      ;;(message (format "File exists %s" (concat "/usr/src/app/" (symbol-value value))))
-      (format "%s:%s" file-name (concat "/usr/src/app/" value)))
-    ))
+      (if (file-exists-p file-name)
+          (progn
+            ;;(with-temp-message (format "flycheck-option-check-config-file-volume file exists: %s" value))
+            (format "%s:%s" file-name (concat "/usr/src/app/" value))
+
+            )
+        ;; (progn
+        ;;   ;;(with-temp-message (format "flycheck-option-check-config-file-volume file not exists: %s" value))
+
+        ;;   )
+        ))))
 
 
 (defun flycheck-option-config-file-eval (value)
-  (message (format "configure flycheck-option-test-eval with value: %s -> " value))
+  (with-temp-message (format "flycheck-option-config-file-eval: %s" value))
 
   (let ((file-name (flycheck-locate-config-file value 'python-docker-flake8)))
-    (when (file-exists-p file-name)
-      ;;(format "--config=%s" (concat "/usr/src/app/" (symbol-value value)))
-      (format "--config=/usr/src/app/setup.cfg")
-      )))
+    (unless (eq file-name nil)
+      (if (file-exists-p file-name)
+          (progn
+            ;; (with-temp-message (format "flycheck-option-config-file-eval file exists: %s" value))
+            (format "--config=/usr/src/app/setup.cfg")
+            )
+          ""
+
+        ))))
 
 (flycheck-define-checker python-docker-flake8
   "A Python syntax checker"
@@ -62,6 +74,7 @@
             "-i"
             (option "--volume=" flycheck-flake8rc concat flycheck-option-check-config-file-volume)
 
+            ;;; TODO: add image options
             "emacsd"
             "/usr/bin/env.sh"
             "3.6.8"
@@ -92,6 +105,34 @@
   :modes python-mode)
 
 
+(flycheck-define-checker python-docker-mypy
+  "Mypy syntax and type checker.  Requires mypy>=0.580.
+
+See URL `http://mypy-lang.org/'."
+  :command ("docker"
+            "run"
+            "--rm"
+            "-i"
+            (option "--volume=" flycheck-python-mypy-ini concat flycheck-option-check-config-file-volume)
+
+            "emacsd"
+            "mypy"
+            "--show-column-numbers"
+            (config-file "--config-file" flycheck-python-mypy-ini)
+            (option "--cache-dir" flycheck-python-mypy-cache-dir)
+            source-original)
+  :error-patterns
+  ((error line-start (file-name) ":" line ":" column ": error:" (message)
+          line-end)
+   (warning line-start (file-name) ":" line ":" column  ": warning:" (message)
+            line-end))
+  :modes python-mode
+  ;; Ensure the file is saved, to work around
+  ;; https://github.com/python/mypy/issues/4746.
+  :predicate flycheck-buffer-saved-p
+  :next-checkers '(t . python-docker-flake8))
+
+
 (defun flycheck-python-docker-setup ()
   (message "Flycheck python docker setup")
   (setq flycheck-flake8rc "setup.cfg")
@@ -102,18 +143,24 @@
   )
 
 
+(add-hook 'python-mode-hook
+          (lambda ()
+            (progn
+              (with-temp-message "Disable default python-mode flycheck checkers:")
+              (dolist (checker '(python-flake8 python-pycompile python-mypy))
+                (with-temp-message (format "    Disable checker %s for python-mode" checker))
+                (add-to-list 'flycheck-disabled-checkers checker))
+              (add-to-list 'flycheck-checkers 'python-docker-flake8 'append))))
+
+
 (defun flycheck-python-docker-flake8-setup ()
   "Test mode switches"
   (setq flycheck-python-flake8-executable (concat **emacs-dir** "venv/bin/flake8"))
   (setq flycheck-flake8rc "setup.cfg")
+  (add-to-list 'flycheck-disabled-checkers 'python-flake8)
 
-  (add-hook 'python-mode-hook
-            (lambda ()
-              (message "Python mode hook work. Print some debug variable")))
-
-  (add-hook 'focus-in-hook
-            (lambda ()
-              (message "Focus on hook: %s" major-mode))))
+  (add-to-list 'flycheck-checkers 'python-docker-flake8 'append)
+  )
 
 
   ;; (when (derived-mode-p 'python-mode)
@@ -127,7 +174,6 @@
 
 ;;(flycheck-python-docker-setup)
 
-(add-to-list 'flycheck-disabled-checkers 'python-flake8)
 
 (flycheck-python-docker-flake8-setup)
 
