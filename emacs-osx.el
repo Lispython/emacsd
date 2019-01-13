@@ -11,9 +11,12 @@
 
 (defconst **docker-run** "docker run --rm -i emacsd")
 
+(defconst **docker-run-base** "/usr/local/bin/docker run -i --rm")
+
 (require 'package) ;; You might already have this line
 (add-to-list 'package-archives
              '("melpa" . "https://melpa.org/packages/"))
+
 (when (< emacs-major-version 24)
   ;; For important compatibility libraries like cl-lib
   (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/")))
@@ -22,7 +25,6 @@
 
 
 (add-to-list 'load-path **emacs-dir**)
-(setq emacs-d-dir "~/.emacs.d/pylookup/")
 ;;(set-default-font "Consolas-8") ;;default font
 ;;the following is size 7 for me...
 
@@ -69,8 +71,6 @@
 (add-to-list 'load-path "~/.emacs.d/magit/")
 (add-to-list 'load-path "~/.emacs.d/inits/")
 
-(setq pylookup-dir "~/.emacs.d/pylookup/")
-(add-to-list 'load-path pylookup-dir)
 
 (load-file "~/.emacs.d/nxml-mode/rng-auto.el")
 
@@ -133,6 +133,7 @@
 (require 'powerline)
 
 (require 'multiple-cursors)
+
 
 ;; (require 'pyenv-mode)
 ;; (pyenv-mode)
@@ -302,7 +303,8 @@
 (load "virtualenv-init.el")
 (load "outline-mode-init.el")
 (load "ibuffer-mode-init.el")
-(load "python-mode-init.el")
+;;(load "python-mode-init.el")
+(load "python-mode-dockerized-init.el")
 (load "org-mode-init.el")
 (load "js-mode-init.el")
 (load "css-mode-init.el")
@@ -321,6 +323,8 @@
 (load "highlight-symbol-init.el")
 (load "clang-init.el")
 (load "debug-init.el")
+
+(load "pylookup-init.el")
 
 
 ;;(load "go-mode-init")

@@ -62,8 +62,6 @@
             ;; (with-temp-message (format "flycheck-option-config-file-eval file exists: %s" value))
             (format "--config=/usr/src/app/setup.cfg")
             )
-          ""
-
         ))))
 
 (flycheck-define-checker python-docker-flake8
@@ -76,6 +74,7 @@
 
             ;;; TODO: add image options
             "emacsd"
+            ;; "/bin/bash" "-c" "$(pyenv prefix 3.6.8)/bin/flake8"
             "/usr/bin/env.sh"
             "3.6.8"
             "flake8"
