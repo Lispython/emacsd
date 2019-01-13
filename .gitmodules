@@ -43,10 +43,6 @@
 	path = ext/restclient
 	url = https://github.com/pashky/restclient.el.git
 	branch = master
-[submodule "ext/editorconfig"]
-	path = ext/editorconfig
-	url = https://github.com/editorconfig/editorconfig-emacs.git
-	branch = master
 [submodule "ext/highlight-symbol"]
 	path = ext/highlight-symbol
 	url = https://github.com/nschum/highlight-symbol.el.git
