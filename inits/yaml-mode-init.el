@@ -6,9 +6,9 @@
 
 ;;; Code:
 
-(use-package 'yaml-mode
-
+(use-package yaml-mode
   :config (progn
+            (message "yaml-mode config init")
             (add-to-list 'auto-mode-alist '("\\.yml$" . yaml-mode))
             (add-hook 'yaml-mode-hook
                       '(lambda ()

@@ -26,9 +26,12 @@
 
 (add-to-list 'load-path **emacs-dir**)
 
+
 (defun with-emacs.d (&rest args)
-  (mapconcat 'identity (append (list (file-truename **emacs-dir**)) args) "")
-  )
+  (mapconcat 'identity (append (list (file-truename **emacs-dir**)) args) ""))
+
+
+
 
 ;;(set-default-font "Consolas-8") ;;default font
 ;;the following is size 7 for me...
@@ -327,6 +330,8 @@
 
 (load "yasnippet-init.el")
 
+(load "editorconfig-init.el")
+(load "highlight-symbol.el")
 
 ;;(load "go-mode-init")
 ;;(load "recompiler")

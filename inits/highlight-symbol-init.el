@@ -1,3 +1,4 @@
+;;; highlight-symbol-init.el ---
 ;; (require 'highlight-symbol)
 
 ;; (global-set-key [(control f3)] 'highlight-symbol)
@@ -8,12 +9,19 @@
 ;; (provide 'highlight-symbol-init)
 
 
-(require 'auto-highlight-symbol )
 
+;;; Commentary:
+;;
 
-(unless global-auto-highlight-symbol-mode
-  (global-auto-highlight-symbol-mode t))
+;;; Code:
+
+(use-package auto-highlight-symbol
+
+  :config (global-auto-highlight-symbol-mode t))
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (provide 'highlight-symbol-init)
+
+;;; highlight-symbol-init.el ends here

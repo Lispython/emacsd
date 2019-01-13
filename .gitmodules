@@ -39,13 +39,3 @@
 [submodule "ext/less-css-mode"]
 	path = ext/less-css-mode
 	url = https://github.com/purcell/less-css-mode.git
-[submodule "ext/restclient"]
-	path = ext/restclient
-	url = https://github.com/pashky/restclient.el.git
-	branch = master
-[submodule "ext/highlight-symbol"]
-	path = ext/highlight-symbol
-	url = https://github.com/nschum/highlight-symbol.el.git
-[submodule "ext/auto-highlight-symbol"]
-	path = ext/auto-highlight-symbol
-	url = https://github.com/mhayashi1120/auto-highlight-symbol-mode.git
