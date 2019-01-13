@@ -25,6 +25,11 @@
 
 
 (add-to-list 'load-path **emacs-dir**)
+
+(defun with-emacs.d (&rest args)
+  (mapconcat 'identity (append (list (file-truename **emacs-dir**)) args) "")
+  )
+
 ;;(set-default-font "Consolas-8") ;;default font
 ;;the following is size 7 for me...
 
@@ -60,7 +65,6 @@
 (add-to-list 'load-path "~/.emacs.d/auto-complete-modes/")
 ;(add-to-list 'load-path "~/.emacs.d/auto-complete-modes/ac-slime/")
 (add-to-list 'load-path "~/.emacs.d/mo-git-blame/")
-(add-to-list 'load-path "~/.emacs.d/ext/yasnippet")
 (add-to-list 'load-path "~/.emacs.d/ext")
 (add-to-list 'load-path "~/.emacs.d/ext/restclient")
 (add-to-list 'load-path "~/.emacs.d/ext/editorconfig/")
@@ -76,12 +80,14 @@
 
 
 ;;GLOBAL REQUIREMENTS
-(require 'font-lock) (if (fboundp 'global-font-lock-mode)
-			 (global-font-lock-mode 1))
+(require 'font-lock)
+
+(if (fboundp 'global-font-lock-mode)
+    (global-font-lock-mode 1))
+
 
 (require 'ansi-color)
 (require 'anything)
-(require 'yasnippet)
 (require 'color-theme)
 (require 'ac-emoji)
 (require 'cc-mode)
@@ -213,16 +219,6 @@
 ;;   (lambda () (fci-mode 1)))
 ;; (global-fci-mode 1)
 
-;; YASNIPPET
-(yas/initialize)
-
-(setq yas/snippet-dirs '("~/.emacs.d/ext/yasnippet/snippets" "~/.emacs.d/snippets"))
-
-(setq yas/root-directory '("~/.emacs.d/ext/yasnippet/snippets" "~/.emacs.d/snippets" ))
-
-;; Map `yas/load-directory' to every element
-(mapc 'yas/load-directory yas/root-directory)
-(yas/global-mode 1)
 ;; MODES AUTO DETECT
 ;;(add-to-list 'auto-mode-alist '("\\.js$" . espresso-mode))
 ;;(add-to-list 'a>uto-mode-alist '("\\.json$" . espresso-mode))
@@ -324,7 +320,12 @@
 (load "clang-init.el")
 (load "debug-init.el")
 
+
+;;; Python configuration
 (load "pylookup-init.el")
+
+
+(load "yasnippet-init.el")
 
 
 ;;(load "go-mode-init")
@@ -348,18 +349,20 @@
 
 
 
-(add-hook 'css-mode-hook (lambda ()
-						   (message "css mode hook")
-						   (rainbow-mode t)
-						   ;; (set-face-font 'default "-unknown-Envy Code R-normal-normal-normal-*-13-*-*-*-m-0-iso10646-1")
-						   ;;(setq ac-sources '(ac-source-words-in-buffer ac-source-symbols))))
-;;						   (setq ac-sources '(ac-source-css-keywords))
+(add-hook 'css-mode-hook
+          (lambda ()
+            (message "css mode hook")
+            (rainbow-mode t)
+            ;; (set-face-font 'default "-unknown-Envy Code R-normal-normal-normal-*-13-*-*-*-m-0-iso10646-1")
+            ;;(setq ac-sources '(ac-source-words-in-buffer ac-source-symbols))))
+            ;;						   (setq ac-sources '(ac-source-css-keywords))
 ))
 
 
-(add-hook 'emacs-lisp-mode-hook (lambda ()
-				  (message "emacs lisp mode hook")
-								  ;; (set-face-font 'default "-unknown-Envy Code R-normal-normal-normal-*-13-*-*-*-m-0-iso10646-1")
+(add-hook 'emacs-lisp-mode-hook
+          (lambda ()
+            (message "emacs lisp mode hook")
+            ;; (set-face-font 'default "-unknown-Envy Code R-normal-normal-normal-*-13-*-*-*-m-0-iso10646-1")
 								  ;; (setq ac-sources '(ac-source-words-in-buffer
 								  ;; 					 ac-source-symbols))
 								   ;; (setq ac-sources '(ac-source-abbrev
@@ -370,17 +373,16 @@
 
 
 
-(add-hook 'espresso-mode-hook (lambda ()
-				;; (set-face-font 'default "-unknown-Envy Code R-normal-normal-normal-*-13-*-*-*-m-0-iso10646-1")
-                                (setq espresso-indent-level 2)))
+(add-hook 'espresso-mode-hook
+          (lambda ()
+            ;; (set-face-font 'default "-unknown-Envy Code R-normal-normal-normal-*-13-*-*-*-m-0-iso10646-1")
+            (setq espresso-indent-level 2)))
 
 ;;;(add-hook 'sgml-mode-hook 'zencoding-mode) ;; Auto-start on any markup modes
 
 ;;(add-hook 'python-mode-hook #'(lambda ()
 ;;                                 (define-key py-mode-map (kbd "M-<tab>") 'anything-ipython-complete)))
 
-(add-hook 'ipython-shell-hook (lambda ()
-                                (define-key py-mode-map (kbd "M-<tab>") 'anything-ipython-complete)))
 
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 (add-hook 'after-save-hook 'autocompile)

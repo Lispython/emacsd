@@ -198,56 +198,81 @@
 
 
 (defun ipdb-cleanup ()
-    (interactive)
-    (save-excursion
-      (replace-regexp ".*ipdb.set_trace().*\n" "" nil (point-min) (point-max))
-      ;; (save-buffer)
-      ))
+  (interactive)
+  (save-excursion
+    (replace-regexp ".*ipdb.set_trace().*\n" "" nil (point-min) (point-max))
+    ;; (save-buffer)
+    ))
+
+
+(defun python-mode-hook-callback ()
+  (message "python mode hook")
+  (auto-complete-mode t)
+  (annotate-pdb)
+  (lambda-mode)
+  (ac-ropemacs-initialize)
+  ;;TODO: use virtualenv version
+  ;;(setq pymacs-python-command py-python-command)
+  (set-variable 'py-indent-offset 4)
+  (set-variable 'py-smart-indentation nil)
+  (set-variable 'indent-tabs-mode nil)
+  (font-lock-add-keywords nil '(("\\<\\(FIXME\\|TODO\\|BUG\\):" 1 font-lock-warning-face t))))
 
 
 (use-package python-mode
-  :bind (("C-c C-t" . 'python-add-breakpoint))
-  :bind-keymap (("C-c C-t" . 'python-add-breakpoint))
+  :bind (("C-c C-t" . python-add-breakpoint))
+  :bind-keymap (("C-c C-t" . python-add-breakpoint))
   :init (progn (add-hook 'python-mode-hook 'annotate-pdb)
-               (message "Use package python-mode init")
-               )
-  )
+               (message "Use package python-mode init"))
+  :config (progn (define-key py-mode-map (kbd "C-c C-t") 'python-add-breakpoint)
+                 (setq ipython-command "~/.emacs.d/venv/bin/ipython")
+                 (setq ipython-completion-command-string "print(';'.join(get_ipython().Completer.complete('%s')[1])) #PYTHON-MODE SILENT\n")
+                 (setq py-shell-name "~/.emacs.d/venv/bin/ipython")
+
+                 ;; (require 'pyenv-mode)
+                 ;; (require 'pyenv-mode-auto)
+
+                 ;; KEY MAPS DEFINITIONS
+                 ;;(define-key py-mode-map (kbd "C-c C-t") 'python-add-breakpoint)
+                 (define-key py-mode-map "\t" 'ryan-python-tab)
+                 (define-key py-mode-map (kbd "RET") 'newline-and-indent)
+                 ;;(define-key py-mode-map (kbd "C-c l") 'pylookup-lookup)
+                                        ;(define-key py-mode-map [tab] 'yas/expand)
+                 (define-key py-mode-map "\t" 'smart-tab)
+                 )
+
+  :hook (python-mode . python-mode-hook-callback))
 
 
 
-;; KEY MAPS DEFINITIONS
-;;(define-key py-mode-map (kbd "C-c C-t") 'python-add-breakpoint)
-(define-key py-mode-map "\t" 'ryan-python-tab)
-(define-key py-mode-map (kbd "RET") 'newline-and-indent)
-;;(define-key py-mode-map (kbd "C-c l") 'pylookup-lookup)
-;(define-key py-mode-map [tab] 'yas/expand)
-(define-key py-mode-map "\t" 'smart-tab)
+
 
 ;; HOOKS
-(add-hook 'python-mode-hook
-          (lambda ()
-            (message "python mode hook")
-            (auto-complete-mode t)
-            (annotate-pdb)
-            (lambda-mode)
-            (flycheck-mode)
-            (ac-ropemacs-initialize)
-            ;;TODO: use virtualenv version
-            ;;(setq pymacs-python-command py-python-command)
-            (set-variable 'py-indent-offset 4)
-            (set-variable 'py-smart-indentation nil)
-            (set-variable 'indent-tabs-mode nil)
-            (font-lock-add-keywords nil '(("\\<\\(FIXME\\|TODO\\|BUG\\):" 1 font-lock-warning-face t)))
-            ))
+;; (add-hook 'python-mode-hook
+;;           (lambda ()
+;;             (message "python mode hook")
+;;             (auto-complete-mode t)
+;;             (annotate-pdb)
+;;             (lambda-mode)
+;;             (flycheck-mode)
+;;             (ac-ropemacs-initialize)
+;;             ;;TODO: use virtualenv version
+;;             ;;(setq pymacs-python-command py-python-command)
+;;             (set-variable 'py-indent-offset 4)
+;;             (set-variable 'py-smart-indentation nil)
+;;             (set-variable 'indent-tabs-mode nil)
+;;             (font-lock-add-keywords nil '(("\\<\\(FIXME\\|TODO\\|BUG\\):" 1 font-lock-warning-face t)))
+;;             ))
 
-(add-hook 'python-mode-hook
-          (lambda ()
-            (require 'sphinx-doc)
-            (sphinx-doc-mode t)
-            ))
+;;; TODO: enable
+;; (add-hook 'python-mode-hook
+;;           (lambda ()
+;;             (require 'sphinx-doc)
+;;             (sphinx-doc-mode t)
+;;             ))
 ;;(add-hook 'find-file-hook 'flymake-find-file-hook)
 
-(setq virtualenv-workon-home (getenv "PYENV_WORKON_HOME"))
+;;(setq virtualenv-workon-home (getenv "PYENV_WORKON_HOME"))
 
 ;; Python or python mode?
 (eval-after-load 'python
@@ -269,9 +294,9 @@
   )
 
 
-(setq pyenv-show-active-python-in-modeline t)
+;;(setq pyenv-show-active-python-in-modeline t)
 
-(load "python-mode-env.el")
+;;(load "python-mode-env.el")
 
 (provide 'python-mode-init)
 ;;; python-mode-init.el ends here

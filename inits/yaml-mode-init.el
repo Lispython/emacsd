@@ -1,6 +1,20 @@
-(add-to-list 'load-path (concat **emacs-ext-dir** "yaml-mode/"))
+;;; yaml-mode-init.el ---
 
-(require 'yaml-mode)
-(add-to-list 'auto-mode-alist '("\\.yml$" . yaml-mode))
 
-(message "yaml-mode init loaded")
+;;; Commentary:
+;;
+
+;;; Code:
+
+(use-package 'yaml-mode
+
+  :config (progn
+            (add-to-list 'auto-mode-alist '("\\.yml$" . yaml-mode))
+            (add-hook 'yaml-mode-hook
+                      '(lambda ()
+                         (define-key yaml-mode-map "\C-m" 'newline-and-indent)))))
+
+
+(provide 'yaml-mode-init)
+
+;;; yaml-mode-init.el ends here

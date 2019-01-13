@@ -59,7 +59,6 @@
 (use-package pylookup
   :load-path (**pylookup-dir**)
   :bind (("C-c l" . pylookup-lookup))
-  :functions pylookup-exec-lookup
   :init (progn (message "Use package pylookup init")
 
                (setq pylookup-program
