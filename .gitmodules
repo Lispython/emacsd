@@ -7,9 +7,6 @@
 [submodule "swank-js"]
 	path = swank-js
 	url = https://github.com/ivan4th/swank-js.git
-[submodule "slime"]
-	path = slime
-	url = https://github.com/Lispython/slime.git
 [submodule "auto-complete-modes/ac-slime"]
 	path = auto-complete-modes/ac-slime
 	url = https://github.com/Lispython/ac-slime.git
@@ -28,10 +25,6 @@
 [submodule "ext/org-mode"]
 	path = ext/org-mode
 	url = git@github.com:Lispython/org-mode.git
-	branch = master
-[submodule "ext/remember"]
-	path = ext/remember
-	url = git://repo.or.cz/remember-el.git
 	branch = master
 [submodule "ext/less-css-mode"]
 	path = ext/less-css-mode

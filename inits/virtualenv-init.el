@@ -1,7 +1,7 @@
 ;;; Setup ENV
 
-(setenv "PYMACS_PYTHON" (concat **emacs-dir** "venv/bin/python"))
-(defconst **venv-dir** (concat **emacs-dir** "venv"))
+;;(setenv "PYMACS_PYTHON" (concat **emacs-dir** "venv/bin/python"))
+;;(defconst **venv-dir** (concat **emacs-dir** "venv"))
 
 
 ;; (defun activate-virtualenv (dir)

@@ -1,3 +1,10 @@
+;;; markdown-init.el ---
+
+
+;;; Commentary:
+;;
+
+;;; Code:
 
 (use-package markdown-mode
   :ensure t
@@ -12,4 +19,5 @@
 (message "markdown init loaded")
 
 (provide 'markdown-init)
-;;; markdown-init.el ends
+
+;;; markdown-init.el ends here

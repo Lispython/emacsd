@@ -24,7 +24,7 @@
 
 
 
-(add-to-list 'load-path **emacs-dir**)
+;; (add-to-list 'load-path **emacs-dir**)
 
 
 (defun with-emacs.d (&rest args)
