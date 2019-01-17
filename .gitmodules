@@ -8,7 +8,3 @@
 [submodule "snippets/text-mode/go-mode"]
         path = snippets/text-mode/go-mode
         url = https://github.com/Lispython/go-mode-yasnippets.git
-
-[submodule "ext/less-css-mode"]
-	path = ext/less-css-mode
-	url = https://github.com/purcell/less-css-mode.git

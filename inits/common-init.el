@@ -20,20 +20,22 @@
 
 (use-package bm)
 
+
+(global-unset-key (kbd "C-3"))
+(global-set-key (kbd "C-3") nil)
+
+
 (use-package swiper-helm
 
   :config (progn
             (with-temp-message "Setup swiper helm")
-            (global-unset-key (kbd "C-3"))
-            (global-set-key (kbd "C-3") nil)
             (global-set-key (kbd "C-3 h") 'swiper-helm)))
 
 (use-package swiper
 
   :config (progn
             (with-temp-message "Setup swiper")
-            (global-unset-key (kbd "C-3"))
-            (global-set-key (kbd "C-3") nil)
+
             (setq ivy-count-format "(%d/%d) ")
             (global-set-key (kbd "C-3 s") 'swiper)))
 
