@@ -1,9 +1,6 @@
 [submodule "emacs-jabber"]
 	path = emacs-jabber
 	url = git://catap.ru/emacs-jabber/emacs-jabber.git
-[submodule "virtualenv"]
-	path = virtualenv
-	url = https://github.com/aculich/virtualenv.el.git
 [submodule "swank-js"]
 	path = swank-js
 	url = https://github.com/ivan4th/swank-js.git
@@ -16,13 +13,7 @@
 [submodule "jslint"]
 	path = jslint
 	url = https://github.com/douglascrockford/JSLint.git
-[submodule "ext/org-readme"]
-	path = ext/org-readme
-	url = https://github.com/mlf176f2/org-readme.git
-[submodule "ext/org-mode"]
-	path = ext/org-mode
-	url = git@github.com:Lispython/org-mode.git
-	branch = master
+
 [submodule "ext/less-css-mode"]
 	path = ext/less-css-mode
 	url = https://github.com/purcell/less-css-mode.git
