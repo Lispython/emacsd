@@ -3,6 +3,7 @@ clean-elc:
 	find . -name '*.pyc' -exec rm -f {} +
 	find . -name '*.pyo' -exec rm -f {} +
 	find . -name '*.elc' -exec rm -f {} +
+	find . -name '*.el~' -exec rm -f {} +
 
 env:
 	@echo "Build environment"
@@ -11,6 +12,7 @@ env:
 
 compile:
 	@echo "Build elc"
+	emacs --batch --eval '(byte-recompile-directory "~/.emacs.d")'
 
 activate:
 	. venv/bin/activate

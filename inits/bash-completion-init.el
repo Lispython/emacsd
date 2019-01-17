@@ -1,3 +1,10 @@
+;;; bash-completion-init.el ---
+
+;;; Commentary:
+;;
+
+;;; Code:
+
 (add-to-list 'load-path (concat **emacs-ext-dir** "emacs-bash-completion"))
 
 (autoload 'bash-completion-dynamic-complete
@@ -19,3 +26,7 @@
   'bash-completion-dynamic-complete)
 
 (message "bash-completion loaded")
+
+(provide 'bash-completion-init)
+
+;;; bash-completion-init.el ends here

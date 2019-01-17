@@ -12,7 +12,7 @@
   ;;; yas/ replaced to yas-
   :config (progn
             (message "Loading yasnippet config")
-            (yas/initialize)
+            (yas-initialize)
 
             ;;(setq yas/snippet-dirs '("~/.emacs.d/ext/yasnippet/snippets" "~/.emacs.d/snippets"))
             ;;(setq yas/snippet-dirs '("~/.emacs.d/ext/yasnippet/snippets" "~/.emacs.d/snippets"))
@@ -22,7 +22,10 @@
 
             ;; Map `yas/load-directory' to every element
             ;;(mapc 'yas/load-directory yas/root-directory)
-            (yas-global-mode 1)))
+            (yas-global-mode 1)
+            (require 'react-snippets)
+
+            ))
 
 
 (provide 'yasnippet-init)

@@ -17,6 +17,10 @@
 (add-to-list 'package-archives
              '("melpa" . "https://melpa.org/packages/"))
 
+(add-to-list 'package-archives
+             '("org" . "https://orgmode.org/elpa/") t)
+
+
 (when (< emacs-major-version 24)
   ;; For important compatibility libraries like cl-lib
   (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/")))
@@ -262,6 +266,18 @@
 (global-set-key (kbd "C-c h r") 'hide-region-hide)
 (global-set-key (kbd "C-c h u") 'hide-region-unhide)
 
+;;; Показывает буфер с найденными совпадениями
+(defun occur-selection ()
+  (interactive)
+  (when (region-active-p)
+    (let (deactivate-mark)
+      (occur (regexp-quote (buffer-substring (region-beginning) (region-end)))))))
+
+
+(global-set-key (kbd "C-c o") 'occur-selection)
+
+
+
 ;;auto complete
 ;;(define-key ac-complete-mode-map "\t" 'auto-complete)
 ;;(define-key ac-mode-map "\r" nil)
@@ -332,6 +348,11 @@
 
 (load "editorconfig-init.el")
 (load "highlight-symbol.el")
+
+(load "multiple-cursors-init.el")
+(load "common-init.el")
+
+(load "magit-init.el")
 
 ;;(load "go-mode-init")
 ;;(load "recompiler")

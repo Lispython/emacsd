@@ -224,7 +224,7 @@
   :bind-keymap (("C-c C-t" . python-add-breakpoint))
   :init (progn (add-hook 'python-mode-hook 'annotate-pdb)
                (message "Use package python-mode init"))
-  :config (progn (define-key py-mode-map (kbd "C-c C-t") 'python-add-breakpoint)
+  :config (progn (define-key python-mode-map (kbd "C-c C-t") 'python-add-breakpoint)
                  (setq ipython-command "~/.emacs.d/venv/bin/ipython")
                  (setq ipython-completion-command-string "print(';'.join(get_ipython().Completer.complete('%s')[1])) #PYTHON-MODE SILENT\n")
                  (setq py-shell-name "~/.emacs.d/venv/bin/ipython")
@@ -233,12 +233,12 @@
                  ;; (require 'pyenv-mode-auto)
 
                  ;; KEY MAPS DEFINITIONS
-                 ;;(define-key py-mode-map (kbd "C-c C-t") 'python-add-breakpoint)
-                 (define-key py-mode-map "\t" 'ryan-python-tab)
-                 (define-key py-mode-map (kbd "RET") 'newline-and-indent)
+                 ;;(define-key python-mode-map (kbd "C-c C-t") 'python-add-breakpoint)
+                 (define-key python-mode-map "\t" 'ryan-python-tab)
+                 (define-key python-mode-map (kbd "RET") 'newline-and-indent)
                  ;;(define-key py-mode-map (kbd "C-c l") 'pylookup-lookup)
-                                        ;(define-key py-mode-map [tab] 'yas/expand)
-                 (define-key py-mode-map "\t" 'smart-tab)
+                                        ;(define-key python-mode-map [tab] 'yas/expand)
+                 (define-key python-mode-map "\t" 'smart-tab)
                  )
 
   :hook (python-mode . python-mode-hook-callback))

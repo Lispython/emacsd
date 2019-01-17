@@ -1,16 +1,23 @@
+;;; org-mode-init.el --- 
 
+
+;;; Code:
 
 (defconst *org-root* "~/Dropbox/.org/"
-  "Own org directory")
+  "Own org directory.")
 
-(add-to-list 'load-path (concat **emacs-ext-dir** "org-mode/lisp"))
-(add-to-list 'load-path (concat **emacs-ext-dir** "org-mode/contrib/lisp"))
+;;(add-to-list 'load-path (concat **emacs-ext-dir** "org-mode/lisp"))
+;;(add-to-list 'load-path (concat **emacs-ext-dir** "org-mode/contrib/lisp"))
 ;;; Remember mode
 ;;(add-to-list 'load-path (concat **emacs-ext-dir** "org-mode/remember"))
 
 ;; 
 ;; (require 'remember)
 ;; (require 'org-remember)
+
+
+;;; Commentary:
+;; 
 
 (require 'org-install)
 (require 'ob-tangle)
@@ -118,7 +125,7 @@
 (org-babel-do-load-languages
  'org-babel-load-languages
  '((emacs-lisp . t)
-   (sh . t)
+   ;;(sh . t)
    (R . t)
    (C . t)
    (awk . t)
@@ -159,14 +166,6 @@
 
 
 
+(provide 'org-mode-init)
 
-
-
-
-
-
-
-
-
-
-
+;;; org-mode-init.el ends here

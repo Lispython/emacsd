@@ -26,3 +26,8 @@ node_modules/*
 
 elpa/*
 url/*
+
+
+.litable-lists.el
+.mc-lists.el
+recentf
