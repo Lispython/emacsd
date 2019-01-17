@@ -12,7 +12,7 @@ env:
 
 compile:
 	@echo "Build elc"
-	emacs --batch --eval '(byte-recompile-directory "~/.emacs.d")'
+	emacs --batch --eval '(byte-recompile-directory "~/.emacs.d" 0 t)'
 
 activate:
 	. venv/bin/activate
