@@ -16,9 +16,6 @@
 [submodule "jslint"]
 	path = jslint
 	url = https://github.com/douglascrockford/JSLint.git
-[submodule "jshint-mode"]
-	path = jshint-mode
-	url = https://github.com/daleharvey/jshint-mode.git
 [submodule "ext/org-readme"]
 	path = ext/org-readme
 	url = https://github.com/mlf176f2/org-readme.git
