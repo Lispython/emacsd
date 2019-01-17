@@ -4,15 +4,10 @@
 [submodule "swank-js"]
 	path = swank-js
 	url = https://github.com/ivan4th/swank-js.git
-[submodule "auto-complete-modes/ac-slime"]
-	path = auto-complete-modes/ac-slime
-	url = https://github.com/Lispython/ac-slime.git
+
 [submodule "snippets/text-mode/go-mode"]
         path = snippets/text-mode/go-mode
         url = https://github.com/Lispython/go-mode-yasnippets.git
-[submodule "jslint"]
-	path = jslint
-	url = https://github.com/douglascrockford/JSLint.git
 
 [submodule "ext/less-css-mode"]
 	path = ext/less-css-mode
