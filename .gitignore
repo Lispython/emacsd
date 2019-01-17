@@ -31,3 +31,5 @@ url/*
 .litable-lists.el
 .mc-lists.el
 recentf
+eshell/*
+games/*
