@@ -1,6 +1,3 @@
-[submodule "emacs-jabber"]
-	path = emacs-jabber
-	url = git://catap.ru/emacs-jabber/emacs-jabber.git
 [submodule "swank-js"]
 	path = swank-js
 	url = https://github.com/ivan4th/swank-js.git
