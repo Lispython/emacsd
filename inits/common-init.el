@@ -7,8 +7,8 @@
 
 ;;; Code:
 
-(use-package multiple-cursors
 
+(use-package multiple-cursors
   :config (progn
             (global-set-key (kbd "C-S-c C-S-c") 'mc/edit-lines)
             (global-set-key (kbd "C->") 'mc/mark-next-like-this)
@@ -52,6 +52,23 @@
             (setq enable-recursive-minibuffers t)
 
             (global-set-key (kbd "C-c C-r") 'ivy-resume)
+            (global-set-key (kbd "C-c C-o") 'ivy-occur)
+
+            (global-set-key (kbd "C-c C-r") 'ivy-resume)
+            (global-set-key (kbd "<f6>") 'ivy-resume)
+            (global-set-key (kbd "M-x") 'counsel-M-x)
+            (global-set-key (kbd "C-x C-f") 'counsel-find-file)
+            (global-set-key (kbd "<f1> f") 'counsel-describe-function)
+            (global-set-key (kbd "<f1> v") 'counsel-describe-vaiable)
+            (global-set-key (kbd "<f1> l") 'counsel-find-library)
+            (global-set-key (kbd "<f2> i") 'counsel-info-lookup-symbol)
+            (global-set-key (kbd "<f2> u") 'counsel-unicode-char)
+            (global-set-key (kbd "C-c g") 'counsel-git)
+            (global-set-key (kbd "C-c j") 'counsel-git-grep)
+            (global-set-key (kbd "C-c k") 'counsel-ag)
+            (global-set-key (kbd "C-x l") 'counsel-locate)
+            (global-set-key (kbd "C-S-o") 'counsel-rhythmbox)
+            (define-key minibuffer-local-map (kbd "C-r") 'counsel-minibuffer-history)
 
             (setq ivy-re-builders-alist
                   '((read-file-name-internal . ivy--regex-fuzzy)
@@ -65,6 +82,8 @@
             (ivy-rich-mode 1)
             (setq ivy-rich-path-style 'abbrev)
             ))
+
+
 
 (provide 'common-init)
 

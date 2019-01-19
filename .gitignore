@@ -33,3 +33,6 @@ url/*
 recentf
 eshell/*
 games/*
+
+autosave/*
+backup/*
