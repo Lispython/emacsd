@@ -1,3 +1,6 @@
+;;; emacs-osx.el ---
+;;; Code:
+
 (setq debug-on-error t)
 
 (defconst **emacs-dir** "~/.emacs.d/"
@@ -6,17 +9,30 @@
 (defconst **emacs-ext-dir** (concat **emacs-dir** "ext/")
   "Directory that store third party modes/etc/")
 
-(defconst **themes-dir** (concat **emacs-dir** "themes/")
-  "Directory than store editor themes")
-
 (defconst **docker-run** "docker run --rm -i emacsd")
 
 (defconst **docker-run-base** "/usr/local/bin/docker run -i --rm")
 
+
+(defvar backup-dir (expand-file-name "~/.emacs.d/backup/"))
+(defvar autosave-dir (expand-file-name "~/.emacs.d/autosave/"))
+
+;; Don't clutter up directories with files~
+(setq backup-directory-alist (list (cons ".*" backup-dir)))
+
+;; Don't clutter with #files either
+
+(setq auto-save-list-file-prefix autosave-dir)
+(setq auto-save-file-name-transforms `((".*" ,autosave-dir t)))
+
+
+
+;;; Commentary:
+;;
+
 (require 'package) ;; You might already have this line
 (add-to-list 'package-archives
              '("melpa" . "https://melpa.org/packages/"))
-
 (add-to-list 'package-archives
              '("org" . "https://orgmode.org/elpa/") t)
 
@@ -27,13 +43,8 @@
 (package-initialize) ;; You might already have this line
 
 
-
-;; (add-to-list 'load-path **emacs-dir**)
-
-
 (defun with-emacs.d (&rest args)
   (mapconcat 'identity (append (list (file-truename **emacs-dir**)) args) ""))
-
 
 
 
@@ -51,35 +62,15 @@
 
 ;;; Remote file editing via ssh
 (add-to-list 'load-path "~/.emacs.d/tramp-files/lisp")
-;(add-to-list 'load-path "~/.emacs.d/slime/")
-;(add-to-list 'load-path "~/.emacs.d/slime/contrib/")
-(add-to-list 'load-path "~/.emacs.d/js-swank/")
-(add-to-list 'load-path "~/.emacs.d/jshint-mode/")
 
-
-;;(add-to-list 'load-path "~/.emacs.d/virtualenv/")
-;;add jabber mode
-(add-to-list 'load-path "~/.emacs.d/emacs-jabber/")
-
-;;(add-to-list 'load-path "~/.emacs.d/ext/python-mode/")
-
-(add-to-list 'load-path (concat **emacs-ext-dir** "go-mode"))
 
 ;;AUTO COMPLETE
-(add-to-list 'load-path "~/.emacs.d/ext/auto-complete/lib/popup")
-(add-to-list 'load-path "~/.emacs.d/ext/auto-complete/lib/fuzzy")
-(add-to-list 'load-path "~/.emacs.d/ext/auto-complete/")
-(add-to-list 'load-path "~/.emacs.d/auto-complete-modes/")
 ;(add-to-list 'load-path "~/.emacs.d/auto-complete-modes/ac-slime/")
-(add-to-list 'load-path "~/.emacs.d/mo-git-blame/")
 (add-to-list 'load-path "~/.emacs.d/ext")
-(add-to-list 'load-path "~/.emacs.d/ext/restclient")
-(add-to-list 'load-path "~/.emacs.d/ext/editorconfig/")
-(add-to-list 'load-path "~/.emacs.d/ext/auto-highlight-symbol/")
 
-;;(add-to-list 'load-path "~/.emacs.d/ext/auto-complete/ext/")
-
-(add-to-list 'load-path "~/.emacs.d/magit/")
+;;; Copy-paste of list extensions
+(add-to-list 'load-path "~/.emacs.d/lisp/")
+(add-to-list 'load-path "~/.emacs.d/site-lisp/")
 (add-to-list 'load-path "~/.emacs.d/inits/")
 
 
@@ -93,76 +84,15 @@
     (global-font-lock-mode 1))
 
 
-(require 'ansi-color)
-(require 'anything)
-(require 'color-theme)
-(require 'ac-emoji)
-(require 'cc-mode)
-
-;;(add-to-list 'custom-theme-load-path **themes-dir**)
-
-;; (mapc 'require '(tramp
-;; 		 auto-complete-config
-;; 		 ac-slime
-;; 		 ansi-color
-;; 		 ))
-
-(require 'tramp)
-(require 'auto-complete-config)
-(require 'ansi-color)
-
-
-;;MODES
-(require 'go-mode-load)
-(require 'docker)
-(require 'css-mode)
-(require 'js2-mode)
-(require 'espresso)
-(require 'django-html-mode)
-(require 'regex-tool)
-(require 'slime)
-(require 'restclient)
-;;(require 'magit)
-;(require 'jabber-autoloads)
-;;;(require 'python-mode)
-;;;(require 'ecb)
-;;;(require 'zencoding-mode)
-(require 'rainbow-mode)
-(require 'http-twiddle)
-(require 'fill-column-indicator)
-
-;;;PYTHON REQUIREMENTS
-(require 'lambda-mode)
-(require 'python-pep8)
-(require 'python-pylint)
-(require 'hyperspec)
-;;(require 'pymacs)
-(require 'hide-region)
-(require 'scheme48)
-(require 'slime-scheme)
-;;(require 'go-autocomplete)
-;;(require 'flymake-jshint)
-
-(require 'powerline)
-
-(require 'multiple-cursors)
-
-
-;; (require 'pyenv-mode)
-;; (pyenv-mode)
-
-;; (require 'pyenv-mode-auto)
-
-
-;;(require 'flycheck)
-;;(global-flycheck-mode)
 
 ;;SET VARIABLES OF EMACS
-(scroll-bar-mode nil) ;hide scrroll bar
-(scroll-bar-mode -1)
 (menu-bar-mode nil) ;this too
 (tool-bar-mode nil) ;hide tool bar too
 (tool-bar-mode -1)
+
+(scroll-bar-mode nil) ;hide scrroll bar
+(scroll-bar-mode -1)
+
 ;; Turn on column number mode
 (column-number-mode t) ;; but this one is good
 ;;(ido-mode t)
@@ -178,12 +108,51 @@
 (desktop-save-mode t)
 (modify-coding-system-alist 'file ".*" 'utf-8) ;; fuck cp1251 and koi-8
 
-;;; Current line hightlight
-(global-hl-line-mode t)
-;(set-face-background 'hl-line "#330")  ;; Emacs 22 Only
+
+
+(require 'anything)
+
+
+(require 'ac-emoji)
+(require 'cc-mode)
+
+(load "ui-init.el")
+
+;;(add-to-list 'custom-theme-load-path **themes-dir**)
+
+;; (mapc 'require '(tramp
+;; 		 auto-complete-config
+;; 		 ac-slime
+;; 		 ansi-color
+;; 		 ))
+
+(require 'tramp)
+(require 'auto-complete-config)
+
+
+;;MODES
+
+(require 'regex-tool)
+
+(use-package rainbow-mode)
+
+
+
+
+;;(require 'pymacs)
+(require 'hide-region)
+(require 'scheme48)
+
+;;;PYTHON REQUIREMENTS
+
+
+;;(require 'hyperspec)
+
+
+
 
 ; Makes clipboard work
-(setq x-select-enable-clipboard t)
+(setq select-enable-clipboard t)
 ;;(setq interprogram-paste-function 'x-cut-buffer-or-selection-value)
 ;;for emacs 2.4
 (setq interprogram-paste-function 'x-selection-value)
@@ -192,12 +161,7 @@
 ;; enable horizontal scrolling
 ;;(hscroll-global-mode t)
 
-;;THEMES
-(setq color-theme-is-global t)
-(color-theme-initialize)
-(color-theme-solarized t)
-;;(color-theme-solarized t)
-;;(load-theme 'solarized t)
+
 
 
 ;;;(color-theme-tango)
@@ -209,37 +173,11 @@
 (setq browse-url-browser-function 'browse-url-default-macosx-browser)
 
 
-(powerline-default-theme)
 
 
 ;;MODES VARIABLES
 (global-auto-complete-mode t)
 ;;;(global-font-lock-mode 1)
-
-;;FILL
-
-(setq fci-rule-width 1)
-;;(setq fci-rule-color "darkblue")
-(setq fci-rule-column 80)
-
-;; (define-globalized-minor-mode global-fci-mode fci-mode
-;;   (lambda () (fci-mode 1)))
-;; (global-fci-mode 1)
-
-;; MODES AUTO DETECT
-;;(add-to-list 'auto-mode-alist '("\\.js$" . espresso-mode))
-;;(add-to-list 'a>uto-mode-alist '("\\.json$" . espresso-mode))
-(autoload 'js2-mode "js2-mode" nil t)
-(add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
-(add-to-list 'auto-mode-alist '("\\.jsx$" . espresso-mode))
-(add-to-list 'auto-mode-alist '("\\.json$" . js2-mode))
-
-(add-to-list 'auto-mode-alist '("\\.html$" . django-html-mode))
-(add-to-list 'auto-mode-alist '("\\.css$" . css-mode))
-(add-to-list 'auto-mode-alist '("\\.less$" . css-mode))
-
-
-
 
 
 ;; AUTO COMPLETE CONFIGS
@@ -266,15 +204,6 @@
 (global-set-key (kbd "C-c h r") 'hide-region-hide)
 (global-set-key (kbd "C-c h u") 'hide-region-unhide)
 
-;;; Показывает буфер с найденными совпадениями
-(defun occur-selection ()
-  (interactive)
-  (when (region-active-p)
-    (let (deactivate-mark)
-      (occur (regexp-quote (buffer-substring (region-beginning) (region-end)))))))
-
-
-(global-set-key (kbd "C-c o") 'occur-selection)
 
 
 
@@ -283,10 +212,10 @@
 ;;(define-key ac-mode-map "\r" nil)
 
 
-(when (require 'anything-show-completion nil t)
-  (use-anything-show-completion
-   'anything-ipython-complete
-   '(length initial-pattern)))
+;; (when (require 'anything-show-completion nil t)
+;;   (use-anything-show-completion
+;;    'anything-ipython-complete
+;;    '(length initial-pattern)))
 
 
 (defun hyperspec-lookup (&optional symbol-name)
@@ -354,7 +283,15 @@
 
 (load "magit-init.el")
 
-;;(load "go-mode-init")
+(load "dired-init.el")
+
+(load "docker-init.el")
+
+(load "company-mode-init.el")
+
+(load "go-mode-init.el")
+
+(load "http-init.el")
 ;;(load "recompiler")
 
 
@@ -385,17 +322,6 @@
 ))
 
 
-(add-hook 'emacs-lisp-mode-hook
-          (lambda ()
-            (message "emacs lisp mode hook")
-            ;; (set-face-font 'default "-unknown-Envy Code R-normal-normal-normal-*-13-*-*-*-m-0-iso10646-1")
-								  ;; (setq ac-sources '(ac-source-words-in-buffer
-								  ;; 					 ac-source-symbols))
-								   ;; (setq ac-sources '(ac-source-abbrev
-								   ;; 					 ac-source-words-in-buffer
-								   ;; 					 ac-source-files-in-current-dir
-								   ;; 					 ac-source-symbols ac-emacs-lisp-sources))
-								  ))
 
 
 
@@ -418,3 +344,7 @@
 (autoload 'mo-git-blame-current "mo-git-blame" nil t)
 
 (provide 'emacs)
+
+(provide 'emacs-osx)
+
+;;; emacs-osx.el ends here

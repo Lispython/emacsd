@@ -15,6 +15,11 @@
   "Join all STRINGS using SEPARATOR."
   (mapconcat 'identity strings separator))
 
+
+(require 'lambda-mode)
+(require 'python-pep8)
+(require 'python-pylint)
+
 ;;(setq py-python-command-args '("-colors" "Linux"))
 ;;(setq py-python-command "/var/github/python2.6/bin/ipython")
 ;;(setq py-python-command "/var/github/python2.6/bin/python2.7")
@@ -216,7 +221,8 @@
   (set-variable 'py-indent-offset 4)
   (set-variable 'py-smart-indentation nil)
   (set-variable 'indent-tabs-mode nil)
-  (font-lock-add-keywords nil '(("\\<\\(FIXME\\|TODO\\|BUG\\):" 1 font-lock-warning-face t))))
+  (font-lock-add-keywords nil '(("\\<\\(FIXME\\|TODO\\|BUG\\):" 1 font-lock-warning-face t)))
+  )
 
 
 (use-package python-mode
@@ -242,6 +248,7 @@
                  )
 
   :hook (python-mode . python-mode-hook-callback))
+
 
 
 

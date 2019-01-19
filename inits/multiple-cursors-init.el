@@ -1,7 +1,8 @@
-;;; multiple-cursors-ini.el ---
+;;; multiple-cursors-init.el ---
 
 ;;; Commentary:
 ;;
+;;; Code:
 
 (defun eval-and-replace ()
   "Replace the preceding sexp with its value."

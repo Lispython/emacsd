@@ -1,3 +1,10 @@
+(require 'css-mode)
+(require 'js2-mode)
+(require 'espresso)
+(require 'django-html-mode)
+
+
+
 ;; (defun flymake-jslint-init ()
 ;;   (let* ((temp-file (flymake-init-create-temp-buffer-copy
 ;; 		     'flymake-create-temp-inplace))
@@ -146,6 +153,22 @@
 ;; ;; 						   (slime-js-minor-mode t)))
 
 ;; (global-set-key [f5] 'slime-js-reload)
+
+
+
+;; MODES AUTO DETECT
+;;(add-to-list 'auto-mode-alist '("\\.js$" . espresso-mode))
+;;(add-to-list 'a>uto-mode-alist '("\\.json$" . espresso-mode))
+(autoload 'js2-mode "js2-mode" nil t)
+(add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
+(add-to-list 'auto-mode-alist '("\\.jsx$" . espresso-mode))
+(add-to-list 'auto-mode-alist '("\\.json$" . js2-mode))
+
+(add-to-list 'auto-mode-alist '("\\.html$" . django-html-mode))
+(add-to-list 'auto-mode-alist '("\\.css$" . css-mode))
+(add-to-list 'auto-mode-alist '("\\.less$" . css-mode))
+
+
 
 
 (add-hook 'js-mode-hook 'js2-minor-mode)

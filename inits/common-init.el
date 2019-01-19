@@ -84,6 +84,16 @@
             ))
 
 
+;;; Показывает буфер с найденными совпадениями
+(defun occur-selection ()
+  (interactive)
+  (when (region-active-p)
+    (let (deactivate-mark)
+      (occur (regexp-quote (buffer-substring (region-beginning) (region-end)))))))
+
+
+(global-set-key (kbd "C-c o") 'occur-selection)
+
 
 (provide 'common-init)
 

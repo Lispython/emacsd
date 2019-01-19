@@ -1,8 +1,13 @@
 ;;(add-hook 'inferior-lisp-mode-hook (lambda () (inferior-slime-mode t)))
 ;; Optionally, specify the lisp program you are using. Default is "lisp"
 
-(require 'ac-slime)
+;;(require 'ac-slime)
 
+
+(use-package slime)
+
+
+(use-package slime-scheme)
 
 ;;LISP-MODE
 ;;Common lisp compiler
@@ -45,8 +50,12 @@
                slime-tramp
                slime-indentation
                slime-autodoc
+               slime-company
                ;;						   slime-js))
 ))
+
+;;(setq slime-contribs '(slime-fancy))
+
 
 ;; ;; ;; Set your lisp system and, optionally, some contribs
 ;;  ;; (setq inferior-lisp-program "/opt/sbcl/bin/sbcl")

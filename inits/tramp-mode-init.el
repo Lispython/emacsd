@@ -1,11 +1,15 @@
-(message "tramp initialization")
+;;; tramp-mode-init.el ---
 
-(setq tramp-default-method "ssh")
+;;; Commentary:
+;;
 
-;; HOOKS
+;;; Code:
 
-(add-hook 'tramp-mode-hook
-	  (lambda ()
-	    (message "tramp hook")))
+(use-package tramp
+  :init
+  (setq tramp-default-method "ssh"))
 
-(message "tramp mode init loaded")
+
+(provide 'tramp-mode-init)
+
+;;; tramp-mode-init.el ends here
