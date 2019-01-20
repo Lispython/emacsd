@@ -6,7 +6,10 @@
 ;;
 
 (require 'http-twiddle)
-(require 'restclient)
+
+(use-package restclient
+  ;; :config (add-to-list 'company-backends 'company-restclient)
+  )
 
 ;;; Code:
 

@@ -6,11 +6,18 @@
 ;;; Code:
 
 
-(use-package go-mode
+(use-package go-mode)
 
+
+(use-package company-go
   :config (progn
-            (add-hook 'go-mode-hook (lambda ()
-			              (message "GO mode hook")))))
+            (add-hook 'go-mode-hook
+                      (lambda ()
+                        (set (make-local-variable 'company-backends) '(company-go))
+                        (company-mode)))
+                  ))
+
+
 
 (provide 'go-mode-init)
 

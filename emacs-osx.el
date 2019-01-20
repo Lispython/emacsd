@@ -25,8 +25,6 @@
 (setq auto-save-list-file-prefix autosave-dir)
 (setq auto-save-file-name-transforms `((".*" ,autosave-dir t)))
 
-
-
 ;;; Commentary:
 ;;
 
@@ -109,11 +107,8 @@
 (modify-coding-system-alist 'file ".*" 'utf-8) ;; fuck cp1251 and koi-8
 
 
-
 (require 'anything)
 
-
-(require 'ac-emoji)
 (require 'cc-mode)
 
 (load "ui-init.el")
@@ -173,33 +168,6 @@
 (setq browse-url-browser-function 'browse-url-default-macosx-browser)
 
 
-
-
-;;MODES VARIABLES
-(global-auto-complete-mode t)
-;;;(global-font-lock-mode 1)
-
-
-;; AUTO COMPLETE CONFIGS
-(add-to-list 'ac-dictionary-directories "~/.emacs.d/dict/")
-(ac-config-default)
-(setq ac-auto-start 1)
-(setq ac-auto-show-menu 0.8)
-(setq ac-quick-help-delay 0.3)
-(setq ac-dwim t)
-(setq ac-sources '(ac-source-abbrev ac-source-dictionary ac-source-words-in-same-mode-buffers))
-
-
-(defun smart-tab ()
-  (interactive)
-  (if (eql (ac-start) nil)
-      (indent-for-tab-command)))
-
-;; KEYMAPS
-(define-key ac-mode-map (kbd "C-c h") 'ac-last-quick-help)
-(define-key ac-mode-map (kbd "C-c H") 'ac-last-help)
-;;(define-key ac-mode-map (kbd "TAB") 'auto-complete)
-(define-key ac-mode-map (kbd "TAB") 'smart-tab)
 
 (global-set-key (kbd "C-c h r") 'hide-region-hide)
 (global-set-key (kbd "C-c h u") 'hide-region-unhide)
@@ -292,6 +260,13 @@
 (load "go-mode-init.el")
 
 (load "http-init.el")
+
+
+;;; Default goto
+(load "dumb-jumb-mode-init.el")
+
+(load "projectile-mode-init.el")
+
 ;;(load "recompiler")
 
 
