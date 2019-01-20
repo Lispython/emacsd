@@ -209,7 +209,8 @@
   :if (memq window-system '(mac ns))
   :ensure t
   :config
-  (exec-path-from-shell-initialize))
+  (exec-path-from-shell-initialize)
+  )
 
 (load "env-init.el")
 (load "virtualenv-init.el")

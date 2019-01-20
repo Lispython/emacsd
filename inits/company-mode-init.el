@@ -113,26 +113,6 @@
             (define-key company-active-map (kbd "C-c h") #'company-quickhelp-manual-begin)))
 
 
-(require 'company)
-
-(defconst sample-completions
-  '("alan" "john" "ada" "dondskfjnsljkdnfjlks", "sdfwdfs", "dondskfsdkdnf"))
-
-(defun company-sample-backend (command &optional arg &rest ignored)
-  (interactive (list 'interactive))
-  (message (format "Autocomplete command: %s -> %s" command arg))
-  (case command
-    (interactive (company-begin-backend 'company-sample-backend))
-    (prefix (and (eq major-mode 'fundamental-mode)
-                (company-grab-symbol)))
-    (candidates
-    (remove-if-not
-      (lambda (c) (string-prefix-p arg c))
-      sample-completions))))
-
-(add-to-list 'company-backends 'company-sample-backend)
-
-
 (provide 'company-mode-init)
 
 ;;; company-mode-init.el ends here
