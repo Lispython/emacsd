@@ -6,9 +6,12 @@
 
 ;;; Code:
 
-(use-package docker-compose-mode)
+;; (use-package docker-compose-mode)
 
-(require 'docker)
+
+(use-package docker
+  :bind ("C-c d" . docker)
+  )
 
 ;;; TODO: configure company-autocomplete
 

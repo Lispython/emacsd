@@ -11,27 +11,33 @@ WORKDIR /usr/src/app
 RUN apt-get update
 
 RUN apt-get install -y --no-install-recommends \
-                pandoc \
-                markdown \
-                build-essential \
-                less \
-                sbcl \
-                clisp \
-                git \
-                curl \
-                wget \
-                clisp-dev \
-                openssl \
-                ca-certificates \
-                aptitude \
-                libxml2-dev \
-                libxslt-dev \
-                python-dev \
-                libssl-dev zlib1g-dev libbz2-dev \
-                libreadline-dev libsqlite3-dev llvm libncurses5-dev libncursesw5-dev xz-utils
+        cmake \
+        libclang-dev \
+        pandoc \
+        markdown \
+        build-essential \
+        less \
+        sbcl \
+        clisp \
+        git \
+        curl \
+        wget \
+        clisp-dev \
+        openssl \
+        ca-certificates \
+        aptitude \
+        libxml2-dev \
+        libxslt-dev \
+        python-dev \
+        libssl-dev zlib1g-dev libbz2-dev \
+        libreadline-dev libsqlite3-dev llvm libncurses5-dev libncursesw5-dev xz-utils
 
 
 RUN apt-get install -y --no-install-recommends mercurial mercurial-common
+
+RUN git clone https://github.com/Sarcasm/irony-mode.git /tmp/irony-mode
+
+RUN cd /tmp/irony-mode && cmake -DCMAKE_INSTALL_PREFIX=/usr/  /tmp/irony-mode/server && cmake --build . --use-stderr --config Release --target install
 
 # Install pyenv for tox
 

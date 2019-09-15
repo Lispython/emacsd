@@ -1,3 +1,10 @@
+;;; css-mode-init.el ---
+
+;;; Commentary:
+;;
+
+;;; Code:
+
 (defvar css-menu nil
   "Menu for CSS Mode.
 This menu will get created automatically if you have the `easymenu'
@@ -13,39 +20,16 @@ package.  Note that the latest X/Emacs releases contain this package.")
     "-----"
 	))
 
-;;(when (require 'auto-complete nil t))
-(defun ac-css-mode-candidates ()
-  "thisandthat."
-  (list "mymode" "mymode candi" "another candidate" "mymode2 csss")
-)
-
-(defun ac-css-mode-documentation (item)
-  (if (stringp item)
-    (let (s)
-      (setq s "help text string")
-
-    ))
-)
-
-
-(ac-define-source css-mode-r
-  '((candidates . ac-css-mode-candidates)
-    (document . ac-css-mode-documentation)
-;;    (prefix . ac-css-prefix)
-    (requires . 0)))
-
-
 (add-hook 'css-mode-hook (lambda ()
-						   (message "css mode hook")
-				           (rainbow-mode t)
-                           (setq ac-sources (append '(ac-source-css-property) ac-sources))
-                           (setq ac-sources (append '(ac-source-css-mode-r) ac-sources))
-						   (if css-menu (easy-menu-add css-menu))
+			   (message "css mode hook")
+			   (rainbow-mode t)
+			   (if css-menu (easy-menu-add css-menu))))
 
-;;(setq ac-sources (append '(ac-source-css-property) ac-sources))
-;;						   (setq ac-sources '(ac-source-css-property))
-))
 
-(add-hook 'css-mode-hook
-          (lambda ()
-            (define-key css-mode-map "\M-\C-x" 'slime-js-refresh-css)))
+(add-to-list 'auto-mode-alist '("\\.css$" . css-mode))
+(add-to-list 'auto-mode-alist '("\\.less$" . css-mode))
+
+
+(provide 'css-mode-init)
+
+;;; css-mode-init.el ends here

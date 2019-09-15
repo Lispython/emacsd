@@ -6,8 +6,9 @@
 ;;; Code:
 
 (use-package tramp
-  :init
-  (setq tramp-default-method "ssh"))
+  :init (setq tramp-default-method "ssh"))
+
+(use-package vagrant-tramp)
 
 
 (provide 'tramp-mode-init)

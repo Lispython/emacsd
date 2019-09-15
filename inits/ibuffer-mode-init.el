@@ -77,6 +77,9 @@
             ))
 
 
+(use-package ibuffer-tramp)
+
+
 (provide 'ibuffer-mode-init)
 
 ;;; ibuffer-mode-init.el ends here

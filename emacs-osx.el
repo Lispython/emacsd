@@ -132,8 +132,6 @@
 (use-package rainbow-mode)
 
 
-
-
 ;;(require 'pymacs)
 (require 'hide-region)
 (require 'scheme48)
@@ -142,8 +140,6 @@
 
 
 ;;(require 'hyperspec)
-
-
 
 
 ; Makes clipboard work
@@ -171,19 +167,6 @@
 
 (global-set-key (kbd "C-c h r") 'hide-region-hide)
 (global-set-key (kbd "C-c h u") 'hide-region-unhide)
-
-
-
-
-;;auto complete
-;;(define-key ac-complete-mode-map "\t" 'auto-complete)
-;;(define-key ac-mode-map "\r" nil)
-
-
-;; (when (require 'anything-show-completion nil t)
-;;   (use-anything-show-completion
-;;    'anything-ipython-complete
-;;    '(length initial-pattern)))
 
 
 (defun hyperspec-lookup (&optional symbol-name)
@@ -218,6 +201,7 @@
 (load "ibuffer-mode-init.el")
 ;;(load "python-mode-init.el")
 (load "python-mode-dockerized-init.el")
+
 (load "org-mode-init.el")
 (load "js-mode-init.el")
 (load "css-mode-init.el")
@@ -232,14 +216,15 @@
 (load "crontab-init.el")
 (load "ac-emoji.el")
 (load "markdown-init.el")
-(load "slime-init.el")
 (load "highlight-symbol-init.el")
-(load "clang-init.el")
 (load "debug-init.el")
 
+;; (load "slime-init.el")
+(load "lisp-init.el")
 
 ;;; Python configuration
 (load "pylookup-init.el")
+
 
 
 (load "yasnippet-init.el")
@@ -262,11 +247,25 @@
 
 (load "http-init.el")
 
+(load "toml-mode-init.el")
 
+(load "rust-mode-init.el")
+
+(load "clang-init.el")
+(load "elixir-init.el")
+(load "erlang-init.el")
+(load "swift-init.el")
+(load "scala-init.el")
+(load "saltstack-init.el")
+
+;; TODO: add more languages
 ;;; Default goto
 (load "dumb-jumb-mode-init.el")
 
 (load "projectile-mode-init.el")
+
+(load "web-mode-init.el")
+
 
 ;;(load "recompiler")
 
@@ -277,9 +276,9 @@
   (interactive)
   (if (or
        (string-match ".emacs.d/[a-zA-z_\+\-]*.el$" (buffer-file-name))
-	   (string-match ".emacs.d/tramp/[a-zA-z_\+\-]*.el$" (buffer-file-name))
-	   (string-match ".emacs.d/themes/[a-zA-z_\+\-]*.el$" (buffer-file-name))
-	   )
+       (string-match ".emacs.d/tramp/[a-zA-z_\+\-]*.el$" (buffer-file-name))
+       (string-match ".emacs.d/themes/[a-zA-z_\+\-]*.el$" (buffer-file-name))
+       )
       (byte-compile-file (buffer-file-name))))
 
 ;;(byte-recompile-directory (expand-file-name "~/.emacs.d") 0)
@@ -287,15 +286,6 @@
 ;;; HOOKS FOR MODES
 
 
-
-(add-hook 'css-mode-hook
-          (lambda ()
-            (message "css mode hook")
-            (rainbow-mode t)
-            ;; (set-face-font 'default "-unknown-Envy Code R-normal-normal-normal-*-13-*-*-*-m-0-iso10646-1")
-            ;;(setq ac-sources '(ac-source-words-in-buffer ac-source-symbols))))
-            ;;						   (setq ac-sources '(ac-source-css-keywords))
-))
 
 
 
@@ -315,9 +305,6 @@
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 (add-hook 'after-save-hook 'autocompile)
 
-
-(autoload 'mo-git-blame-file "mo-git-blame" nil t)
-(autoload 'mo-git-blame-current "mo-git-blame" nil t)
 
 (provide 'emacs)
 

@@ -33,6 +33,8 @@
 			 (slime-net-coding-system (or ,coding 'utf-8-unix)))
 		 (slime)))))
 
+
+(setq inferior-lisp-program "sbcl")
 ;;(lisp-slime sbcl "docker run --rm -i emacsd /usr/bin/sbcl")
 ;;(lisp-slime clisp "docker run --rm -i emacsd /usr/bin/clisp")
 
@@ -44,6 +46,7 @@
                slime-asdf
                slime-banner
                slime-repl
+               slime-scratch
                slime-scratch
                ;;slime-highlight-edits
                slime-sbcl-exts

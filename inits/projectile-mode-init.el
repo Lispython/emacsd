@@ -15,14 +15,17 @@
   (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
   (projectile-mode t)
   (setq projectile-project-search-path '("~/github/projects/"))
-  (setq projectile-completion-system 'ivy)
+  (setq projectile-completion-system 'ivy))
 
-  )
 
 (use-package counsel-projectile
   :config (progn
             (counsel-projectile-mode)
             ))
+
+
+;;(use-package projectile-speedbar)
+
 
 (provide 'projectile-mode-init)
 

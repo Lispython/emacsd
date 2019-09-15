@@ -1,179 +1,110 @@
+;;; js-mode-init.el ---
+
+;;; Commentary:
+;;
+
 (require 'css-mode)
-(require 'js2-mode)
-(require 'espresso)
-(require 'django-html-mode)
+;; (require 'espresso)
+;; (require 'django-html-mode)
+
+
+;;; Code:
+
+
+(use-package js2-mode
+
+  :config (progn
+            (add-hook 'js-mode-hook 'js2-minor-mode)
+
+            ;; (add-hook 'js2-mode-hook 'setup-tide-mode)
+
+            (add-to-list 'auto-mode-alist '("\\.\\(js\\|es6\\)\\(\\.erb\\)?\\'" . js2-mode))
+            (add-to-list 'auto-mode-alist '("\\.json$" . js2-mode))
+            (add-to-list 'interpreter-mode-alist (cons "node" 'js2-mode))
+
+            (add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
+            ;; (add-to-list 'auto-mode-alist '("\\.jsx$" . js2-mode))
+            ;; (add-to-list 'auto-mode-alist '("\\.tsx$" . js2-mode))
+            (add-to-list 'auto-mode-alist '("\\.html$" . django-html-mode))
+
+
+            ;; (when (< emacs-major-version 27)
+            ;;     (add-to-list 'auto-mode-alist '("\\.jsx?\\'" . js2-jsx-mode))
+            ;;     (add-to-list 'interpreter-mode-alist '("node" . js2-jsx-mode)))
+
+            ;; (add-to-list 'auto-mode-alist '("\\.jsx?\\'" . js2-jsx-mode))
+            ;; (add-to-list 'interpreter-mode-alist '("node" . js2-jsx-mode))
+
+            (setq js2-strict-missing-semi-warning nil)
+
+            (setq js2-basic-offset 2)
+
+
+            (add-hook 'js-mode-hook (lambda ()
+                                      (flycheck-select-checker 'javascript-eslint)
+                                      ))
+
+            ;; (add-hook 'js2-mode-hook 'tide-mode)
+
+            ;; (add-to-list 'auto-mode-alist '("\\.jsx?\\'" . js2-jsx-mode))
+            ;; (add-to-list 'interpreter-mode-alist '("node" . js2-jsx-mode))
+
+            ;; (setq js2-highlight-level 3
+            ;;       js2-bounce-indent-p nil
+            ;;       js2-include-node-externs t
+            ;;       js2-skip-preprocessor-directives t
+            ;;       js2-indent-switch-body nil
+            ;;       js2-strict-missing-semi-warning nil
+            ;;       js2-ignored-warnings nil
+            ;;       js2-strict-trailing-comma-warning nil
+            ;;       js2-mode-show-parse-errors nil
+            ;;       js2-mode-show-strict-warnings nil)
+
+            ))
+
+(use-package rjsx-mode
+  :hook (rjsx-mode . tide-setup)
+  :config (progn
+            (add-to-list 'auto-mode-alist '("components\\/.*\\.js\\'" . rjsx-mode))
+            (add-to-list 'auto-mode-alist '("\\.js\\'" . rjsx-mode))
+            ;; (add-hook 'rjsx-mode-hook 'tide-setup)
+            ;; (add-to-list 'auto-mode-alist '("\\.tsx?\\'" . rjsx-mode))
+            ))
+
+
+(use-package tide
+  :after (typescript-mode company flycheck)
+  :hook ((typescript-mode . tide-setup)
+         (typescript-mode . tide-hl-identifier-mode)
+         (before-save . tide-format-before-save))
+  :config (progn
+            ;; (flycheck-add-next-checker 'javascript-eslint 'javascript-tide 'append)
+
+            ;; (add-to-list 'auto-mode-alist '("\\.tsx$" . js-mode))
+
+            (add-hook 'typescript-mode-hook #'tide-setup)
+
+            ;; (flycheck-add-mode 'javascript-eslint 'tide-mode)
+            ;; (flycheck-add-next-checker 'javascript-eslint 'jsx-tide 'append)
+
+            ;; (define-key tide-mode-map (kbd "s-b") 'tide-jump-to-definition)
+            ;; (define-key tide-mode-map (kbd "s-[") 'tide-jump-back)
+            )
+  )
+
+(use-package typescript-mode
+
+  :config (progn
+            (add-to-list 'auto-mode-alist '("\\.ts\\'" . typescript-mode))
+            (add-to-list 'auto-mode-alist '("\\.tsx?\\'" . typescript-mode))))
+
+
+(require 'web-mode)
+
+;; enable typescript-tslint checker
 
 
 
-;; (defun flymake-jslint-init ()
-;;   (let* ((temp-file (flymake-init-create-temp-buffer-copy
-;; 		     'flymake-create-temp-inplace))
-;;          (local-file (file-relative-name
-;; 		      temp-file
-;; 		      (file-name-directory buffer-file-name))))
-;;     (list "rhino" (list (expand-file-name "~/.emacs.d/jslint/jslint.js") local-file))))
+(provide 'js-mode-init)
 
-;; (setq flymake-allowed-file-name-masks
-;;       (cons '(".+\\.js$"
-;; 	      flymake-jslint-init
-;; 	      flymake-simple-cleanup
-;; 	      flymake-get-real-file-name)
-;; 	    flymake-allowed-file-name-masks))
-
-;; (setq flymake-err-line-patterns
-;;       (cons '("^Lint at line \\([[:digit:]]+\\) character \\([[:digit:]]+\\): \\(.+\\)$"
-;; 	      nil 1 2 3)
-;; 	    flymake-err-line-patterns))
-
-
-;; (when (load "flymake" t)
-;;   (defun flymake-jslint-init ()
-;;     (let* ((temp-file (flymake-init-create-temp-buffer-copy
-;; 		       'flymake-create-temp-inplace))
-;;            (local-file (file-relative-name
-;;                         temp-file
-;;                         (file-name-directory buffer-file-name))))
-;;       (list "/home/alex/local/node/bin/jslint" (list local-file))))
-
-;;   (setq flymake-err-line-patterns
-;; 	(cons '("^  [[:digit:]]+ \\([[:digit:]]+\\),\\([[:digit:]]+\\): \\(.+\\)$"
-;; 		nil 1 2 3)
-;; 	      flymake-err-line-patterns))
-
-;;   (add-to-list 'flymake-allowed-file-name-masks
-;;                '("\\.js\\'" flymake-jslint-init)))
-
-
-;; adapted from http://www.emacswiki.org/emacs/FlymakeJavaScript
-;;
-;; Installation:
-;;
-;;     (add-to-list 'load-path "~/lib/jshint-mode")
-;;     (require 'flymake-jshint)
-;;     (add-hook 'javascript-mode-hook
-;;         (lambda () (flymake-mode t)))
-;;
-;; run M-x flymake-mode to turn flymake on and off
-;;
-
-
-
-
-
-;;;;;;;;;;;;;;;;;;;;;;;;
-;;;TMP disabled flymake
-;;;;;;;;;;;;;;;;;;;;;;;;
-
-;; (require 'flymake)
-
-;; (defcustom jshint-mode-mode "jshint"
-;;   "Can use either jshint or jslint"
-;;   :type 'string
-;;   :group 'flymake-jshint)
-
-;; (defcustom jshint-mode-node-program "node"
-;;   "The program name to invoke node.js."
-;;   :type 'string
-;;   :group 'flymake-jshint)
-
-;; (defcustom jshint-mode-location (file-name-directory load-file-name)
-;;   "The directory jshint-mode.js may be found in."
-;;   :type 'string
-;;   :group 'flymake-jshint)
-
-;; (defcustom jshint-mode-port 3003
-;;   "The port the jshint-mode server runs on."
-;;   :type 'integer
-;;   :group 'flymake-jshint)
-
-;; (defcustom jshint-mode-host "127.0.0.1"
-;;   "The host the jshint-mode server runs on."
-;;   :type 'string
-;;   :group 'flymake-jshint)
-
-;; (setq jshint-process "jshint-mode-server")
-;; (setq jshint-buffer "*jshint-mode*")
-
-;; (defun jshint-mode-init ()
-;;   "Start the jshint-mode server."
-;;   (interactive)
-;;   (if (eq (process-status jshint-process) 'run)
-;;       'started
-;;     (start-process
-;;      jshint-process
-;;      jshint-buffer
-;;      jshint-mode-node-program
-;;      (expand-file-name (concat jshint-mode-location "/jshint-mode.js"))
-;;      "--host" jshint-mode-host
-;;      "--port" (number-to-string jshint-mode-port))
-;;     (set-process-query-on-exit-flag (get-process jshint-process) nil)
-;;     (message
-;;      (concat "jshint server has started on " jshint-mode-host
-;;              (number-to-string jshint-mode-port)))
-;;     'starting
-;;     ))
-
-;; (defun jshint-mode-stop ()
-;;   "Stop the jshint-mode server."
-;;   (interactive)
-;;   (delete-process jshint-process))
-
-;; (defun flymake-jshint-init ()
-;;   (if (eq (jshint-mode-init) 'started)
-;;       (let* ((temp-file (flymake-init-create-temp-buffer-copy 'flymake-create-temp-inplace))
-;;              (local-file (file-relative-name temp-file
-;;                                              (file-name-directory buffer-file-name)))
-;;              (jshint-url (format "http://%s:%d/check" jshint-mode-host jshint-mode-port)))
-;;         (list "curl" (list "--form" (format "source=<%s" local-file)
-;;                            "--form" (format "filename=%s" local-file)
-;;                            "--form" (format "mode=%s" jshint-mode-mode)
-;;                            jshint-url)))))
-
-;; (setq flymake-allowed-file-name-masks
-;;       (cons '(".+\\.js$"
-;; 	      ;;flymake-jshint-init
-;; 	      flymake-simple-cleanup
-;; 	      flymake-get-real-file-name)
-;; 	    flymake-allowed-file-name-masks))
-
-;; (setq flymake-err-line-patterns
-;;       (cons '("^Lint at line \\([[:digit:]]+\\) character \\([[:digit:]]+\\): \\(.+\\)$"
-;; 	      nil 1 2 3)
-;; 	    flymake-err-line-patterns))
-
-
-
-;; ;; (add-hook 'javascript-mode-hook (lambda ()
-;; ;; 								  (flymake-mode t)))
-
-;; ;; (add-hook 'espresso-mode-hook (lambda ()
-;; ;; 								(flymake-mode t)))
-
-;; ;; (add-hook 'js2-mode-hook (lambda ()
-;; ;; 						   (slime-js-minor-mode t)))
-
-;; (global-set-key [f5] 'slime-js-reload)
-
-
-
-;; MODES AUTO DETECT
-;;(add-to-list 'auto-mode-alist '("\\.js$" . espresso-mode))
-;;(add-to-list 'a>uto-mode-alist '("\\.json$" . espresso-mode))
-(autoload 'js2-mode "js2-mode" nil t)
-(add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
-(add-to-list 'auto-mode-alist '("\\.jsx$" . espresso-mode))
-(add-to-list 'auto-mode-alist '("\\.json$" . js2-mode))
-
-(add-to-list 'auto-mode-alist '("\\.html$" . django-html-mode))
-(add-to-list 'auto-mode-alist '("\\.css$" . css-mode))
-(add-to-list 'auto-mode-alist '("\\.less$" . css-mode))
-
-
-
-
-(add-hook 'js-mode-hook 'js2-minor-mode)
-
-(add-to-list 'auto-mode-alist '("\\.jsx?\\'" . js2-jsx-mode))
-(add-to-list 'interpreter-mode-alist '("node" . js2-jsx-mode))
-
-(setq js2-strict-missing-semi-warning nil)
+;;; js-mode-init.el ends here

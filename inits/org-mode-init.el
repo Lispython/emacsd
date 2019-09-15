@@ -1,4 +1,4 @@
-;;; org-mode-init.el --- 
+;;; org-mode-init.el ---
 
 
 ;;; Code:
@@ -11,13 +11,13 @@
 ;;; Remember mode
 ;;(add-to-list 'load-path (concat **emacs-ext-dir** "org-mode/remember"))
 
-;; 
+;;
 ;; (require 'remember)
 ;; (require 'org-remember)
 
 
 ;;; Commentary:
-;; 
+;;
 
 (require 'org-install)
 (require 'ob-tangle)
@@ -63,7 +63,7 @@
 (setq org-default-notes-file (concat org-directory "/notes.org"))
 
 
-(global-font-lock-mode 1)
+;; (global-font-lock-mode 1)
 
 (setq org-todo-keywords '((type "TODO" "NEXT" "WAITING" "STARTED" "|" "DONE" "CANCELED")))
 
