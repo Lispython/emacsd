@@ -8,10 +8,13 @@
 ;;; Code:
 
 (use-package scala-mode
+  :ensure t
   :interpreter
   ("scala" . scala-mode))
 
-(use-package sbt-mode)
+(use-package sbt-mode
+  :ensure t
+  )
 
 (provide 'scala-init)
 

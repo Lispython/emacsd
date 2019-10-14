@@ -3,7 +3,9 @@
 ;;; Commentary:
 ;;
 
-(use-package toml-mode)
+(use-package toml-mode
+  :ensure t
+  )
 
 (provide 'toml-mode-init)
 

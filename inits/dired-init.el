@@ -10,6 +10,7 @@
 
 
 (use-package dired-rainbow
+  :ensure t
 
   :config (progn
             (message "Configure dired"))
@@ -27,6 +28,7 @@
 
 
 (use-package dired-collapse
+  :ensure t
 
   :config (progn
             (add-hook 'dired-mode-hook 'dired-collapse-mode)))

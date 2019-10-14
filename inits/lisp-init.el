@@ -8,6 +8,7 @@
     (lispy-mode 1)))
 
 (use-package lispy
+  :ensure t
 
   :config (progn
             (setq lispy-compat 1)

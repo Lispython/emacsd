@@ -56,22 +56,23 @@
 
 
 (use-package company
+  :ensure t
   :config (progn
             (add-hook 'after-init-hook 'global-company-mode)
 
             (define-key company-active-map (kbd "TAB") 'company-complete-common-or-cycle)
             (define-key company-active-map (kbd "<tab>") 'company-complete-common-or-cycle)
 
-            (setq company-minimum-prefix-length 2               ; default is 3
+            (setq company-minimum-prefix-length 2 ; default is 3
                   ;; company-show-numbers          t
                   company-dabbrev-downcase      nil
                   company-dabbrev-ignore-case   nil
 
-                  company-tooltip-limit 20                      ; bigger popup window
-                  company-idle-delay 0.1                        ; decrease delay before autocompletion popup shows
-                  company-echo-delay 0                          ; remove annoying blinking
-                  ; company-begin-commands '(self-insert-command) ; start autocompletion only after typing
-            )
+                  company-tooltip-limit 20 ; bigger popup window
+                  company-idle-delay 0.1 ; decrease delay before autocompletion popup shows
+                  company-echo-delay 0   ; remove annoying blinking
+                                        ; company-begin-commands '(self-insert-command) ; start autocompletion only after typing
+                  )
 
             (set-face-attribute
              'company-preview
@@ -92,10 +93,12 @@
 
 
 (use-package company-statistics
+  :ensure t
   :config (progn
             (company-statistics-mode)))
 
 (use-package company-quickhelp
+  :ensure t
   :config (progn
             (company-quickhelp-mode)
             (setq x-gtk-use-system-tooltips nil)

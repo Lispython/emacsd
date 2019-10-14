@@ -6,7 +6,9 @@
 
 ;;; Code:
 
-(use-package swift-mode)
+(use-package swift-mode
+  :ensure t
+  )
 
 (provide 'swift-init)
 

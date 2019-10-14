@@ -129,7 +129,9 @@
 
 (require 'regex-tool)
 
-(use-package rainbow-mode)
+(use-package rainbow-mode
+  :ensure t
+  )
 
 
 ;;(require 'pymacs)

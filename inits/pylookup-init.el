@@ -57,6 +57,7 @@
 
 
 (use-package pylookup
+  :ensure t
   :load-path (**pylookup-dir**)
   :bind (("C-c l" . pylookup-lookup))
   :init (progn (message "Use package pylookup init")
@@ -76,14 +77,14 @@
                )
   :config (progn (message "Use package pylookup config")
 
-               (defalias 'pylookup-exec-lookup 'pylookup-exec-lookup-override)
-               (defalias 'pylookup-exec-get-cache 'pylookup-exec-get-cache-override)
-               (autoload 'pylookup-lookup "pylookup"
-                 "Lookup SEARCH-TERM in the Python HTML indexes." t)
+                 (defalias 'pylookup-exec-lookup 'pylookup-exec-lookup-override)
+                 (defalias 'pylookup-exec-get-cache 'pylookup-exec-get-cache-override)
+                 (autoload 'pylookup-lookup "pylookup"
+                   "Lookup SEARCH-TERM in the Python HTML indexes." t)
 
-               (autoload 'pylookup-update "pylookup"
-                 "Run pylookup-update and create the database at `pylookup-db-file'." t)
-           )
+                 (autoload 'pylookup-update "pylookup"
+                   "Run pylookup-update and create the database at `pylookup-db-file'." t)
+                 )
   ;;:mode ("\\.txt$" . rst-mode)
   )
 

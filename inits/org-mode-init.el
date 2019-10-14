@@ -158,14 +158,14 @@
 
 
 (use-package ob-typescript
-
+  :ensure t
   :config (org-babel-do-load-languages 'org-babel-load-languages
                                        (append org-babel-load-languages
                                                '((typescript     . t)))
                                        ))
 
 (use-package ob-rust
-
+  :ensure t
   :config (org-babel-do-load-languages 'org-babel-load-languages
                                        (append org-babel-load-languages
                                                '((rust     . t)))
@@ -173,14 +173,14 @@
 
 
 (use-package ob-sql-mode
-
+  :ensure t
   :config (org-babel-do-load-languages 'org-babel-load-languages
                                        (append org-babel-load-languages
                                                '((rust     . t)))
                                        ))
 
 (use-package ob-http
-
+  :ensure t
   :config (org-babel-do-load-languages 'org-babel-load-languages
                                        (append org-babel-load-languages
                                                '((http     . t)))
@@ -188,14 +188,14 @@
 
 
 (use-package ob-ipython
-
+  :ensure t
   :config (org-babel-do-load-languages 'org-babel-load-languages
                                        (append org-babel-load-languages
                                                '((ipython     . t)))
                                        ))
 
 (use-package ob-restclient
-
+  :ensure t
   :config (org-babel-do-load-languages 'org-babel-load-languages
                                        (append org-babel-load-languages
                                                '((restclient     . t)))
@@ -203,7 +203,7 @@
 
 
 (use-package org-screen
-
+  :ensure t
   :config (progn
             (setq org-babel-default-header-args:screen '((:results . "silent") (:session . "default") (:cmd . "/bin/bash") (:terminal . "xterm")))
             )

@@ -204,7 +204,7 @@ See URL `http://mypy-lang.org/'."
 
 
 (use-package hydra
-
+  :ensure t
   :config
   (defhydra hydra-flycheck
     (:pre (progn (setq hydra-lv t) (flycheck-list-errors))

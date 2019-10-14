@@ -191,6 +191,7 @@
   )
 
 (use-package lambda-mode
+  :ensure t
   :hook (python-mode . lambda-mode))
 
 ;; (use-package python-mode

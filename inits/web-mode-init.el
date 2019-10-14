@@ -4,6 +4,7 @@
 ;;
 
 (use-package web-mode
+  :ensure t
   :config (progn
 
             (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
@@ -17,6 +18,7 @@
 
 
 (use-package web-mode-edit-element
+  :ensure t
   :config (progn
             (add-hook 'web-mode-hook 'web-mode-edit-element-minor-mode)))
 

@@ -15,6 +15,7 @@
 
 ;;; Display line width indicator
 (use-package fill-column-indicator
+  :ensure t
   :config (progn ;;FILL
 
             (setq fci-rule-width 1)
@@ -24,7 +25,7 @@
             ;; (define-globalized-minor-mode global-fci-mode fci-mode
             ;;   (lambda () (fci-mode 1)))
             ;; (global-fci-mode 1)
-  ))
+            ))
 
 
 ;;; Current line hightlight
@@ -35,6 +36,7 @@
 
 
 (use-package color-theme
+  :ensure t
   :init (setq color-theme-is-global t)
   :config (progn
             ;; (setq color-theme-directory "~/.emacs.d/themes")
@@ -47,6 +49,7 @@
 
 
 (use-package powerline
+  :ensure t
   :config
   (powerline-default-theme))
 

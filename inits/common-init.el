@@ -8,6 +8,7 @@
 
 
 (use-package multiple-cursors
+  :ensure t
   :config (progn
             (global-set-key (kbd "C-S-c C-S-c") 'mc/edit-lines)
             (global-set-key (kbd "C->") 'mc/mark-next-like-this)
@@ -17,7 +18,9 @@
             (global-set-key (kbd "M-<mouse-1>") 'mc/add-cursor-on-click)
             ))
 
-(use-package bm)
+(use-package bm
+  :ensure t
+  )
 
 
 (global-unset-key (kbd "C-3"))
@@ -25,13 +28,13 @@
 
 
 (use-package swiper-helm
-
+  :ensure t
   :config (progn
             (with-temp-message "Setup swiper helm")
             (global-set-key (kbd "C-3 h") 'swiper-helm)))
 
 (use-package swiper
-
+  :ensure t
   :config (progn
             (with-temp-message "Setup swiper")
 
@@ -45,6 +48,7 @@
 ;; )
 
 (use-package ivy
+  :ensure t
   :config (progn
             (with-temp-message "Setup ivy mode")
             (ivy-mode t)
@@ -90,7 +94,9 @@
 ;;   :config
 ;;   (all-the-icons-ivy-setup))
 
-(use-package ivy-hydra)
+(use-package ivy-hydra
+  :ensure t
+  )
 
 ;;; Показывает буфер с найденными совпадениями
 (defun occur-selection ()
@@ -117,6 +123,7 @@
 
 
 (use-package helm-swoop
+  :ensure t
   :config (progn
             (global-set-key (kbd "M-i") 'helm-swoop)
             (global-set-key (kbd "M-I") 'helm-swoop-back-to-last-point)
@@ -138,18 +145,20 @@
 
 
 (use-package command-log-mode
+  :ensure t
   :config (global-command-log-mode)
   )
 
 
 (use-package undo-tree
-
+  :ensure t
   :config (progn
             (global-undo-tree-mode)
             ))
 
 
 (use-package origami
+  :ensure t
   :config (progn
             (global-origami-mode)
             (define-key origami-mode-map (kbd "C-c f") 'origami-recursively-toggle-node)
@@ -165,18 +174,21 @@
 
 
 (use-package smartparens-config
+  :ensure t
   :ensure smartparens
   :config (progn
             (show-smartparens-global-mode t)
             (smartparens-global-mode)
 
             ;; (add-hook 'prog-mode-hook 'turn-on-smartparens-strict-mode)
-             ;; (add-hook 'markdown-mode-hook 'turn-on-smartparens-strict-mode)
+            ;; (add-hook 'markdown-mode-hook 'turn-on-smartparens-strict-mode)
             ;;(add-hook 'js-mode-hook #'smartparens-mode)
             )
   )
 
-(use-package look-mode)
+(use-package look-mode
+  :ensure t
+  )
 
 
 (provide 'common-init)

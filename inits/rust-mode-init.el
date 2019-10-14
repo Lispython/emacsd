@@ -38,6 +38,7 @@
 ;;   )
 
 (use-package rust-mode
+  :ensure t
   :config (progn
             (add-to-list 'auto-mode-alist '("\\.rs\\'" . rust-mode))
             (with-eval-after-load 'rust-mode
@@ -58,8 +59,8 @@
 
             ;;(defalias 'racer--call 'racer--call-override )
 
-           (setq company-tooltip-align-annotations t)
-           )
+            (setq company-tooltip-align-annotations t)
+            )
   )
 
 (provide 'rust-mode-init)

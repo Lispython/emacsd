@@ -6,10 +6,12 @@
 ;;; Code:
 
 (use-package yasnippet
+  :ensure t
+
   ;;:load-path ("~/.emacs.d/ext/yasnippet")
   ;;:load-path (concat **emacs-ext-dir** "yasnippet")
-  ;;; WARNING
-  ;;; yas/ replaced to yas-
+;;; WARNING
+;;; yas/ replaced to yas-
   :config (progn
             (message "Loading yasnippet config")
             (yas-initialize)
@@ -39,7 +41,7 @@
 
 
 (use-package yasnippet-snippets
-
+  :ensure t
   :config (yasnippet-snippets-initialize)
   )
 

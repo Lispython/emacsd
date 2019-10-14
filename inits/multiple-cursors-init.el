@@ -16,7 +16,7 @@
 
 
 (use-package multiple-cursors
-
+  :ensure t
   :config (progn ;; Should be able to eval-and-replace anywhere.
             (global-set-key (kbd "C-c C-e") 'eval-and-replace)
             (global-set-key (kbd "M-s-e") 'eval-and-replace)))

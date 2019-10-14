@@ -8,6 +8,7 @@
 (require 'http-twiddle)
 
 (use-package restclient
+  :ensure t
   ;; :config (add-to-list 'company-backends 'company-restclient)
   )
 

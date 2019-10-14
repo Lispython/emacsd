@@ -6,6 +6,7 @@
 ;;; Code:
 
 (use-package tramp
+  :ensure t
   :init (setq tramp-default-method "ssh")
   :config (progn
             (with-eval-after-load 'tramp
@@ -28,10 +29,12 @@
 
   )
 
-(use-package vagrant-tramp)
+(use-package vagrant-tramp
+  :ensure t
+  )
 
 (use-package ssh-tunnels
-
+  :ensure t
   :config (progn
 
             ;; (setq ssh-tunnels-configurations

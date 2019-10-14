@@ -4,10 +4,14 @@
 ;;(require 'ac-slime)
 
 
-(use-package slime)
+(use-package slime
+  :ensure t
+  )
 
 
-(use-package slime-scheme)
+(use-package slime-scheme
+  :ensure t
+  )
 
 ;;LISP-MODE
 ;;Common lisp compiler

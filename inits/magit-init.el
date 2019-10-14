@@ -9,12 +9,14 @@
 
 
 (use-package magit
+  :ensure t
   :config (progn
             (global-set-key (kbd "C-x g") 'magit-status)
             (setq magit-save-repository-buffers nil)
             ))
 
 (use-package magit-todos
+  :ensure t
   :after magit)
 
 ;; (use-package forge

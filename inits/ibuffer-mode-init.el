@@ -7,6 +7,7 @@
 
 
 (use-package ibuffer
+  :ensure t
 
   :config (progn
             (global-set-key (kbd "C-x C-b") 'ibuffer)
@@ -46,6 +47,7 @@
             ))
 
 (use-package ibuffer-vc
+  :ensure t
 
   :config (progn
             (message "Configure ibuffer vc")
@@ -77,7 +79,9 @@
             ))
 
 
-(use-package ibuffer-tramp)
+(use-package ibuffer-tramp
+  :ensure t
+  )
 
 
 (provide 'ibuffer-mode-init)

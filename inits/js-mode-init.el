@@ -12,7 +12,7 @@
 
 
 (use-package js2-mode
-
+  :ensure t
   :config (progn
             (add-hook 'js-mode-hook 'js2-minor-mode)
 
@@ -63,6 +63,7 @@
             ))
 
 (use-package rjsx-mode
+  :ensure t
   :hook (rjsx-mode . tide-setup)
   :config (progn
             (add-to-list 'auto-mode-alist '("components\\/.*\\.js\\'" . rjsx-mode))
@@ -73,6 +74,7 @@
 
 
 (use-package tide
+  :ensure t
   :after (typescript-mode company flycheck)
   :hook ((typescript-mode . tide-setup)
          (typescript-mode . tide-hl-identifier-mode)
@@ -93,7 +95,7 @@
   )
 
 (use-package typescript-mode
-
+  :ensure t
   :config (progn
             (add-to-list 'auto-mode-alist '("\\.ts\\'" . typescript-mode))
             (add-to-list 'auto-mode-alist '("\\.tsx?\\'" . typescript-mode))))

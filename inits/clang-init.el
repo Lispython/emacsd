@@ -43,7 +43,7 @@
 ;;; Code:
 
 (use-package irony
-
+  :ensure t
   :config (progn
             (add-hook 'c++-mode-hook 'irony-mode)
             (add-hook 'c-mode-hook 'irony-mode)
@@ -87,6 +87,7 @@
   )
 
 (use-package irony-eldoc
+  :ensure t
   :config (progn
             (add-hook 'irony-mode-hook #'irony-eldoc)
             ))
@@ -102,7 +103,7 @@
 ;;   )
 
 (use-package company-irony-c-headers
-
+  :ensure t
   :config (progn
             ;; Load with `irony-mode` as a grouped backend
             (eval-after-load 'company
