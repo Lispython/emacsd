@@ -108,6 +108,14 @@
 )
 
 
+(use-package ivy-todo
+  :ensure t
+  ;; :bind ("C-c t" . ivy-todo)
+  :commands ivy-todo
+  :config
+  (setq ivy-todo-default-tags '("PROJECT")))
+
+
 (use-package helm-swoop
   :config (progn
             (global-set-key (kbd "M-i") 'helm-swoop)
@@ -166,7 +174,9 @@
              ;; (add-hook 'markdown-mode-hook 'turn-on-smartparens-strict-mode)
             ;;(add-hook 'js-mode-hook #'smartparens-mode)
             )
-)
+  )
+
+(use-package look-mode)
 
 
 (provide 'common-init)

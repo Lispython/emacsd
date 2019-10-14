@@ -19,8 +19,17 @@
 ;;; Commentary:
 ;;
 
+
 (require 'org-install)
 (require 'ob-tangle)
+
+;; (use-package org
+;;   :mode (("\\.org$" . org-mode))
+;;   :ensure org-plus-contrib
+;;   :config
+;;   (progn
+;;     ;; config stuff
+;;     ))
 
 (setq org-directory *org-root*)
 (setq org-mobile-directory "~/Dropbox/MobileOrg")
@@ -82,8 +91,8 @@
 (add-hook 'org-mode-hook
 	  (lambda ()
 	    (message "org mode hook")
-	    (set-face-font 'default "-unknown-Anonymous Pro-normal-normal-normal-*-14-*-*-*-m-0-iso10646-1")
-	    (set-default-font "-unknown-Anonymous Pro-normal-normal-normal-*-14-*-*-*-m-0-iso10646-1")
+	    ;; (set-face-font 'default "-unknown-Anonymous Pro-normal-normal-normal-*-14-*-*-*-m-0-iso10646-1")
+	    ;; (set-default-font "-unknown-Anonymous Pro-normal-normal-normal-*-14-*-*-*-m-0-iso10646-1")
 
 	    ;; yasnippet (allow yasnippet to do it's thing in org files)
 	    (make-variable-buffer-local 'yas/trigger-key)
@@ -125,7 +134,9 @@
 (org-babel-do-load-languages
  'org-babel-load-languages
  '((emacs-lisp . t)
-   ;;(sh . t)
+   (shell . t)
+   (screen . t)
+   (ein . t)
    (R . t)
    (C . t)
    (awk . t)
@@ -138,15 +149,95 @@
    (clojure . t)
    (lisp . t)
    (org . t)
-   (sql . t)))
+   (sql . t)
+   ))
+
+(setq org-confirm-babel-evaluate
+      (lambda (lang body)
+        (not (string= lang "sql-mode"))))
 
 
+(use-package ob-typescript
+
+  :config (org-babel-do-load-languages 'org-babel-load-languages
+                                       (append org-babel-load-languages
+                                               '((typescript     . t)))
+                                       ))
+
+(use-package ob-rust
+
+  :config (org-babel-do-load-languages 'org-babel-load-languages
+                                       (append org-babel-load-languages
+                                               '((rust     . t)))
+                                       ))
+
+
+(use-package ob-sql-mode
+
+  :config (org-babel-do-load-languages 'org-babel-load-languages
+                                       (append org-babel-load-languages
+                                               '((rust     . t)))
+                                       ))
+
+(use-package ob-http
+
+  :config (org-babel-do-load-languages 'org-babel-load-languages
+                                       (append org-babel-load-languages
+                                               '((http     . t)))
+                                       ))
+
+
+(use-package ob-ipython
+
+  :config (org-babel-do-load-languages 'org-babel-load-languages
+                                       (append org-babel-load-languages
+                                               '((ipython     . t)))
+                                       ))
+
+(use-package ob-restclient
+
+  :config (org-babel-do-load-languages 'org-babel-load-languages
+                                       (append org-babel-load-languages
+                                               '((restclient     . t)))
+                                       ))
+
+
+(use-package org-screen
+
+  :config (progn
+            (setq org-babel-default-header-args:screen '((:results . "silent") (:session . "default") (:cmd . "/bin/bash") (:terminal . "xterm")))
+            )
+  )
+
+
+
+(use-package ob-tmux
+  ;; Install package automatically (optional)
+  :ensure t
+  :custom
+  (org-babel-default-header-args:tmux
+   '((:results . "silent")  ;
+     (:session . "default") ; The default tmux session to send code to
+     (:socket  . nil)))  ; The default tmux socket to communicate with
+  ;; The tmux sessions are prefixed with the following string.
+  ;; You can customize this if you like.
+  (org-babel-tmux-session-prefix "ob-")
+  ;; The terminal that will be used.
+  ;; You can also customize the options passed to the terminal.
+  ;; The default terminal is "gnome-terminal" with options "--".
+  (org-babel-tmux-terminal "xterm")
+  (org-babel-tmux-terminal-opts '("-T" "ob-tmux" "-e"))
+  ;; Finally, if your tmux is not in your $PATH for whatever reason, you
+  ;; may set the path to the tmux binary as follows:
+  ;; (org-babel-tmux-location "/usr/bin/tmux")
+
+  )
 ;; CUSOM HELP FUNCTIONS
 
 (defun org-my ()
   (interactive)
   (find-file "~/Dropbox/.org/gtd.org")
-)
+  )
 
 (defun work-org ()
   (interactive)
@@ -163,6 +254,7 @@
 	 "* %?\nEntered on %U\n %i\n %a")))
 
 (message "org-mode init loaded")
+
 
 
 

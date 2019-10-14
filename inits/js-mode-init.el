@@ -40,9 +40,9 @@
             (setq js2-basic-offset 2)
 
 
-            (add-hook 'js-mode-hook (lambda ()
-                                      (flycheck-select-checker 'javascript-eslint)
-                                      ))
+            ;; (add-hook 'js-mode-hook (lambda ()
+            ;;                           (flycheck-select-checker 'javascript-eslint)
+            ;;                           ))
 
             ;; (add-hook 'js2-mode-hook 'tide-mode)
 

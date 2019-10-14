@@ -17,7 +17,16 @@
   )
 
 
-(use-package geiser-install)
+;; (require 'geiser-install)
+
+;; (use-package geiser :ensure t)
+
+(use-package geiser
+  :ensure t
+  :config
+  (add-hook 'scheme-mode-hook 'geiser-mode))
+
+;; (use-package geiser-install)
 
 (provide 'lisp-init)
 

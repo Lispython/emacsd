@@ -25,7 +25,23 @@
             (yas-global-mode 1)
             (require 'react-snippets)
 
+
+            (eval-after-load "company"
+              '(progn
+                 ;; (add-to-list 'company-backends 'company-yasnippet)
+                 (global-set-key (kbd "C-c y") 'company-yasnippet)
+
+                 (push '(company-semantic :with company-yasnippet) company-backends)
+
+                 )
+              )
             ))
+
+
+(use-package yasnippet-snippets
+
+  :config (yasnippet-snippets-initialize)
+  )
 
 
 (provide 'yasnippet-init)
