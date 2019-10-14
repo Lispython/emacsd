@@ -122,7 +122,7 @@
 ;; 		 ))
 
 (require 'tramp)
-(require 'auto-complete-config)
+;; (require 'auto-complete-config)
 
 
 ;;MODES
