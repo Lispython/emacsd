@@ -103,6 +103,12 @@
 
 (require 'web-mode)
 
+
+(add-hook 'espresso-mode-hook
+          (lambda ()
+            ;; (set-face-font 'default "-unknown-Envy Code R-normal-normal-normal-*-13-*-*-*-m-0-iso10646-1")
+            (setq espresso-indent-level 2)))
+
 ;; enable typescript-tslint checker
 
 

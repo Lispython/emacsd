@@ -42,6 +42,8 @@
 
 ;;; Code:
 
+(use-package cc-mode)
+
 (use-package irony
   :ensure t
   :config (progn

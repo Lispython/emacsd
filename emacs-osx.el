@@ -49,7 +49,7 @@
 ;;(set-default-font "Consolas-8") ;;default font
 ;;the following is size 7 for me...
 
-;;(set-face-font 'default "-unknown-Envy Code R-normal-normal-normal-*-13-*-*-*-m-0-iso10646-1")
+;;(set-face-font 'default "-unknown-Envy Code R-normal-normal-normal-*-13-*-*-1*-m-0-iso10646-1")
 ;;(set-face-font 'default "-outline-Bitstream Vera Sans Mono-normal-r-normal-normal-12-90-96-96-c-*-iso8859-1")
 ;;(set-face-font 'default "-unknown-Anonymous Pro-normal-normal-normal-*-14-*-*-*-m-0-iso10646-1")
 ;;(set-frame-font "Envy Code R-7") ;; doesn't work consistently ;
@@ -63,7 +63,6 @@
 
 
 ;;AUTO COMPLETE
-;(add-to-list 'load-path "~/.emacs.d/auto-complete-modes/ac-slime/")
 (add-to-list 'load-path "~/.emacs.d/ext")
 
 ;;; Copy-paste of list extensions
@@ -107,41 +106,10 @@
 (modify-coding-system-alist 'file ".*" 'utf-8) ;; fuck cp1251 and koi-8
 
 
-(require 'anything)
-
-(require 'cc-mode)
-
 (load "ui-init.el")
 
 ;;(add-to-list 'custom-theme-load-path **themes-dir**)
 
-;; (mapc 'require '(tramp
-;; 		 auto-complete-config
-;; 		 ac-slime
-;; 		 ansi-color
-;; 		 ))
-
-(require 'tramp)
-;; (require 'auto-complete-config)
-
-
-;;MODES
-
-(require 'regex-tool)
-
-(use-package rainbow-mode
-  :ensure t
-  )
-
-
-;;(require 'pymacs)
-(require 'hide-region)
-(require 'scheme48)
-
-;;;PYTHON REQUIREMENTS
-
-
-;;(require 'hyperspec)
 
 
 ; Makes clipboard work
@@ -165,30 +133,6 @@
 (setq browse-url-browser-function 'browse-url-default-windows-browser)
 (setq browse-url-browser-function 'browse-url-default-macosx-browser)
 
-
-
-(global-set-key (kbd "C-c h r") 'hide-region-hide)
-(global-set-key (kbd "C-c h u") 'hide-region-unhide)
-
-
-(defun hyperspec-lookup (&optional symbol-name)
-  (interactive)
-  (let ((browse-url-browser-function 'w3m-browse-url))
-	(if symbol-name
-		(common-lisp-hyperspec symbol-name)
-	  (call-interactively 'common-lisp-hyperspec))))
-
-
-;;; Comment and uncomment function
-(defun comment-or-uncomment-this (&optional lines)
-  (interactive "P")
-  (if mark-active
-      (if (< (mark) (point))
-          (comment-or-uncomment-region (mark) (point))
-		(comment-or-uncomment-region (point) (mark)))
-	(comment-or-uncomment-region
-	 (line-beginning-position)
-	 (line-end-position lines))))
 
 (use-package exec-path-from-shell
   :if (memq window-system '(mac ns))
@@ -290,20 +234,6 @@
 ;;; HOOKS FOR MODES
 
 
-
-
-
-
-
-(add-hook 'espresso-mode-hook
-          (lambda ()
-            ;; (set-face-font 'default "-unknown-Envy Code R-normal-normal-normal-*-13-*-*-*-m-0-iso10646-1")
-            (setq espresso-indent-level 2)))
-
-;;;(add-hook 'sgml-mode-hook 'zencoding-mode) ;; Auto-start on any markup modes
-
-;;(add-hook 'python-mode-hook #'(lambda ()
-;;                                 (define-key py-mode-map (kbd "M-<tab>") 'anything-ipython-complete)))
 
 
 (add-hook 'before-save-hook 'delete-trailing-whitespace)

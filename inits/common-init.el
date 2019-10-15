@@ -6,6 +6,10 @@
 
 ;;; Code:
 
+(use-package rainbow-mode
+  :ensure t
+  )
+
 
 (use-package multiple-cursors
   :ensure t
@@ -190,6 +194,27 @@
   :ensure t
   )
 
+(use-package regex-tool
+  :ensure t
+  )
+
+
+(use-package hide-region)
+
+(global-set-key (kbd "C-c h r") 'hide-region-hide)
+(global-set-key (kbd "C-c h u") 'hide-region-unhide)
+
+
+;;; Comment and uncomment function
+(defun comment-or-uncomment-this (&optional lines)
+  (interactive "P")
+  (if mark-active
+      (if (< (mark) (point))
+          (comment-or-uncomment-region (mark) (point))
+		(comment-or-uncomment-region (point) (mark)))
+	(comment-or-uncomment-region
+	 (line-beginning-position)
+	 (line-end-position lines))))
 
 (provide 'common-init)
 

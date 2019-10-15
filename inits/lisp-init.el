@@ -29,6 +29,22 @@
 
 ;; (use-package geiser-install)
 
+
+(use-package scheme48)
+
+
+
+(defun hyperspec-lookup (&optional symbol-name)
+  (interactive)
+  (let ((browse-url-browser-function 'w3m-browse-url))
+	(if symbol-name
+		(common-lisp-hyperspec symbol-name)
+	  (call-interactively 'common-lisp-hyperspec))))
+
+
+(use-package hyperspec)
+
+
 (provide 'lisp-init)
 
 ;;; lisp-init.el ends here
