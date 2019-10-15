@@ -7,6 +7,7 @@
 ;;; Code:
 
 (use-package yaml-mode
+  :ensure t
   :config (progn
             (message "yaml-mode config init")
             (add-to-list 'auto-mode-alist '("\\.yml$" . yaml-mode))

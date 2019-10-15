@@ -110,8 +110,9 @@
 
 
 (use-package expand-region
+  :ensure t
   :config (global-set-key (kbd "C-=") 'er/expand-region)
-)
+  )
 
 
 (use-package ivy-todo
@@ -174,7 +175,6 @@
 
 
 (use-package smartparens-config
-  :ensure t
   :ensure smartparens
   :config (progn
             (show-smartparens-global-mode t)

@@ -6,9 +6,12 @@
 
 ;;; Code:
 
-(use-package yaml-mode)
+(use-package yaml-mode
+  :ensure t
+  )
 
 (use-package salt-mode
+  :ensure t
   :config (progn
             (add-to-list 'auto-mode-alist '("\\.sls\\'" . saltstack-mode))
             (add-hook 'salt-mode-hook

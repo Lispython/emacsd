@@ -16,7 +16,7 @@
   (mapconcat 'identity strings separator))
 
 
-(require 'lambda-mode)
+;(require 'lambda-mode)
 
 ;;(setq py-python-command-args '("-colors" "Linux"))
 ;;(setq py-python-command "/var/github/python2.6/bin/ipython")
@@ -191,7 +191,6 @@
   )
 
 (use-package lambda-mode
-  :ensure t
   :hook (python-mode . lambda-mode))
 
 ;; (use-package python-mode
@@ -294,6 +293,7 @@
 
 
 (use-package anaconda-mode
+  :ensure t
   :config (progn
             (add-hook 'python-mode-hook 'anaconda-mode)
             (add-hook 'python-mode-hook 'anaconda-eldoc-mode)
@@ -302,6 +302,7 @@
 (add-hook 'python-mode-hook 'python-mode-hook-callback)
 
 (use-package company-anaconda
+  :ensure t
   :config
   (eval-after-load "company"
     '(add-to-list 'company-backends 'company-anaconda))
@@ -309,6 +310,7 @@
 
 
 (use-package pyenv-mode
+  :ensure t
   :init
   (add-to-list 'exec-path "~/.pyenv/shims")
   (setenv "WORKON_HOME" "~/.pyenv/versions/")
@@ -333,10 +335,13 @@
   (setq-local python-shell-virtualenv-root nil))
   (kill-local-variable python-shell-virtualenv-root)
 
-(use-package pip-requirements)
+(use-package pip-requirements
+  :ensure t
+  )
 
 
 (use-package reformatter
+  :ensure t
   :config (progn
             ;; TODO make dynamic avaluation
             (setq pep8-command "autopep8"

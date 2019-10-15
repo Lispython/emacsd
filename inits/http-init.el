@@ -5,7 +5,9 @@
 ;;; Commentary:
 ;;
 
-(require 'http-twiddle)
+(use-package http-twiddle
+  :ensure t
+  )
 
 (use-package restclient
   :ensure t

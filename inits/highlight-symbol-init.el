@@ -30,7 +30,15 @@
 ;;             (global-set-key [(meta f3)] 'highlight-symbol-query-replace)
 ;;             ))
 
+;; (load "highlight-symbol.el")
+
+(use-package highlight-symbol
+  :ensure t
+  )
+
+
 (use-package auto-highlight-symbol
+  :ensure t
   :config (progn
             (global-auto-highlight-symbol-mode t)
             (setq ahs-idle-interval 0.1)

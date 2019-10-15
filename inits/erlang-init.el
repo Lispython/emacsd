@@ -10,7 +10,7 @@
 
 
 (use-package erlang-start
-
+  :ensure erlang
   :config (progn
             (add-hook 'erlang-mode-hook #'smartparens-mode)
             (add-to-list 'auto-mode-alist '("\\.erl?$" . erlang-mode))
@@ -33,8 +33,9 @@
 (distel-setup)
 
 (use-package company-distel
-   :config (progn
-             (add-to-list 'company-backends 'company-distel)))
+  :ensure t
+  :config (progn
+            (add-to-list 'company-backends 'company-distel)))
 
 
 (provide 'erlang-init)

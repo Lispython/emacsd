@@ -41,11 +41,18 @@
   :ensure t
   :config (progn
             (add-to-list 'auto-mode-alist '("\\.rs\\'" . rust-mode))
-            (with-eval-after-load 'rust-mode
-              (add-hook 'flycheck-mode-hook #'flycheck-rust-setup)
-              ;;(add-hook 'flycheck-mode-hook #'flycheck-inline-mode)
 
+            (use-package flycheck-rust
+              :ensure t
+
+              :config (progn
+                        (with-eval-after-load 'rust-mode
+                          (add-hook 'flycheck-mode-hook #'flycheck-rust-setup)
+                          ;;(add-hook 'flycheck-mode-hook #'flycheck-inline-mode)
+
+                          ))
               )
+           
 
             (add-hook 'rust-mode-hook #'racer-mode)
             (add-hook 'racer-mode-hook #'eldoc-mode)

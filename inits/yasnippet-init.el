@@ -25,7 +25,9 @@
             ;; Map `yas/load-directory' to every element
             ;;(mapc 'yas/load-directory yas/root-directory)
             (yas-global-mode 1)
-            (require 'react-snippets)
+            (use-package react-snippets
+              :ensure t
+              )
 
 
             (eval-after-load "company"

@@ -203,7 +203,6 @@
 
 
 (use-package org-screen
-  :ensure t
   :config (progn
             (setq org-babel-default-header-args:screen '((:results . "silent") (:session . "default") (:cmd . "/bin/bash") (:terminal . "xterm")))
             )

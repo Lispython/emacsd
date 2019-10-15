@@ -23,10 +23,10 @@
 ;; Don't clutter with #files either
 
 (setq auto-save-list-file-prefix autosave-dir)
-(setq auto-save-file-name-transforms `((".*" ,autosave-dir t)))
-
 ;;; Commentary:
 ;;
+
+(setq auto-save-file-name-transforms `((".*" ,autosave-dir t)))
 
 (require 'package) ;; You might already have this line
 (add-to-list 'package-archives
@@ -197,10 +197,16 @@
   (exec-path-from-shell-initialize)
   )
 
+(load "common-init.el")
+(load "dired-init.el")
+
 (load "env-init.el")
+
+(load "lisp-init.el")
+(load "ibuffer-mode-init.el")
+
 (load "virtualenv-init.el")
 (load "outline-mode-init.el")
-(load "ibuffer-mode-init.el")
 ;;(load "python-mode-init.el")
 (load "python-mode-dockerized-init.el")
 
@@ -216,13 +222,13 @@
 (load "autopep8-init.el")
 (load "flycheck-init.el")
 (load "crontab-init.el")
-(load "ac-emoji.el")
+;(load "ac-emoji.el")
 (load "markdown-init.el")
 (load "highlight-symbol-init.el")
 (load "debug-init.el")
 
 ;; (load "slime-init.el")
-(load "lisp-init.el")
+
 
 ;;; Python configuration
 (load "pylookup-init.el")
@@ -232,14 +238,10 @@
 (load "yasnippet-init.el")
 
 (load "editorconfig-init.el")
-(load "highlight-symbol.el")
 
 (load "multiple-cursors-init.el")
-(load "common-init.el")
 
 (load "magit-init.el")
-
-(load "dired-init.el")
 
 (load "docker-init.el")
 

@@ -15,7 +15,9 @@
             )
   )
 
-(require 'flycheck-color-mode-line)
+(use-package flycheck-color-mode-line
+  :ensure t
+         )
 
 (eval-after-load "flycheck"
   '(add-hook 'flycheck-mode-hook 'flycheck-color-mode-line-mode))
