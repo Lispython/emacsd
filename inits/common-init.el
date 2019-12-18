@@ -29,25 +29,29 @@
 
 (global-unset-key (kbd "C-3"))
 (global-set-key (kbd "C-3") nil)
+(global-set-key (kbd "M-3") nil)
 
 
 (use-package swiper-helm
   :ensure t
   :config (progn
-            (with-temp-message "Setup swiper helm")
             (global-set-key (kbd "C-3 h") 'swiper-helm)))
 
 (use-package swiper
   :ensure t
   :config (progn
-            (with-temp-message "Setup swiper")
-
             (setq ivy-count-format "(%d/%d) ")
+            ;; (global-set-key "\C-s" 'swiper)
             (global-set-key (kbd "C-c u") 'swiper-all)
-            (global-set-key (kbd "C-3 s") 'swiper)))
+            (global-set-key (kbd "C-3 s") 'swiper)
+            (global-set-key (kbd "C-s") 'swiper)
+
+            (global-set-key [C-tab-s] 'swiper)
+
+            ))
 
 
-;; (use-package helm
+;; (-package helm
 ;;   :config (setq helm-make-completion-method 'ivy)
 ;; )
 
@@ -198,6 +202,18 @@
   :ensure t
   )
 
+(use-package free-keys
+  :ensure t
+  )
+
+
+;; (use-package vterm
+;;   :ensure t
+;;   )
+
+(use-package multi-term
+  :ensure t
+  )
 
 (use-package hide-region)
 
@@ -215,6 +231,10 @@
 	(comment-or-uncomment-region
 	 (line-beginning-position)
 	 (line-end-position lines))))
+
+
+(use-package commandor)
+
 
 (provide 'common-init)
 

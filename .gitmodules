@@ -8,3 +8,11 @@
 [submodule "ext/distel"]
 	path = ext/distel
 	url = https://github.com/massemanet/distel.git
+[submodule "ext/lsp-docker"]
+	path = ext/lsp-docker
+	url = https://github.com/emacs-lsp/lsp-docker
+	branch = master
+[submodule "ext/lsp-ivy"]
+	path = ext/lsp-ivy
+	url = https://github.com/emacs-lsp/lsp-ivy.git
+	branch = master

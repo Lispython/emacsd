@@ -1,0 +1,7 @@
+FROM erlang:22.1.4
+
+RUN git clone https://github.com/erlang/rebar3.git && cd /rebar3 && ./bootstrap
+RUN git clone https://github.com/erlang-ls/erlang_ls --depth 1 && cd erlang_ls && rebar3 as debug escriptize
+
+ENV PATH="/erlang_ls/_build/default/bin/:${PATH}"
+ENV PATH="/erlang_ls/_build/debug/bin/:${PATH}"

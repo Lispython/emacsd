@@ -32,8 +32,6 @@
 
 (use-package scheme48)
 
-
-
 (defun hyperspec-lookup (&optional symbol-name)
   (interactive)
   (let ((browse-url-browser-function 'w3m-browse-url))

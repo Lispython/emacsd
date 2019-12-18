@@ -81,7 +81,6 @@
     (global-font-lock-mode 1))
 
 
-
 ;;SET VARIABLES OF EMACS
 (menu-bar-mode nil) ;this too
 (tool-bar-mode nil) ;hide tool bar too
@@ -122,8 +121,15 @@
 ;; enable horizontal scrolling
 ;;(hscroll-global-mode t)
 
+(defun add-subdirs-to-load-path (path)
+  "Add subdirectories "
 
+  (let ((default-directory path))
+    (normal-top-level-add-subdirs-to-load-path))
+  )
 
+(add-subdirs-to-load-path **emacs-ext-dir**)
+(add-subdirs-to-load-path "~/.emacs.d/lisp/")
 
 ;;;(color-theme-tango)
 
@@ -214,6 +220,8 @@
 
 (load "web-mode-init.el")
 
+(load "prog-mode-init.el")
+
 
 ;;(load "recompiler")
 
@@ -239,8 +247,6 @@
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 (add-hook 'after-save-hook 'autocompile)
 
-
-(provide 'emacs)
 
 (provide 'emacs-osx)
 

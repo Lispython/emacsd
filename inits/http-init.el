@@ -14,6 +14,10 @@
   ;; :config (add-to-list 'company-backends 'company-restclient)
   )
 
+(use-package request
+  :ensure t
+  )
+
 ;;; Code:
 
 (provide 'http-init)

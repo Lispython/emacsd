@@ -141,25 +141,6 @@
   (set (make-local-variable 'ac-auto-start) nil))
 
 
-;; Auto Syntax Error Hightlight
-;; (when (load "flymake" t)
-;;   (custom-set-faces
-;;    '(flymake-errline ((((class color)) (:background "red"))))
-;;    '(flymake-warnline ((((class color)) (:background "orange")))))
-;;   (defun flymake-pyflakes-init ()
-;;     (let* ((temp-file (flymake-init-create-temp-buffer-copy
-;; 					   'flymake-create-temp-inplace))
-;; 		   (local-file (file-relative-name
-;; 						temp-file
-;; 						(file-name-directory buffer-file-name))))
-;;       ;;USE pyflakes command for check file
-;; 	  ;; can use epylint.py in emacs.d/epylint.py
-;; 	  (list "pyflakes" (list local-file)))
-;; 	)
-;;   (add-to-list 'flymake-allowed-file-name-masks
-;; 			   '("\\.py\\'" flymake-pyflakes-init)))
-
-
 ;;PYLOOKUP
 (eval-when-compile (require 'pylookup))
 

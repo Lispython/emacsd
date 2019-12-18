@@ -53,3 +53,8 @@ docker-build:
 	@echo "Build docker packages"
 	# docker build  --rm -t emacsd ./
 	docker build --rm -t emacsd --file=./env/Dockerfile ./env/
+
+docker-lsp-build:
+	@echo "Build lsp docker images"
+
+	docker build --rm -t lsp-erlang --file=./env/Dockerfile.lsp-erlang ./env/
