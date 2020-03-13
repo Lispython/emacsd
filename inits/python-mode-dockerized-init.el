@@ -347,18 +347,24 @@
             (setq pep8-command "autopep8"
                   isort-command "isort")
 
-             (reformatter-define py-autopep8-format
-               :program pep8-command
-               :args '("--max-line-length=200" "-"))
+            (reformatter-define py-autopep8-format
+              :program "autopep8"
+              :args '("--max-line-length=200" "-"))
 
-             (reformatter-define py-autoimports-format
-               :program isort-command
-               :args '("--lines=100"
-                       "-sp=/Users/Alexandr/vms/rambler/projects/crm/crm_backend2/"
-                       "-"))
-             )
-  )
+            (reformatter-define py-imports-format
+              :program "isort"
+              :args (list "--lines=100" (concat "-sp=" (projectile-project-root)) "-"))
+
+            (reformatter-define py-yapf-format
+              :program "yapf"
+              :args (list "--style=pep8"))
+
+            (reformatter-define py-hash-replace
+              :program "sed"
+              :args (list "s/\s*\#\s*$//g"))
+
+            ))
 
 
-(provide 'python-mode-init)
+(provide 'python-mode-dockerized-init)
 ;;; python-mode-init.el ends here

@@ -15,7 +15,7 @@
   (define-key projectile-mode-map (kbd "s-p") 'projectile-command-map)
   (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
   (projectile-mode t)
-  (setq projectile-project-search-path '("~/github/projects/"))
+  (setq projectile-project-search-path '("~/github/projects/" "~/.cargo" "~/.pyenv"))
   (setq projectile-completion-system 'ivy))
 
 

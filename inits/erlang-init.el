@@ -81,15 +81,18 @@
 ;;             (add-to-list 'company-backends 'company-distel)))
 
 
-(use-package lsp-mode
-  :ensure t
-  :hook (erlang-mode . lsp)
-  )
+;(use-package lsp-mode
+;  :ensure t
+;  :hook (erlang-mode . lsp)
+;  :config (progn
+;            (setq lsp-erlang-server-path "/Users/Alexandr/.erlang_apps/erlang_ls/_build/default/bin/erlang_ls")
+;            )
+;  )
 
-(use-package lsp-docker
-  :config (progn
-            (with-temp-message "Loading erlang lsp docker")
-            )
+;(use-package lsp-docker
+;  :config (progn
+;            (with-temp-message "Loading erlang lsp docker")
+;            )
   ;; :config (progn
   ;;           (with-temp-message "Loading lsp docker")
   ;;           (lsp-docker-register-client
@@ -102,16 +105,21 @@
   ;;            :path-mappings nil)
 
   ;;           )
-  :after lsp-mode
-  )
+;  :after lsp-mode
+;  )
 
 ;; (use-package eglot
+;;   ;; :hook (erlang-mode . eglot)
+
+;;   ;; :hook (erlang-mode . eglot-ensure)
+
 ;;   :config (progn
 ;;             ;; (add-to-list 'eglot-server-programs '(erlang-mode . ("erlang_rs")))
 ;;             ;; (add-to-list 'eglot-server-programs . ("/tmp/erlang_ls/_build/default/bin/erlang_ls" 9998))
 ;;             (add-to-list 'eglot-server-programs
-;;                          `(erlang-mode . ( "docker" "run" "--rm" "-i" "-p" "11119:11119" "lsp-erlang:latest" "erlang_ls" "11119")
-;;                                        ))))
+;;                          ;; `(erlang-mode . ( "docker" "run" "--rm" "-i" "-p" "11119:11119" "lsp-erlang:latest" "erlang_ls" "11119"))
+;;                          `(erlang-mode . ("/Users/Alexandr/.erlang_apps/erlang_ls/_build/default/bin/erlang_ls" "--log-dir" "/tmp/erlang_ls_logs" "--transport" "stdio"))
+;;                          )))
 
 (provide 'erlang-init)
 
