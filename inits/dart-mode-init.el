@@ -21,6 +21,11 @@
   )
 
 
+;; Dir locals customization
+;; ((dart-mode
+;;   (flutter-l10n-classname . "AppLocalizations")
+;;   (flutter-l10n-file . "lib/app_l10n.dart")))
+
 (use-package flutter
   :after dart-mode
   :bind (:map dart-mode-map
