@@ -233,7 +233,7 @@
 	 (line-end-position lines))))
 
 
-(use-package commandor)
+;; (use-package commandor)
 
 
 (provide 'common-init)

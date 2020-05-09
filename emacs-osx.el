@@ -184,7 +184,6 @@
 (load "pylookup-init.el")
 
 
-
 (load "yasnippet-init.el")
 
 (load "editorconfig-init.el")
@@ -211,6 +210,7 @@
 (load "swift-init.el")
 (load "scala-init.el")
 (load "saltstack-init.el")
+(load "dart-mode-init.el")
 
 ;; TODO: add more languages
 ;;; Default goto
