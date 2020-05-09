@@ -27,6 +27,7 @@
 ;;   (flutter-l10n-file . "lib/app_l10n.dart")))
 
 (use-package flutter
+  :ensure t
   :after dart-mode
   :bind (:map dart-mode-map
               ("C-M-x" . #'flutter-run-or-hot-reload))
@@ -35,6 +36,7 @@
 
 
 (use-package flutter-l10n-flycheck
+  :ensure t
   :after flutter
   :config
   (flutter-l10n-flycheck-setup))
