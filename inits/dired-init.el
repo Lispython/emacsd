@@ -38,6 +38,14 @@
   :bind (:map dired-mode-map
               ("/" . dired-narrow)))
 
+(when (string= system-type "darwin")
+  (setq dired-use-ls-dired nil))
+
+(use-package all-the-icons-dired
+  :ensure t
+  :config (add-hook 'dired-mode-hook 'all-the-icons-dired-mode)
+  )
+
 (provide 'dired-init)
 
 ;;; dired-init.el ends here

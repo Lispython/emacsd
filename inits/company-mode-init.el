@@ -74,10 +74,11 @@
                                         ; company-begin-commands '(self-insert-command) ; start autocompletion only after typing
                   )
 
-            (set-face-attribute
-             'company-preview
-             nil
-             :background (face-attribute 'company-preview-common :background))
+            ;; (set-face-attribute
+            ;;  'company-preview
+            ;;  nil
+            ;;  :background (face-attribute 'company-preview-common :background)
+            ;;  )
 
             ;; (custom-set-faces
             ;;  '(company-preview ((t (:foreground "darkgray" :underline t))))

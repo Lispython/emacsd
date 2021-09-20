@@ -14,9 +14,9 @@
             (add-to-list 'auto-mode-alist '("\\.dart\\'" . dart-mode))
             ;; (add-to-list 'eglot-server-programs '(dart-mode . ("dart_language_server")))
 
-            (add-to-list 'eglot-server-programs '(dart-mode . ("dart_language_server")))
+            ;; (add-to-list 'eglot-server-programs '(dart-mode . ("dart_language_server")))
 
-            (add-hook 'dart-mode-hook 'eglot-ensure)
+            ;; (add-hook 'dart-mode-hook 'eglot-ensure)
             )
   )
 

@@ -235,6 +235,46 @@
 
 ;; (use-package commandor)
 
+(use-package all-the-icons
+  :ensure t)
+
+(use-package doom-modeline
+  :ensure t
+  :after all-the-icons
+  :init (progn
+          (setq doom-modeline-height 24)
+          (setq doom-modeline-icon t)
+          (setq doom-modeline-major-mode-color-icon t)
+          (setq doom-modeline-lsp t)
+
+          (setq doom-modeline-env-version t)
+          (doom-modeline-mode 1)
+
+          ;; (setq doom-modeline-env-enable-python t)
+          ;; (setq doom-modeline-env-enable-ruby t)
+          ;; (setq doom-modeline-env-enable-perl t)
+          ;; (setq doom-modeline-env-enable-go t)
+          ;; (setq doom-modeline-env-enable-elixir t)
+          ;; (setq doom-modeline-env-enable-rust t)
+          ;; (setq doom-modeline-env-python-executable "python")
+          ;; (setq doom-modeline-env-ruby-executable "ruby")
+          ;; (setq doom-modeline-env-perl-executable "perl")
+          ;; (setq doom-modeline-env-go-executable "go")
+          ;; (setq doom-modeline-env-elixir-executable "iex")
+          ;; (setq doom-modeline-env-rust-executable "rustc")
+          )
+  )
+
+
+(use-package all-the-icons-ivy
+  :ensure t
+  :after all-the-icons
+  :init (add-hook 'after-init-hook 'all-the-icons-ivy-setup))
+
+(use-package direnv
+  :ensure t
+  )
+
 
 (provide 'common-init)
 
