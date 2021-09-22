@@ -10,9 +10,9 @@
   :init (progn
           (setq lsp-keymap-prefix "C-c l")
           )
-  :hook ((rust-mode . lsp)
+  :hook ((rust-mode . lsp-deferred)
          (go-mode . lsp)
-         ;;(python-mode . lsp)
+         (python-mode . lsp)
          )
   :commands lsp
   :config (progn
@@ -22,7 +22,12 @@
             (setq lsp-completion-enable t)
             (setq lsp-rust-server 'rust-analyzer)
 
-            (setq lsp-headerline-breadcrumb-mode nil)
+            (setq lsp-headerline-breadcrumb-enable nil)
+            (setq lsp-ui-doc-enable nil)
+
+            (setq lsp-ui-sideline-enable nil)
+
+
 
             ))
 

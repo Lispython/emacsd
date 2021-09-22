@@ -7,38 +7,6 @@
 ;;; Code:
 
 
-
-
-;; ;;MODES VARIABLES
-;; (global-auto-complete-mode t)
-;; ;;;(global-font-lock-mode 1)
-
-
-;; ;; AUTO COMPLETE CONFIGS
-;; (add-to-list 'ac-dictionary-directories "~/.emacs.d/dict/")
-;; (ac-config-default)
-;; (setq ac-auto-start 1)
-;; (setq ac-auto-show-menu 0.8)
-;; (setq ac-quick-help-delay 0.3)
-;; (setq ac-dwim t)
-;; (setq ac-sources '(ac-source-abbrev ac-source-dictionary ac-source-words-in-same-mode-buffers))
-
-
-;; (defun smart-tab ()
-;;   (interactive)
-;;   (if (eql (ac-start) nil)
-;;       (indent-for-tab-command)))
-
-;; ;; KEYMAPS
-;; (define-key ac-mode-map (kbd "C-c h") 'ac-last-quick-help)
-;; (define-key ac-mode-map (kbd "C-c H") 'ac-last-help)
-
-
-;; ;;(define-key ac-mode-map (kbd "TAB") 'auto-complete)
-;; (define-key ac-mode-map (kbd "TAB") 'smart-tab)
-
-
-
 (defun complete-or-indent ()
   (interactive)
   (if (company-manual-begin)
@@ -53,8 +21,6 @@
     (indent-according-to-mode)))
 
 
-
-
 (use-package company
   :ensure t
   :config (progn
@@ -63,7 +29,7 @@
             (define-key company-active-map (kbd "TAB") 'company-complete-common-or-cycle)
             (define-key company-active-map (kbd "<tab>") 'company-complete-common-or-cycle)
 
-            (setq company-minimum-prefix-length 2 ; default is 3
+            (setq company-minimum-prefix-length 3 ; default is 3
                   ;; company-show-numbers          t
                   company-dabbrev-downcase      nil
                   company-dabbrev-ignore-case   nil
@@ -101,7 +67,7 @@
 (use-package company-quickhelp
   :ensure t
   :config (progn
-            (company-quickhelp-mode)
+            ;; (company-quickhelp-mode)
             (setq x-gtk-use-system-tooltips nil)
             (setq company-quickhelp-delay 0.05
                   company-quickhelp-max-lines 30

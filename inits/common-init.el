@@ -211,9 +211,9 @@
 ;;   :ensure t
 ;;   )
 
-(use-package multi-term
-  :ensure t
-  )
+;; (use-package multi-term
+;;   :ensure t
+;;   )
 
 (use-package hide-region)
 
@@ -262,6 +262,9 @@
           ;; (setq doom-modeline-env-go-executable "go")
           ;; (setq doom-modeline-env-elixir-executable "iex")
           ;; (setq doom-modeline-env-rust-executable "rustc")
+
+          ;; (setq doom-modeline-before-update-env-hook nil)
+          ;; (setq doom-modeline-after-update-env-hook nil)
           )
   )
 
