@@ -12,16 +12,16 @@
   :config (progn
             (add-to-list 'auto-mode-alist '("\\.rs\\'" . rust-mode))
 
-            (use-package flycheck-rust
-              :ensure t
+            ;; (use-package flycheck-rust
+            ;;   :ensure t
 
-              :config (progn
-                        (with-eval-after-load 'rust-mode
-                          (add-hook 'flycheck-mode-hook #'flycheck-rust-setup)
-                          ;;(add-hook 'flycheck-mode-hook #'flycheck-inline-mode)
+            ;;   :config (progn
+            ;;             (with-eval-after-load 'rust-mode
+            ;;               (add-hook 'flycheck-mode-hook #'flycheck-rust-setup)
+            ;;               ;;(add-hook 'flycheck-mode-hook #'flycheck-inline-mode)
 
-                          ))
-              )
+            ;;               ))
+            ;;   )
 
 
             ;; (lsp-rust-analyzer-cargo-watch-command "clippy")
@@ -34,6 +34,7 @@
                       (lambda ()
                         (local-set-key (kbd "C-c <tab>") #'rust-format-buffer)
                         ))
+
 
             ;;(defalias 'racer--call 'racer--call-override )
 

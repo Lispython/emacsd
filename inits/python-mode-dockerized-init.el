@@ -104,8 +104,6 @@
 
 (defun pyenv-mode-auto-hook ()
   "Automatically activates pyenv version if .python-version file exists."
-  (message "pyenv-mode-auto-hook called")
-
   (f-traverse-upwards
    (lambda (path)
      (let ((pyenv-version-path (f-expand ".python-version" path)))
@@ -115,21 +113,12 @@
              t))))))
 
 (defun pyenv-activate-hook ()
-
-  (message (format "Switch to buffer %s" (current-buffer)))
-
+  ""
   (make-local-variable 'process-environment)
 
   (make-local-variable 'python-shell-virtualenv-root)
 
-  (message (format "Curent python-shell-virtualenv-root: %s" python-shell-virtualenv-root))
-  (message "Before pyenv-mode-auto-hook")
-  (print-python-vars)
-
   (pyenv-mode-auto-hook)
-
-  (message "After pyenv-mode-auto-hook")
-  (print-python-vars)
 
   )
 

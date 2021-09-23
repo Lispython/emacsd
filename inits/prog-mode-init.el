@@ -27,7 +27,7 @@
 
             (setq lsp-ui-sideline-enable nil)
 
-
+            (setq lsp-rust-all-features t)
 
             ))
 
