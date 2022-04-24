@@ -8,7 +8,7 @@
 (use-package lsp-mode
   :ensure t
   :init (progn
-          (setq lsp-keymap-prefix "C-c l")
+          (setq lsp-keymap-prefix "s-l")
           )
   :hook ((rust-mode . lsp-deferred)
          (go-mode . lsp)
