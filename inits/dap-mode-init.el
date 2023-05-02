@@ -7,10 +7,12 @@
 
 (use-package dap-mode
   :ensure t
-  :config
-  (delete 'tooltip dap-auto-configure-features)
-  (dap-mode t)
-  (dap-ui-mode t))
+  :config (progn (delete 'tooltip dap-auto-configure-features)
+                 (dap-mode t)
+                 (dap-ui-mode t)
+
+                 (require 'dap-cpptools)
+                 ))
 
 
 

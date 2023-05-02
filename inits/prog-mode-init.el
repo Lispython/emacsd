@@ -5,17 +5,20 @@
 
 ;;; Code:
 
+
 (use-package lsp-mode
   :ensure t
   :init (progn
-          (setq lsp-keymap-prefix "s-l")
+          (setq lsp-keymap-prefix "C-c l")
           )
   :hook ((rust-mode . lsp-deferred)
          (go-mode . lsp)
          (python-mode . lsp)
+         (dart-mode . lsp)
          )
   :commands lsp
   :config (progn
+            ;; (define-key lsp-mode-map (kbd "s-l") lsp-command-map)
             (setq lsp-log-io t)
             (setq lsp-prefer-capf t)
             (setq lsp-completion-provider :capf)
@@ -31,34 +34,15 @@
 
             ))
 
-;; (use-package lsp-ui
-;;   :ensure t
-;;   :hook (erlang-mode . 'flycheck-mode)
-;;   :config (progn
-;;             (require 'lsp-imenu)
-;;             (add-hook 'lsp-after-open-hook 'lsp-enable-imenu)
-
-;;             )
-;;   :commands lsp-ui-mode)
 
 
-;(use-package company-box
-;  :ensure t
-;  :hook (company-mode . company-box-mode))
+(use-package protobuf-mode
+  :ensure t
+  :config (progn
+            (add-to-list 'auto-mode-alist '("\\.proto\\'" . protobuf-mode))
+            )
+  )
 
-;; (use-package lsp-ivy
-;;   :after ivy
-;;   )
-
-
-;; (use-package lsp-origami
-;;   :after (lsp-mode origami-mode)
-;;   )
-
-
-;; (use-package eglot
-;;   :ensure t
-;;   )
 
 (provide 'prog-mode-init)
 

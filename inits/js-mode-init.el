@@ -101,7 +101,7 @@
             (add-to-list 'auto-mode-alist '("\\.tsx?\\'" . typescript-mode))))
 
 
-(require 'web-mode)
+(use-package web-mode)
 
 
 (add-hook 'espresso-mode-hook

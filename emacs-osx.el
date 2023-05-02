@@ -14,8 +14,8 @@
 (defconst **docker-run-base** "/usr/local/bin/docker run -i --rm")
 
 
-(defvar backup-dir (expand-file-name "~/.emacs.d/backup/"))
 (defvar autosave-dir (expand-file-name "~/.emacs.d/autosave/"))
+(defvar backup-dir (expand-file-name "~/.emacs.d/backup/"))
 
 ;; Don't clutter up directories with files~
 (setq backup-directory-alist (list (cons ".*" backup-dir)))
@@ -104,6 +104,8 @@
 (setq-default indent-tabs-mode nil)
 (desktop-save-mode t)
 (modify-coding-system-alist 'file ".*" 'utf-8) ;; fuck cp1251 and koi-8
+(setq max-lisp-eval-depth 10000)
+(setq max-specpdl-size 20000)
 
 
 (load "ui-init.el")
@@ -131,6 +133,8 @@
 
 (add-subdirs-to-load-path **emacs-ext-dir**)
 (add-subdirs-to-load-path "~/.emacs.d/lisp/")
+(add-subdirs-to-load-path (concat **emacs-ext-dir** "ai"))
+
 
 ;;;(color-theme-tango)
 
@@ -145,6 +149,7 @@
   :if (memq window-system '(mac ns))
   :ensure t
   :config
+  (setq exec-path-from-shell-variables '("PATH" "GOPATH"))
   (exec-path-from-shell-initialize)
   )
 
@@ -224,6 +229,8 @@
 (load "prog-mode-init.el")
 
 (load "dap-mode-init.el")
+
+(load "ai-init.el")
 
 
 ;;(load "recompiler")

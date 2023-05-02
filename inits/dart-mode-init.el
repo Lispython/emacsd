@@ -16,10 +16,24 @@
 
             ;; (add-to-list 'eglot-server-programs '(dart-mode . ("dart_language_server")))
 
+            (add-hook 'dart-mode-hook 'lsp)
+
+            (setq gc-cons-threshold (* 100 1024 1024)
+                  read-process-output-max (* 1024 1024))
             ;; (add-hook 'dart-mode-hook 'eglot-ensure)
             )
   )
 
+(use-package lsp-dart
+  :ensure t
+  :hook (dart-mode . lsp)
+  ;; :init
+  ;; (dap-register-debug-template "Flutter :: Custom debug"
+  ;;                              (list :flutterPlatform "x86_64"
+  ;;                                    :program "lib/main_debug.dart"
+  ;;                                    :args '("--flavor" "customer_a")))
+
+  )
 
 ;; Dir locals customization
 ;; ((dart-mode
@@ -32,7 +46,7 @@
   :bind (:map dart-mode-map
               ("C-M-x" . #'flutter-run-or-hot-reload))
   :custom
-  (flutter-sdk-path "/Applications/flutter/"))
+  (flutter-sdk-path "/Users/alexandr/github/env/flutter/"))
 
 
 (use-package flutter-l10n-flycheck

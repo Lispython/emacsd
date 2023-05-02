@@ -64,7 +64,7 @@
 (add-to-list 'auto-mode-alist '("\\.org\\'" . org-mode))
 
 ;; KEYBINDINGS
-(global-set-key (kbd "C-c l") 'org-store-link)
+(global-set-key (kbd "C-c C-l") 'org-store-link)
 (global-set-key (kbd "C-c a") 'org-agenda)
 (global-set-key (kbd "C-c C-a") 'org-show-all)
 ;;(define-key global-map (kbd "C-c r") 'org-remember)
@@ -98,7 +98,9 @@
 	    (make-variable-buffer-local 'yas/trigger-key)
 	    (setq yas/trigger-key [tab])
 	    (add-to-list 'org-tab-first-hook 'yas/org-very-safe-expand)
-	    (define-key yas/keymap [tab] 'yas/next-field)))
+	    (define-key yas/keymap [tab] 'yas/next-field)
+            (setq truncate-lines t)
+            ))
 
 (setq org-remember-templates
       '(
@@ -136,7 +138,7 @@
  '((emacs-lisp . t)
    (shell . t)
    (screen . t)
-   (ein . t)
+   ;; (ein . t)
    (R . t)
    (C . t)
    (awk . t)
@@ -187,12 +189,12 @@
                                        ))
 
 
-(use-package ob-ipython
-  :ensure t
-  :config (org-babel-do-load-languages 'org-babel-load-languages
-                                       (append org-babel-load-languages
-                                               '((ipython     . t)))
-                                       ))
+;; (use-package ob-ipython
+;;   :ensure t
+;;   :config (org-babel-do-load-languages 'org-babel-load-languages
+;;                                        (append org-babel-load-languages
+;;                                                '((ipython     . t)))
+;;                                        ))
 
 (use-package ob-restclient
   :ensure t
@@ -202,11 +204,11 @@
                                        ))
 
 
-(use-package org-screen
-  :config (progn
-            (setq org-babel-default-header-args:screen '((:results . "silent") (:session . "default") (:cmd . "/bin/bash") (:terminal . "xterm")))
-            )
-  )
+;; (use-package org-screen
+;;   :config (progn
+;;             (setq org-babel-default-header-args:screen '((:results . "silent") (:session . "default") (:cmd . "/bin/bash") (:terminal . "xterm")))
+;;             )
+;;   )
 
 
 
@@ -251,10 +253,6 @@
 	 "* TODO %?\n %i\n %a")
 	("j" "Journal" entry (file+datetree "~/Dropbox/.org/journal.org")
 	 "* %?\nEntered on %U\n %i\n %a")))
-
-(message "org-mode init loaded")
-
-
 
 
 (provide 'org-mode-init)

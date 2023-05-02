@@ -8,6 +8,11 @@
 *.config
 auto-save-list/*
 .saves*
+.dap-breakpoints
+.lsp-session-v1
+company-statistics-cache.el
+projectile-bookmarks.eld
+transient/*
 #*#
 *#*#
 *~

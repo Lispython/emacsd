@@ -56,36 +56,36 @@
 
 
 
-(use-package pylookup
-  :load-path (**pylookup-dir**)
-  :bind (("C-c l" . pylookup-lookup))
-  :init (progn (message "Use package pylookup init")
+;; (use-package pylookup
+;;   :load-path (**pylookup-dir**)
+;;   :bind (("C-c l" . pylookup-lookup))
+;;   :init (progn (message "Use package pylookup init")
 
-               (setq pylookup-program
-                     (string-join
-                      (list **docker-run-base**
-                            (format "--volume=%s:%s" (file-truename **pylookup-dir**) "/pylookup")
-                            docker-container-name
-                            "/pylookup/pylookup.py"
-                            ) " "))
+;;                (setq pylookup-program
+;;                      (string-join
+;;                       (list **docker-run-base**
+;;                             (format "--volume=%s:%s" (file-truename **pylookup-dir**) "/pylookup")
+;;                             docker-container-name
+;;                             "/pylookup/pylookup.py"
+;;                             ) " "))
 
-               ;;(setq pylookup-exec-lookup 'pylookup-exec-lookup-custom)
-               (with-temp-message (format "Pylookup program %s" pylookup-program))
-               ;;(setq pylookup-program (concat pylookup-dir "/pylookup.py"))
-               (setq pylookup-db-file "/pylookup/pylookup.db")
-               )
-  :config (progn (message "Use package pylookup config")
+;;                ;;(setq pylookup-exec-lookup 'pylookup-exec-lookup-custom)
+;;                (with-temp-message (format "Pylookup program %s" pylookup-program))
+;;                ;;(setq pylookup-program (concat pylookup-dir "/pylookup.py"))
+;;                (setq pylookup-db-file "/pylookup/pylookup.db")
+;;                )
+;;   :config (progn (message "Use package pylookup config")
 
-                 (defalias 'pylookup-exec-lookup 'pylookup-exec-lookup-override)
-                 (defalias 'pylookup-exec-get-cache 'pylookup-exec-get-cache-override)
-                 (autoload 'pylookup-lookup "pylookup"
-                   "Lookup SEARCH-TERM in the Python HTML indexes." t)
+;;                  (defalias 'pylookup-exec-lookup 'pylookup-exec-lookup-override)
+;;                  (defalias 'pylookup-exec-get-cache 'pylookup-exec-get-cache-override)
+;;                  (autoload 'pylookup-lookup "pylookup"
+;;                    "Lookup SEARCH-TERM in the Python HTML indexes." t)
 
-                 (autoload 'pylookup-update "pylookup"
-                   "Run pylookup-update and create the database at `pylookup-db-file'." t)
-                 )
-  ;;:mode ("\\.txt$" . rst-mode)
-  )
+;;                  (autoload 'pylookup-update "pylookup"
+;;                    "Run pylookup-update and create the database at `pylookup-db-file'." t)
+;;                  )
+;;   ;;:mode ("\\.txt$" . rst-mode)
+;;   )
 
 
 

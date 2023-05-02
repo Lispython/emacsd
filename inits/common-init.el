@@ -55,6 +55,11 @@
 ;;   :config (setq helm-make-completion-method 'ivy)
 ;; )
 
+
+(use-package counsel
+  :ensure t
+  :after (ivy))
+
 (use-package ivy
   :ensure t
   :config (progn
@@ -62,6 +67,9 @@
             (ivy-mode t)
             (setq ivy-use-virtual-buffers t)
             (setq enable-recursive-minibuffers t)
+
+            (setq counsel-ag-command (list "ag" "--hidden" "--vimgrep" "%s"))
+            (setq counsel-ag-base-command (list "ag" "--hidden" "--vimgrep" "%s"))
 
             (ivy-set-occur 'ivy-switch-buffer 'ivy-switch-buffer-occur)
 
@@ -163,6 +171,7 @@
   :ensure t
   :config (progn
             (global-undo-tree-mode)
+            (setq undo-tree-history-directory-alist '(("." . "~/.emacs.d/undo")))
             ))
 
 
@@ -170,9 +179,9 @@
   :ensure t
   :config (progn
             (global-origami-mode)
-            (define-key origami-mode-map (kbd "C-c f") 'origami-recursively-toggle-node)
-            (define-key origami-mode-map (kbd "C-c F") 'origami-toggle-all-nodes)
-            ))
+            (define-key origami-mode-map (kbd "M-E") 'origami-toggle-node)
+            (define-key origami-mode-map (kbd "M-Q") 'origami-open-all-nodes)
+            (define-key origami-mode-map (kbd "M-W") 'origami-close-all-nodes)))
 
 ;; (use-package sr-speedbar
 ;;   :config (progn
@@ -215,10 +224,10 @@
 ;;   :ensure t
 ;;   )
 
-(use-package hide-region)
+;; (use-package hide-region)
 
-(global-set-key (kbd "C-c h r") 'hide-region-hide)
-(global-set-key (kbd "C-c h u") 'hide-region-unhide)
+;; (global-set-key (kbd "C-c h r") 'hide-region-hide)
+;; (global-set-key (kbd "C-c h u") 'hide-region-unhide)
 
 
 ;;; Comment and uncomment function
@@ -275,6 +284,10 @@
   :init (add-hook 'after-init-hook 'all-the-icons-ivy-setup))
 
 (use-package direnv
+  :ensure t
+  )
+
+(use-package wgrep
   :ensure t
   )
 

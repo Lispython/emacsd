@@ -27,7 +27,7 @@
             ;; (lsp-rust-analyzer-cargo-watch-command "clippy")
 
 
-            (add-hook 'rust-mode-hook 'cargo-minor-mode)
+
             (add-hook 'rust-mode-hook #'smartparens-mode)
 
             (add-hook 'rust-mode-hook
@@ -39,6 +39,13 @@
             ;;(defalias 'racer--call 'racer--call-override )
 
             ;; (setq company-tooltip-align-annotations t)
+            )
+  )
+
+(use-package cargo
+  :after rust-mode
+  :config (progn
+            (add-hook 'rust-mode-hook 'cargo-minor-mode)
             )
   )
 

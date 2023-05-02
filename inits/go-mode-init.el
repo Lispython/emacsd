@@ -8,7 +8,9 @@
 
 (use-package go-mode
   :ensure t
-  )
+  :config (progn
+            (setq gofmt-command "gosimports")
+            (add-hook 'before-save-hook 'gofmt-before-save)))
 
 
 (use-package company-go
