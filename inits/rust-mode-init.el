@@ -32,8 +32,7 @@
 
             (add-hook 'rust-mode-hook
                       (lambda ()
-                        (local-set-key (kbd "C-c <tab>") #'rust-format-buffer)
-                        ))
+                        (local-set-key (kbd "C-c <tab>") #'rust-format-buffer)))
 
 
             ;;(defalias 'racer--call 'racer--call-override )
@@ -43,6 +42,7 @@
   )
 
 (use-package cargo
+  :ensure t
   :after rust-mode
   :config (progn
             (add-hook 'rust-mode-hook 'cargo-minor-mode)

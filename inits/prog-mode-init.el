@@ -32,6 +32,8 @@
 
             (setq lsp-rust-all-features t)
 
+            ;; (setq lsp-treemacs-sync-mode nil)
+
             ))
 
 

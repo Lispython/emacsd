@@ -20,8 +20,8 @@
 ;;
 
 
-(require 'org-install)
-(require 'ob-tangle)
+;; (require 'org-install)
+;; (require 'ob-tangle)
 
 ;; (use-package org
 ;;   :mode (("\\.org$" . org-mode))

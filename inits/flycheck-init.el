@@ -12,6 +12,9 @@
             (add-to-list 'flycheck-checkers 'jsx-tide 'append)
             (add-to-list 'flycheck-checkers 'typescript-tslint 'append)
             (add-to-list 'flycheck-checkers 'typescript-tide 'append)
+
+               (eval-after-load 'flycheck
+                 '(flycheck-package-setup))
             )
   )
 

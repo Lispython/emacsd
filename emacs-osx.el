@@ -232,6 +232,9 @@
 
 (load "ai-init.el")
 
+(load "ansible-init.el")
+
+(load "devrc-init.el")
 
 ;;(load "recompiler")
 
