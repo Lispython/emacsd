@@ -15,6 +15,7 @@
          (go-mode . lsp)
          (python-mode . lsp)
          (dart-mode . lsp)
+         (elisp-mode . lsp)
          )
   :commands lsp
   :config (progn
@@ -33,6 +34,10 @@
             (setq lsp-rust-all-features t)
 
             ;; (setq lsp-treemacs-sync-mode nil)
+
+            (require 'elsa)
+            (require 'elsa-lsp)
+            (elsa-lsp-register)
 
             ))
 

@@ -269,6 +269,7 @@
           (setq doom-modeline-lsp t)
 
           (setq doom-modeline-env-version t)
+          (setq doom-modeline-minor-modes nil)
           (doom-modeline-mode 1)
 
           ;; (setq doom-modeline-env-enable-python t)

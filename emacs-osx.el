@@ -217,6 +217,7 @@
 (load "scala-init.el")
 (load "saltstack-init.el")
 (load "dart-mode-init.el")
+(load "zig-mode-init.el")
 
 ;; TODO: add more languages
 ;;; Default goto

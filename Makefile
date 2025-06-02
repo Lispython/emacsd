@@ -9,6 +9,8 @@ env:
 	@echo "Build environment"
 	./env.sh dev_py
 	./env.sh js
+	brew tap emacs-eask/cli https://github.com/emacs-eask/packaging
+	brew install eask-cli
 
 compile:
 	@echo "Build elc"

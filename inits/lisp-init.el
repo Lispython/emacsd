@@ -48,6 +48,16 @@
 
 (use-package hyperspec)
 
+(use-package elsa
+  :ensure t
+  :config (progn
+            (require 'elsa)
+            (require 'elsa-lsp)
+            (elsa-lsp-register)
+            )
+  )
+
+
 
 (provide 'lisp-init)
 
